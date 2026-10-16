@@ -17,11 +17,14 @@
 | `docs/PLAN.md` | 만드는 순서 체크리스트 |
 | `docs/COLLECT.md` | 수집 규칙 (에이전트가 매번 읽음) |
 | `docs/ROUTINE.md` | 자동 수집 예약 설정. 다른 Claude 계정으로 옮길 때 이걸로 다시 만들면 됨 |
+| `docs/TELEGRAM.md` | 텔레그램 알림 설정법 (봇 만들기, 환경 변수) |
+| `scripts/telegram.sh` | 수집 끝나면 텔레그램으로 요약을 보내는 작은 스크립트 |
 
 ## 자동 수집
 - 매주 **월요일·목요일 아침 7시**에 클라우드에서 자동으로 행사를 모아 GitHub에 올려요. 폰 주소에 바로 반영돼요.
 - 예약 확인·끄기·지금 실행: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh
 - 수집 규칙을 바꾸고 싶으면 `docs/COLLECT.md`를 고치면 돼요 (에이전트가 매번 이 문서를 읽어요).
+- 수집이 끝나면 텔레그램으로 "이번 주말 추천 3곳" 요약이 와요 (설정: `docs/TELEGRAM.md`).
 
 ## 자주 쓰는 말 (Claude에게)
 - "이번 주 행사 수집해줘" → `data/events.js` 갱신 (2단계부터)
