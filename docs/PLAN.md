@@ -32,7 +32,8 @@
 - **확인**: 한마디 지시로 10건 이상 모이고, 그중 8건 이상이 실제로 맞는 정보다. 출처 추가도 한마디로 된다
 
 ## 3단계 · 매주 자동 + 폰에서 보기
-- [x] 3-1 매주 월·목 아침 7시 자동 수집 예약 완료 (클라우드 루틴: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh)
+- [x] 3-1 매주 월·목 아침 7시 자동 수집 예약 완료 (클라우드 루틴: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh). 설정은 `docs/ROUTINE.md`
+- [ ] 3-1b 시험 실행에서 막힌 것 풀기: ① GitHub에 Claude 앱 설치(쓰기 권한) ② 클라우드 환경 네트워크 접근 허용 → 다시 시험 실행
 - [x] 3-2 GitHub에 올리기 → 무료 주소 https://mukaa1111.github.io/weekend-events/ (저장소 github.com/mukaa1111/weekend-events, 공개)
 - [ ] 3-3 폰에서 주소 열어 보기, 홈 화면에 추가
 - [x] 3-4 `docs/NOTES.md` 만들어 둠 → 2~3주 써 보며 불편한 점 적기 (적는 건 계속)
