@@ -16,6 +16,11 @@
 | `docs/PRD.md` | 무엇을 만드는지 정리한 기획서 |
 | `docs/PLAN.md` | 만드는 순서 체크리스트 |
 
+## 자동 수집
+- 매주 **월요일·목요일 아침 7시**에 클라우드에서 자동으로 행사를 모아 GitHub에 올려요. 폰 주소에 바로 반영돼요.
+- 예약 확인·끄기·지금 실행: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh
+- 수집 규칙을 바꾸고 싶으면 `docs/COLLECT.md`를 고치면 돼요 (에이전트가 매번 이 문서를 읽어요).
+
 ## 자주 쓰는 말 (Claude에게)
 - "이번 주 행사 수집해줘" → `data/events.js` 갱신 (2단계부터)
 - "출처에 ○○ 추가해줘 (주소)" → `data/sources.js`에 추가
