@@ -7,7 +7,7 @@
 // big      : true 이면 "미리 체크할 큰 행사"에 들어갑니다
 // verified : false 이면 "확인 필요" 표시 (공식 페이지에서 날짜를 직접 확인하지 못한 정보)
 //
-// 마지막 수집: 2026-10-16 (첫 수집, 3개 팀: 대전 / 근교 / 전국·뉴스레터)
+// 마지막 수집: 2026-10-16
 
 window.EVENTS = [
 
@@ -173,13 +173,13 @@ window.EVENTS = [
   {
     id: "2026-10-nonsan-ganggyeong-festival",
     title: "제30회 강경젓갈·상월고구마 축제",
-    start: "2026-10-16", end: "2026-10-18",
-    time: "시간 미확인 (폐막 10/18 18:00)",
+    start: "2026-10-16", end: "2026-10-17",
+    time: "시간 미확인 (10/17 18:00 폐막식)",
     place: "논산 강경읍 금강둔치 일원", city: "논산", region: "근교",
     cost: "무료", price: "", reservation: false, ages: "전연령",
     tags: ["축제", "야외"],
     url: "http://www.nonsan.go.kr/kor/html/sub03/030101.html?mode=V&no=6e89d25e13fa4545f0bcff711e4e9d7d&GotoPage=1", source: "논산시",
-    note: "체험 부스·공연은 첨부 일정표 참고. 10/17(토) 18:00 강경 근대거리 '강경 풍류 예인쇼'도 함께 가능.",
+    note: "⚠ 강풍·호우 예보로 일정 단축, 10/18(일) 행사 취소(논산시 공지). 체험 부스·공연은 첨부 일정표 참고. 10/17(토) 18:00 강경 근대거리 '강경 풍류 예인쇼'도 함께 가능.",
     big: true, verified: true
   },
   {
@@ -373,6 +373,18 @@ window.EVENTS = [
     url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12333", source: "국립청주박물관",
     note: "어린이 15명 정원. 접수 11/9(월)~11/18(수) 누리집 교육행사 탭. 문의 043-229-6407",
     big: true, verified: true
+  },
+  {
+    id: "2026-11-cheongju-kids-opera-festa",
+    title: "알리오페라단 키즈 오페라 페스타",
+    start: "2026-11-27", end: "2026-11-28",
+    time: "시간 미확인",
+    place: "청주예술의전당 대공연장", city: "청주", region: "근교",
+    cost: "유료", price: "요금 미확인 (예매안내 참고)", reservation: true, ages: "어린이 가족",
+    tags: ["예술"],
+    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
+    note: "11/27(금)~28(토). 예매는 청주예술의전당 예매안내 페이지에서 확인.",
+    big: false, verified: true
   },
   {
     id: "2026-11-cheongju-junglebook",
