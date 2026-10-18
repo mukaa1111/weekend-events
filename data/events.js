@@ -7,23 +7,11 @@
 // big      : true 이면 "미리 체크할 큰 행사"에 들어갑니다
 // verified : false 이면 "확인 필요" 표시 (공식 페이지에서 날짜를 직접 확인하지 못한 정보)
 //
-// 마지막 수집: 2026-10-16
+// 마지막 수집: 2026-10-19
 
 window.EVENTS = [
 
   // ───────────── 대전 ─────────────
-  {
-    id: "2026-10-daejeon-techcon-e",
-    title: "2026 테크콘E (국방과학 축제) 마지막 날",
-    start: "2026-10-16", end: "2026-10-17",
-    time: "시간 미확인",
-    place: "국립중앙과학관 사이언스홀·꿈이광장", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["과학"],
-    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "10/15~17 사흘 행사. 남은 날은 10/17(토) 하루뿐. 일부 프로그램은 선착순 신청.",
-    big: false, verified: true
-  },
   {
     id: "2026-10-daejeon-contents-fair",
     title: "2026 대전콘텐츠페어 (공공캐릭터 페스티벌·기능성게임 체험)",
@@ -69,7 +57,7 @@ window.EVENTS = [
     cost: "무료", price: "", reservation: true, ages: "전연령",
     tags: ["축제"],
     url: "https://www.daejeon.go.kr/his/board/musBoardDataView.do?bbsCode=hisnews&menuSeq=677&boardDataSeq=12351", source: "대전시립박물관 공지 / OK예약서비스",
-    note: "평일은 OK예약 사전예약(11월분 10/13~ 접수), 토요일은 현장접수만. 일·월 휴무. 11/16~30 시설보수 휴관.",
+    note: "평일은 OK예약 사전예약(11월분 10/13~11/30 접수 중), 토요일은 현장접수만. 일·월 휴무. 11/16~30 시설보수 휴관.",
     big: false, verified: true
   },
   {
@@ -171,30 +159,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
-    id: "2026-10-nonsan-ganggyeong-festival",
-    title: "제30회 강경젓갈·상월고구마 축제",
-    start: "2026-10-16", end: "2026-10-17",
-    time: "시간 미확인 (10/17 18:00 폐막식)",
-    place: "논산 강경읍 금강둔치 일원", city: "논산", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["축제", "야외"],
-    url: "http://www.nonsan.go.kr/kor/html/sub03/030101.html?mode=V&no=6e89d25e13fa4545f0bcff711e4e9d7d&GotoPage=1", source: "논산시",
-    note: "⚠ 강풍·호우 예보로 일정 단축, 10/18(일) 행사 취소(논산시 공지). 체험 부스·공연은 첨부 일정표 참고. 10/17(토) 18:00 강경 근대거리 '강경 풍류 예인쇼'도 함께 가능.",
-    big: true, verified: true
-  },
-  {
-    id: "2026-10-gongju-museum-percussion",
-    title: "국립공주박물관 '나의 박물관: 타악' (타악 공연 + 소원돌·키링 체험)",
-    start: "2026-10-17", end: "2026-10-17",
-    time: "11:00~16:00 (체험 11:00~15:00, 공연 14:30~16:00)",
-    place: "국립공주박물관 야외광장", city: "공주", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["예술", "과학"],
-    url: "https://gongju.museum.go.kr/prog/clturEvnt/kor/sub03_02/view.do?evntNo=666", source: "국립공주박물관",
-    note: "특별전 <한국의 영산, 계룡산> 연계 야외 행사. 현장 참여, 예약 없음. 문의 041-850-6346",
-    big: false, verified: true
-  },
-  {
     id: "2026-10-sejong-arboretum-free-festival",
     title: "제6회 사회적가치 나눔축제 (국립세종수목원 무료 개방)",
     start: "2026-10-17", end: "2026-10-18",
@@ -204,30 +168,6 @@ window.EVENTS = [
     tags: ["야외", "축제"],
     url: "https://www.sejongyeonhap.co.kr/news/articleView.html?idxno=58123", source: "세종시민일보 (세종시 주최)",
     note: "행사 기간 수목원 무료 입장. 기업 부스 70곳, 스티커투어, 문화공연. 어린이 전용 체험은 미확인.",
-    big: false, verified: false
-  },
-  {
-    id: "2026-10-cheongju-peterpan",
-    title: "가족 뮤지컬 <피터팬> (청주아트홀)",
-    start: "2026-10-17", end: "2026-10-17",
-    time: "13:30, 15:30",
-    place: "청주아트홀", city: "청주", region: "근교",
-    cost: "유료", price: "미확인", reservation: true, ages: "전연령 (가족)",
-    tags: ["예술"],
-    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
-    note: "가격·예매처 미표기, 청주아트홀 043-201-2360 문의. 10/24~25 어린이극 '타키포오 몬스터 전쟁의 서막'도 있음.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-painters",
-    title: "넌버벌 퍼포먼스 <페인터즈> (세종문화예술회관)",
-    start: "2026-10-17", end: "2026-10-17",
-    time: "시간 미확인",
-    place: "세종문화예술회관 (조치원)", city: "세종", region: "근교",
-    cost: "유료", price: "미확인", reservation: true, ages: "전연령",
-    tags: ["예술"],
-    url: "https://www.sjac.or.kr/culture/main/view", source: "세종문화예술회관 (검색 결과)",
-    note: "그림 그리는 과정을 보여주는 마술 같은 미술 퍼포먼스. 공식 사이트가 안 열려 시간·가격 미확인, 예매 전 확인.",
     big: false, verified: false
   },
   {
@@ -324,6 +264,18 @@ window.EVENTS = [
     tags: ["예술"],
     url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12347", source: "국립청주박물관",
     note: "10/24(토)·10/31(토) 2회. 사전예약 없이 당일 선착순 238석. 특별전·어린이박물관과 같은 날 묶기 좋음.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-10-sejong-sports-festival",
+    title: "2026 세종 스포츠 축제",
+    start: "2026-10-24", end: "2026-10-24",
+    time: "08:00~21:00",
+    place: "세종중앙공원", city: "세종", region: "근교",
+    cost: "무료", price: "", reservation: false, ages: "전연령",
+    tags: ["야외", "축제"],
+    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do", source: "세종시 행사달력",
+    note: "비용·세부 프로그램은 미확인(행사달력에는 날짜·장소만 있음). 같은 날 밤 국립세종수목원 야간개장과 묶어 갈 수 있음.",
     big: false, verified: true
   },
   {
