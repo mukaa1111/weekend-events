@@ -57,7 +57,7 @@
 ## 먼저 읽을 것
 1. `docs/COLLECT.md` — 수집 규칙 전체 (무엇을/어디서/어떻게/중복/끝난 뒤). 이 문서가 최우선 규칙이다.
 2. `data/sources.js` — 돌아야 할 출처 목록. `active: false`는 건너뛴다. 각 출처의 `note`에 접속 요령이 적혀 있다.
-3. `data/events.js` — 현재 행사 목록과 데이터 형식. 이 형식을 정확히 유지한다 (`window.EVENTS = [ ... ];` 로 시작하는 자바스크립트 파일, 필드: id, title, start, end, time, place, city, region, cost, price, reservation, ages, tags, url, source, note, big, verified. 선택 필드: applyStart(접수 시작일), deadline(접수 마감일), applyNote(접수 방법 한 줄)).
+3. `data/events.js` — 현재 행사 목록과 데이터 형식. 이 형식을 정확히 유지한다 (`window.EVENTS = [ ... ];` 로 시작하는 자바스크립트 파일, 필드: id, title, start, end, time, place, city, region, cost, price, reservation, ages, tags, url, source, note, big, verified. 선택 필드: applyStart(접수 시작일), applyTime(접수 시작 시각 "HH:MM"), deadline(접수 마감일), applyNote(접수 방법 한 줄)).
 
 ## 할 일
 1. `TZ=Asia/Seoul date +%Y-%m-%d`로 오늘 날짜(한국 시간)를 확인한다. 수집 기간은 오늘부터 약 6주 뒤까지.
@@ -65,13 +65,13 @@
 3. 찾은 행사를 `data/events.js`에 반영한다:
    - 이미 있는 행사(id 같거나 날짜·장소가 같은 것)는 새로 만들지 말고 시간·가격·예약·접수 정보만 보강한다.
    - 새 행사는 COLLECT.md 3절 형식대로 추가한다. `verified`는 공식 페이지에서 날짜를 직접 읽었을 때만 true.
-   - **접수(예약) 정보는 반드시 날짜로 적는다.** 접수 시작일이 보이면 `applyStart`, 마감일이 보이면 `deadline`에 "연-월-일"로 적고, 방법은 `applyNote`에 한 줄(예: "OK예약 선착순", "누리집 교육행사 탭"). 선착순이라 마감일이 없으면 `deadline`은 행사 전날로 적는다. 접수가 이미 마감됐지만 행사는 남았으면 그대로 두고 `note`에 "접수 마감"이라고 적는다. 메모(`note`)에만 적고 `deadline`을 비워 두면 안 된다.
+   - **접수(예약) 정보는 반드시 날짜로 적는다.** 접수 시작일이 보이면 `applyStart`, 시작 시각(예: 10시 오픈)이 보이면 `applyTime`에 "HH:MM", 마감일이 보이면 `deadline`에 "연-월-일"로 적고, 방법은 `applyNote`에 한 줄(예: "OK예약 선착순", "누리집 교육행사 탭"). 선착순이라 마감일이 없으면 `deadline`은 행사 전날로 적는다. 접수가 이미 마감됐지만 행사는 남았으면 그대로 두고 `note`에 "접수 마감"이라고 적는다. 메모(`note`)에만 적고 `deadline`을 비워 두면 안 된다.
    - `end`가 어제 이전인 지난 행사는 삭제한다.
    - 대상 연령이 안 맞는 것(중학생 이상 전용, 5세 미만 전용), 마감된 것, 상설 시설은 넣지 않는다.
    - 전국(region '전국')은 큰 행사만, `big: true`.
    - 파일 맨 위 주석의 '마지막 수집:' 날짜를 오늘로 바꾼다.
 4. `data/sources.js`는 출처가 안 열리거나 주소가 바뀐 경우에만 `note`를 갱신한다. 출처를 멋대로 지우지 않는다.
-5. 검사: `node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"` 가 `ok`를 출력해야 한다. 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
+5. 검사: `node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(e.applyTime&&!/^\d{2}:\d{2}$/.test(e.applyTime))throw new Error('bad applyTime '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"` 가 `ok`를 출력해야 한다. 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
 6. `docs/COLLECT.md` 맨 아래 '수집 기록' 표에 한 줄 추가한다 (**변경이 0건이어도 반드시 추가**): | 날짜 | 추가 n건 | 갱신 n건 | 못 연 출처 | 메모 |
 7. 변경된 파일을 커밋하고 `main` 브랜치에 바로 푸시한다 (PR 만들지 않는다). **수집 기록 한 줄만 바뀌었어도 반드시 커밋·푸시한다.** 이 커밋이 자동 수집이 살아 있다는 증거다. 커밋 메시지 예: `행사 수집 2026-10-20: 추가 7건, 갱신 3건, 삭제 5건`. 푸시가 끝나면 GitHub Pages가 자동으로 새 목록을 보여준다.
 8. **텔레그램 알림**: 푸시가 끝나면 `bash scripts/telegram.sh "<메시지>"` 를 한 번 실행한다. 메시지는 글자만(마크다운 기호 없이), 아래 형식으로 만든다.
@@ -88,7 +88,7 @@
 
 예약 서두르기 (7일 안)
 - 행사명(행사일 M/D) — 접수 마감 M/D(요일), 접수 방법
-- 행사명(행사일 M/D) — 접수 시작 M/D(요일), 접수 방법
+- 행사명(행사일 M/D) — 접수 시작 M/D(요일) HH:MM, 접수 방법   ← 시각이 있으면 반드시 적는다 (오픈 직후 매진 대비)
 
 전체 보기: https://mukaa1111.github.io/weekend-events/
 ```

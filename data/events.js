@@ -6,7 +6,7 @@
 // tags     : "과학"(과학·만들기·코딩) "야외"(운동·야외·자연) "예술"(예술·공연·전시) "축제"(축제·역사·도서관)
 // big      : true 이면 "미리 체크할 큰 행사"에 들어갑니다
 // verified : false 이면 "확인 필요" 표시 (공식 페이지에서 날짜를 직접 확인하지 못한 정보)
-// applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyNote : 접수 방법 한 줄
+// applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
 // 마지막 수집: 2026-10-19
@@ -257,7 +257,7 @@ window.EVENTS = [
     time: "14:00~15:30",
     place: "국립공주박물관 세미나실·전시실", city: "공주", region: "근교",
     cost: "무료", price: "", reservation: true, ages: "초등 이상 + 가족",
-    applyStart: "2026-10-19", deadline: "2026-10-23", applyNote: "10/24 회차: 10/19 10시 선착순 / 11/28 회차: 11/23 10시",
+    applyStart: "2026-10-19", applyTime: "10:00", deadline: "2026-10-23", applyNote: "10/24 회차: 10/19 10시 선착순 / 11/28 회차: 11/23 10시",
     tags: ["과학", "예술"],
     url: "https://gongju.museum.go.kr/prog/eduPrgrm/kor/sub03_01/view.do?prgrmNo=1089", source: "국립공주박물관",
     note: "토요일 회차 10/24, 11/28. 회차 30명, 접수는 전주 월요일 10시 누리집 선착순(10/19, 11/23). 보호자 동반 필수.",

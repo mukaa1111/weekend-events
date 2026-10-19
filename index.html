@@ -242,7 +242,7 @@
     if (e.reservation) badges += '<span class="badge resv">예약 필요</span>';
     if (e.applyStart && parse(e.applyStart) >= today) {
       var ap = parse(e.applyStart);   // 시작일이 아직 안 지났으면 항상 표시 (오픈 직후 매진 대비)
-      badges += '<span class="badge deadline">접수 시작 ' + fmt(ap) + '(' + dayName(ap) + ')</span>';
+      badges += '<span class="badge deadline">접수 시작 ' + fmt(ap) + '(' + dayName(ap) + ')' + (e.applyTime ? ' ' + esc(e.applyTime) : '') + '</span>';
     }
     if (e.deadline) {
       var dl = parse(e.deadline);
