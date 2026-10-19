@@ -42,6 +42,8 @@
 | 2026-10-16 2차 | 네트워크 해결 확인(잘쓸레터 읽힘). 변경 0건이라 커밋 안 함 → push 권한 미검증. 출처를 1곳만 열어봄 → 지시문 강화 |
 | 2026-10-16 3차 | **성공.** 출처 24곳 전부 시도(○11 △6 ×7, 503은 사이트 쪽 일시 차단), 추가 1건·갱신 1건(강경젓갈축제 10/18 취소 반영), 검사 ok 40, GitHub 커밋 dc08b95 푸시. 소요 1분 43초 |
 | 2026-10-16 4차 | **텔레그램 알림 성공.** 환경 변수 입력 후 실행 → 수집·푸시 후 폰으로 요약 메시지 도착 확인 |
+| 2026-10-19 (첫 자동 실행) | 월요일 07:00 자동 실행 성공. 추가 1·갱신 1·삭제 5, 텔레그램 도착 |
+| 2026-10-19 (지시문 변경) | 접수 시작·마감일을 `applyStart`/`deadline`으로 적고, 알림에 '예약 서두르기(7일 안)' 묶음 추가 |
 
 ## 루틴이 안 되는 요금제라면 (대안)
 - **수동**: PC에서 Claude Code를 열고 "이번 주 행사 수집해줘" → 수집 후 "GitHub에 올려줘". 5~10분.
@@ -55,25 +57,42 @@
 ## 먼저 읽을 것
 1. `docs/COLLECT.md` — 수집 규칙 전체 (무엇을/어디서/어떻게/중복/끝난 뒤). 이 문서가 최우선 규칙이다.
 2. `data/sources.js` — 돌아야 할 출처 목록. `active: false`는 건너뛴다. 각 출처의 `note`에 접속 요령이 적혀 있다.
-3. `data/events.js` — 현재 행사 목록과 데이터 형식. 이 형식을 정확히 유지한다 (`window.EVENTS = [ ... ];` 로 시작하는 자바스크립트 파일, 필드: id, title, start, end, time, place, city, region, cost, price, reservation, ages, tags, url, source, note, big, verified).
+3. `data/events.js` — 현재 행사 목록과 데이터 형식. 이 형식을 정확히 유지한다 (`window.EVENTS = [ ... ];` 로 시작하는 자바스크립트 파일, 필드: id, title, start, end, time, place, city, region, cost, price, reservation, ages, tags, url, source, note, big, verified. 선택 필드: applyStart(접수 시작일), deadline(접수 마감일), applyNote(접수 방법 한 줄)).
 
 ## 할 일
 1. `TZ=Asia/Seoul date +%Y-%m-%d`로 오늘 날짜(한국 시간)를 확인한다. 수집 기간은 오늘부터 약 6주 뒤까지.
 2. `data/sources.js`의 활성 출처를 **빠짐없이 모두** 돈다. **출처마다 WebFetch를 최소 한 번은 시도한다.** 같은 날 이미 수집했더라도, '바뀐 게 없을 것 같아도' 생략하지 않는다. 한 출처가 안 열려도 멈추지 말고 다음 출처로 넘어간다. 순서: 공식 사이트(교육·행사·공지 페이지) WebFetch → 안 열리면 WebSearch로 '기관명 + 이번달/다음달 + 어린이 행사' 검색해서 검색 결과·뉴스 기사에서 날짜를 읽는다. 잘쓸레터(어피티)는 보관함 https://uppity.co.kr/newsletter/jalsseul-letter/ 에서 최신 호 1~2개를 읽고 '즐길거리/일정' 코너의 행사를 뽑는다. 보완 검색도 3~5개 한다 (예: '대전 아이와 주말 ○월 행사', '대전 어린이 체험 ○월 ○일', '세종 청주 공주 ○월 축제 가족', '국립중앙과학관 ○월 주말 프로그램').
 3. 찾은 행사를 `data/events.js`에 반영한다:
-   - 이미 있는 행사(id 같거나 날짜·장소가 같은 것)는 새로 만들지 말고 시간·가격·예약 정보만 보강한다.
+   - 이미 있는 행사(id 같거나 날짜·장소가 같은 것)는 새로 만들지 말고 시간·가격·예약·접수 정보만 보강한다.
    - 새 행사는 COLLECT.md 3절 형식대로 추가한다. `verified`는 공식 페이지에서 날짜를 직접 읽었을 때만 true.
+   - **접수(예약) 정보는 반드시 날짜로 적는다.** 접수 시작일이 보이면 `applyStart`, 마감일이 보이면 `deadline`에 "연-월-일"로 적고, 방법은 `applyNote`에 한 줄(예: "OK예약 선착순", "누리집 교육행사 탭"). 선착순이라 마감일이 없으면 `deadline`은 행사 전날로 적는다. 접수가 이미 마감됐지만 행사는 남았으면 그대로 두고 `note`에 "접수 마감"이라고 적는다. 메모(`note`)에만 적고 `deadline`을 비워 두면 안 된다.
    - `end`가 어제 이전인 지난 행사는 삭제한다.
    - 대상 연령이 안 맞는 것(중학생 이상 전용, 5세 미만 전용), 마감된 것, 상설 시설은 넣지 않는다.
    - 전국(region '전국')은 큰 행사만, `big: true`.
    - 파일 맨 위 주석의 '마지막 수집:' 날짜를 오늘로 바꾼다.
 4. `data/sources.js`는 출처가 안 열리거나 주소가 바뀐 경우에만 `note`를 갱신한다. 출처를 멋대로 지우지 않는다.
-5. 검사: `node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!/^\d{4}-\d{2}-\d{2}$/.test(e.start)||!/^\d{4}-\d{2}-\d{2}$/.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"` 가 `ok`를 출력해야 한다. 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
+5. 검사: `node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"` 가 `ok`를 출력해야 한다. 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
 6. `docs/COLLECT.md` 맨 아래 '수집 기록' 표에 한 줄 추가한다 (**변경이 0건이어도 반드시 추가**): | 날짜 | 추가 n건 | 갱신 n건 | 못 연 출처 | 메모 |
 7. 변경된 파일을 커밋하고 `main` 브랜치에 바로 푸시한다 (PR 만들지 않는다). **수집 기록 한 줄만 바뀌었어도 반드시 커밋·푸시한다.** 이 커밋이 자동 수집이 살아 있다는 증거다. 커밋 메시지 예: `행사 수집 2026-10-20: 추가 7건, 갱신 3건, 삭제 5건`. 푸시가 끝나면 GitHub Pages가 자동으로 새 목록을 보여준다.
-8. **텔레그램 알림**: 푸시가 끝나면 `bash scripts/telegram.sh "<메시지>"` 를 한 번 실행한다. 메시지는 글자만(마크다운 기호 없이), 아래 형식으로 만든다. '이번 주말'은 오늘 기준 다음 토·일이다. 추천은 `data/events.js`에서 그 주말에 열리는 행사 중 초등 2학년에게 잘 맞는 것 3개(무료·체험·예약 불필요 우선), 미리 체크는 접수 마감이 가장 가까운 교육·예약 1개(없으면 줄 생략).
-   (메시지 형식은 docs/TELEGRAM.md 예시 참고)
-   스크립트가 '건너뜀'이라고 출력하면(환경 변수 없음) 요약에 '텔레그램 미설정'이라고만 적는다. '전송 실패'면 응답 내용을 요약에 적는다. 토큰·chat id 값은 절대 출력하거나 파일에 쓰지 않는다.
+8. **텔레그램 알림**: 푸시가 끝나면 `bash scripts/telegram.sh "<메시지>"` 를 한 번 실행한다. 메시지는 글자만(마크다운 기호 없이), 아래 형식으로 만든다.
+   - '이번 주말'은 오늘 기준 다음 토·일. 추천은 `data/events.js`에서 그 주말에 열리는 행사 중 초등 2학년에게 잘 맞는 것 3개(무료·체험 우선). 예약이 필요한 행사는 "예약 필요(마감 M/D)" 또는 "예약 필요(선착순)"처럼 접수 상태를 꼭 적고, 접수가 이미 끝난 행사는 추천하지 않는다.
+   - '예약 서두르기'는 `deadline` 또는 `applyStart`가 오늘부터 7일 안인 행사(최대 3개, 날짜 빠른 순). 없으면 "예약 서두르기: 없음" 한 줄.
+```
+📅 주말 뭐하지? M/D(요일) 수집 결과
+추가 n · 갱신 n · 삭제 n
+
+이번 주말(M/D~M/D) 추천
+1. 행사명 — M/D(요일) 시간, 비용, 예약 불필요
+2. 행사명 — M/D(요일) 시간, 비용, 예약 필요(마감 M/D)
+3. ...
+
+예약 서두르기 (7일 안)
+- 행사명(행사일 M/D) — 접수 마감 M/D(요일), 접수 방법
+- 행사명(행사일 M/D) — 접수 시작 M/D(요일), 접수 방법
+
+전체 보기: https://mukaa1111.github.io/weekend-events/
+```
+스크립트가 '건너뜀'이라고 출력하면(환경 변수 없음) 요약에 '텔레그램 미설정'이라고만 적는다. '전송 실패'면 응답 내용을 요약에 적는다. 토큰·chat id 값은 절대 출력하거나 파일에 쓰지 않는다.
 
 ## 막혔을 때
 - 사이트 접속이 DNS 오류(ENOTFOUND)로 연달아 실패하면 클라우드 환경의 네트워크 제한일 수 있다. 그래도 WebSearch는 되니 모든 출처를 WebSearch로라도 끝까지 확인하고, 요약에 '공식 사이트 접속 불가 → 환경 네트워크 설정 확인 필요'라고 분명히 적는다.

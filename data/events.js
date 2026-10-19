@@ -6,6 +6,8 @@
 // tags     : "과학"(과학·만들기·코딩) "야외"(운동·야외·자연) "예술"(예술·공연·전시) "축제"(축제·역사·도서관)
 // big      : true 이면 "미리 체크할 큰 행사"에 들어갑니다
 // verified : false 이면 "확인 필요" 표시 (공식 페이지에서 날짜를 직접 확인하지 못한 정보)
+// applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyNote : 접수 방법 한 줄
+//   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
 // 마지막 수집: 2026-10-19
 
@@ -55,6 +57,7 @@ window.EVENTS = [
     time: "화~금 10:00~11:30 / 토 10:00, 13:00, 15:30",
     place: "대전시립박물관 우리놀이터", city: "대전 유성구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령",
+    applyStart: "2026-10-13", deadline: "2026-11-30", applyNote: "OK예약 사전예약 (토요일은 현장접수)",
     tags: ["축제"],
     url: "https://www.daejeon.go.kr/his/board/musBoardDataView.do?bbsCode=hisnews&menuSeq=677&boardDataSeq=12351", source: "대전시립박물관 공지 / OK예약서비스",
     note: "평일은 OK예약 사전예약(11월분 10/13~11/30 접수 중), 토요일은 현장접수만. 일·월 휴무. 11/16~30 시설보수 휴관.",
@@ -67,6 +70,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "한밭수목원", city: "대전 서구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령",
+    deadline: "2026-11-26", applyNote: "OK예약 선착순",
     tags: ["야외"],
     url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
     note: "매주 토요일 해설사와 수목원 산책. 접수 ~11/26 선착순(OK예약). 평일 해설(10/19~11/20)도 별도 예약 가능.",
@@ -91,6 +95,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령",
+    applyNote: "누리집 선착순 예약 + 잔여석 현장접수",
     tags: ["과학"],
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
     note: "토요일 대중 과학강연. 누리집 선착순 예약 + 잔여석 현장접수. 강연 주제·시간은 공지 확인.",
@@ -115,6 +120,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "대전시립미술관", city: "대전 서구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "초등 2~3학년",
+    applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 선착순",
     tags: ["예술"],
     url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스 / 대전시립미술관",
     note: "2학년 맞춤 반! 토·일 운영. 접수 10/6~11/13 선착순(OK예약). 연계 전시 《선과 색, 지역의 기억》 10/21 개막. 문의 042-270-7332",
@@ -127,6 +133,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "국립중앙과학관", city: "대전 유성구", region: "대전",
     cost: "유료", price: "반별 상이 (예약페이지 확인)", reservation: true, ages: "5세~초등 6학년",
+    applyStart: "2026-10-14", deadline: "2026-11-06", applyNote: "통합예약(rsvn.science.go.kr) 가입 후 결제",
     tags: ["과학"],
     url: "https://science.go.kr/mps/0/bbs/163/moveBbsNttList.do", source: "국립중앙과학관 개인교육",
     note: "매주 토요일 4회 과정. 접수 10/14~11/6. 통합예약(rsvn.science.go.kr)에서 아이 이름으로 가입 후 결제까지 해야 완료.",
@@ -139,6 +146,7 @@ window.EVENTS = [
     time: "13:30 출발 (접수 11:30~13:00), 체험 14:00~17:00",
     place: "엑스포시민광장·한밭수목원·DCC", city: "대전 유성구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령",
+    deadline: "2026-10-31", applyNote: "사전등록 선착순 1,500명",
     tags: ["야외", "과학"],
     url: "https://xn--269as6am3d4uc81numd8pq3wftwa42zek7a.com/", source: "행사 공식 누리집",
     note: "수목원 QR 스탬프 걷기(완주 시 온통대전 1만원), 태양광 체험 6종, OX퀴즈. 사전등록 ~10/31 선착순 1,500명 — 서두를 것.",
@@ -249,6 +257,7 @@ window.EVENTS = [
     time: "14:00~15:30",
     place: "국립공주박물관 세미나실·전시실", city: "공주", region: "근교",
     cost: "무료", price: "", reservation: true, ages: "초등 이상 + 가족",
+    applyStart: "2026-10-19", deadline: "2026-10-23", applyNote: "10/24 회차: 10/19 10시 선착순 / 11/28 회차: 11/23 10시",
     tags: ["과학", "예술"],
     url: "https://gongju.museum.go.kr/prog/eduPrgrm/kor/sub03_01/view.do?prgrmNo=1089", source: "국립공주박물관",
     note: "토요일 회차 10/24, 11/28. 회차 30명, 접수는 전주 월요일 10시 누리집 선착순(10/19, 11/23). 보호자 동반 필수.",
@@ -321,6 +330,7 @@ window.EVENTS = [
     time: "10:00~11:30",
     place: "국립청주박물관 상설전시실·야외정원", city: "청주", region: "근교",
     cost: "무료", price: "", reservation: true, ages: "초등 1~6학년 + 가족",
+    applyStart: "2026-11-09", deadline: "2026-11-18", applyNote: "누리집 교육행사 탭 사전예약",
     tags: ["야외", "과학"],
     url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12333", source: "국립청주박물관",
     note: "어린이 15명 정원. 접수 11/9(월)~11/18(수) 누리집 교육행사 탭. 문의 043-229-6407",
@@ -333,6 +343,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "청주예술의전당 대공연장", city: "청주", region: "근교",
     cost: "유료", price: "요금 미확인 (예매안내 참고)", reservation: true, ages: "어린이 가족",
+    applyNote: "청주예술의전당 예매안내 참고",
     tags: ["예술"],
     url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
     note: "11/27(금)~28(토). 예매는 청주예술의전당 예매안내 페이지에서 확인.",
@@ -431,6 +442,7 @@ window.EVENTS = [
     time: "11:00~17:30 (입장 마감 17:00)",
     place: "벡스코 제1·2전시장", city: "부산 해운대구", region: "전국",
     cost: "유료", price: "일반 18,000원 / 청소년(2008년 이후 출생) 8,000원", reservation: true, ages: "전연령 (초등 고학년 이상 추천)",
+    applyStart: "2026-09-29", applyNote: "100% 사전예매 (현장판매 없음)",
     tags: ["과학", "축제"],
     url: "https://www.gstar.or.kr/part/gstar_btc_info.do", source: "지스타 공식 홈페이지",
     note: "100% 사전예매(현장판매 없음), 9/29부터 판매 중. 8~9세는 청소년권. 체험 대기줄 길 수 있어 초2에겐 다소 힘들 수 있음.",
@@ -443,6 +455,7 @@ window.EVENTS = [
     time: "10:00~18:00 (입장 마감 17:30)",
     place: "코엑스 Hall A", city: "서울 강남구", region: "전국",
     cost: "일부 유료", price: "사전등록 시 무료, 현장 10,000원 (57회 기준)", reservation: true, ages: "유아~초등 저학년",
+    applyNote: "사전등록 시 무료 (educare.co.kr)",
     tags: ["과학", "예술", "축제"],
     url: "https://www.yugacrew.com/crewletter/coex-baby-fair-2026", source: "육아 블로그(유가크루) / 주최 세계전람",
     note: "로봇코딩·AI·쿠킹·공예 체험 부스. 사전등록은 educare.co.kr. 주 대상이 유아~예비초등이라 2학년에겐 다소 어릴 수 있음.",
