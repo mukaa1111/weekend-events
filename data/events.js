@@ -9,35 +9,11 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-10-19
+// 마지막 수집: 2026-10-22
 
 window.EVENTS = [
 
   // ───────────── 대전 ─────────────
-  {
-    id: "2026-10-daejeon-contents-fair",
-    title: "2026 대전콘텐츠페어 (공공캐릭터 페스티벌·기능성게임 체험)",
-    start: "2026-10-16", end: "2026-10-18",
-    time: "시간 미확인",
-    place: "대전컨벤션센터(DCC) 제2전시장", city: "대전 유성구", region: "대전",
-    cost: "일부 유료", price: "입장료 미확인 (사전등록 안내 있음)", reservation: false, ages: "전연령",
-    tags: ["과학", "예술"],
-    url: "https://inews24.com/view/2012526", source: "아이뉴스24·헤럴드경제 (대전관광공사 주최)",
-    note: "전국 지자체 캐릭터 92종, 10/17 캐릭터 퍼레이드, 기능성게임 27종 체험. 10/17~18 대전역↔DCC 셔틀 1,000원. 옆 빵축제와 같은 날 가능.",
-    big: false, verified: false
-  },
-  {
-    id: "2026-10-daejeon-bread-festival",
-    title: "2026 대전 빵축제",
-    start: "2026-10-17", end: "2026-10-18",
-    time: "13:00~21:00",
-    place: "엑스포과학공원 한빛탑 일원", city: "대전 유성구", region: "대전",
-    cost: "일부 유료", price: "입장 무료, 빵 구매 유료", reservation: false, ages: "전연령",
-    tags: ["축제", "야외"],
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=11970", source: "문화체육관광부 축제정보 (주최 대전관광공사)",
-    note: "빵집 120곳 부스(A~E존), '빵잼 올림픽' 등 가족 놀이·제과 체험. 인파 매우 많음, 오픈 직후 방문 권장. 잘쓸레터에도 소개.",
-    big: true, verified: true
-  },
   {
     id: "2026-10-daejeon-yuseong-chrysanthemum",
     title: "제17회 유성국화축제",
@@ -153,43 +129,44 @@ window.EVENTS = [
     big: true, verified: true
   },
 
-  // ───────────── 근교 ─────────────
   {
-    id: "2026-10-cheongju-chojeong-festival",
-    title: "세종대왕과 초정약수축제",
-    start: "2026-10-16", end: "2026-10-18",
-    time: "10:00~21:00",
-    place: "초정문화공원·초정행궁 일원", city: "청주", region: "근교",
-    cost: "일부 유료", price: "입장 무료, 체험부스 유료", reservation: false, ages: "전연령",
-    tags: ["축제", "야외"],
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=11834", source: "문화체육관광부 축제정보",
-    note: "전통공방·만들기·족욕 체험, 보물찾기, 훈민정음 디지털 전시, 한복 체험. 대전에서 차로 약 1시간.",
+    id: "2026-10-daejeon-bookfair",
+    title: "2026 대전 북페어 (그림책 만들기·북토크)",
+    start: "2026-10-24", end: "2026-10-25",
+    time: "시간 미확인",
+    place: "엑스포기념관", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "입장료 미확인", reservation: false, ages: "전연령",
+    tags: ["과학", "축제"],
+    url: "https://www.wikitree.co.kr/articles/1165916", source: "위키트리 (검색 기사)",
+    note: "AI 그림책 만들기, 책갈피 제작 체험, 궤도·심채경 등 북토크. 엑스포과학공원 일원이라 주차 혼잡 예상.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-10-daejeon-seogu-book-festival",
+    title: "대전 서구 책축제",
+    start: "2026-10-24", end: "2026-10-24",
+    time: "13:00~17:00",
+    place: "대전 서구 (장소 미확인)", city: "대전 서구", region: "대전",
+    cost: "무료", price: "비용 미확인", reservation: false, ages: "전연령",
+    tags: ["축제"],
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp", source: "문화체육관광부 축제 안내",
+    note: "문체부 축제 목록에 날짜·시간만 있음. 문의 042-288-4872. 북페어와 같은 날.",
     big: false, verified: true
   },
   {
-    id: "2026-10-sejong-arboretum-free-festival",
-    title: "제6회 사회적가치 나눔축제 (국립세종수목원 무료 개방)",
-    start: "2026-10-17", end: "2026-10-18",
-    time: "시간 미확인",
-    place: "국립세종수목원", city: "세종", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    url: "https://www.sejongyeonhap.co.kr/news/articleView.html?idxno=58123", source: "세종시민일보 (세종시 주최)",
-    note: "행사 기간 수목원 무료 입장. 기업 부스 70곳, 스티커투어, 문화공연. 어린이 전용 체험은 미확인.",
-    big: false, verified: false
+    id: "2026-10-nonsan-art-festival",
+    title: "제21회 논산예술제",
+    start: "2026-10-24", end: "2026-10-24",
+    time: "10:00~19:30",
+    place: "논산시민공원(시민가족공원)", city: "논산", region: "근교",
+    cost: "무료", price: "비용 미확인", reservation: false, ages: "전연령",
+    tags: ["예술", "축제"],
+    url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
+    note: "세부 프로그램은 미확인. 대전에서 차로 약 40분.",
+    big: false, verified: true
   },
-  {
-    id: "2026-10-cheonan-bread-day",
-    title: "2026 빵빵데이 천안",
-    start: "2026-10-17", end: "2026-10-18",
-    time: "시간 미확인",
-    place: "천안종합운동장 오륜문 광장 일원", city: "천안", region: "근교",
-    cost: "일부 유료", price: "입장 무료 추정, 빵 구매 유료", reservation: false, ages: "전연령",
-    tags: ["축제"],
-    url: "https://www.cheonan.go.kr/pangpangday/index.do", source: "잘쓸레터(어피티)",
-    note: "17일 개막식 드론 1,000대 라이트쇼, 18일 빵 음악회. 대전 빵축제와 같은 주말이라 하나만 고르기.",
-    big: false, verified: false
-  },
+
+  // ───────────── 근교 ─────────────
   {
     id: "2026-10-cheongju-media-art",
     title: "2026 국가유산 미디어아트 청주 '빛으로 여는 청주의 보물'",
