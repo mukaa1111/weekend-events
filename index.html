@@ -50,6 +50,17 @@
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
     padding: 14px 16px; margin-top: 10px;
   }
+  .card .row { display: flex; gap: 12px; align-items: flex-start; }
+  .card .main { flex: 1; min-width: 0; }
+  .thumb {
+    position: relative; flex: 0 0 64px; width: 64px; height: 64px; border-radius: 12px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-size: 30px; background: #eee;
+  }
+  .thumb.과학 { background: var(--tag-science); }
+  .thumb.야외 { background: var(--tag-outdoor); }
+  .thumb.예술 { background: var(--tag-art); }
+  .thumb.축제 { background: var(--tag-festival); }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .card .top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
   .card .title { font-size: 17px; font-weight: 700; margin: 0; }
   .card .title a { color: inherit; text-decoration: none; }
@@ -100,6 +111,7 @@
 
   @media (max-width: 520px) {
     .card .top { flex-direction: column; gap: 2px; }
+    .thumb { flex-basis: 56px; width: 56px; height: 56px; font-size: 26px; }
   }
 </style>
 </head>
@@ -260,6 +272,8 @@
   }
 
   // ---------- 카드 그리기 ----------
+  var ICON = { "과학": "🔬", "야외": "🌳", "예술": "🎭", "축제": "🎪" };
+
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   // 오늘부터 며칠 남았는지 (0 = 오늘)
@@ -335,13 +349,18 @@
     if (e.indoor === true) tags += '<span class="tag venue">실내</span>';
     else if (e.indoor === "both") tags += '<span class="tag venue">실내+야외</span>';
     else if (e.indoor === false) tags += '<span class="tag venue outdoor">야외</span>';
-    return '<article class="card">' +
+    // 왼쪽 섬네일: 분야 아이콘, 공식 포스터 주소(image)가 있으면 그 위에 사진. 사진이 안 열리면 아이콘만 남음
+    var first = (e.tags && e.tags[0]) || "축제";
+    var thumb = '<div class="thumb ' + esc(first) + '"><span class="icon">' + (ICON[first] || "📌") + '</span>' +
+      (e.image ? '<img src="' + esc(e.image) + '" alt="" loading="lazy" onerror="this.remove()">' : "") + '</div>';
+    return '<article class="card"><div class="row">' + thumb + '<div class="main">' +
       '<div class="top"><h3 class="title"><a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a></h3>' +
       '<div class="date">' + dateLabel(e) + endD + '</div></div>' +
       '<div class="meta"><span>' + esc(e.time) + '</span><span>' + esc(e.place) + '</span><span>' + esc(e.city) + '</span><span>' + esc(e.ages) + '</span></div>' +
       (e.note ? '<div class="note">' + esc(e.note) + "</div>" : "") +
       '<div class="foot">' + tags + badges +
       '<span class="src">출처: <a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.source) + "</a></span></div>" +
+      '</div></div>' +
       actions +
       "</article>";
   }
