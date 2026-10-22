@@ -95,6 +95,8 @@
     border: 1px solid var(--line); color: var(--ink); text-decoration: none; background: #fafafa;
   }
   .card .actions a:active { background: var(--accent-soft); }
+  .card .actions a.fav.on { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; font-weight: 700; }
+  #sec-fav .card { border-color: #fca5a5; }
   .card .src a { color: var(--muted); }
 
   details { margin-top: 28px; }
@@ -144,6 +146,7 @@
     <button class="chip region-chip" data-region="전국">전국</button>
   </div>
 
+  <section id="sec-fav"><h2>♥ 찜한 행사 <small>이 폰에만 저장돼요</small></h2><div class="list"></div></section>
   <section id="sec-apply"><h2>예약 서두르기 <small>7일 안에 접수 마감·시작</small></h2><div class="list"></div></section>
   <section id="sec-this"><h2>이번 주말 <small id="range-this"></small></h2><div class="list"></div>
     <details id="sec-ongoing"><summary>계속 진행 중인 전시·체험 <span id="count-ongoing" style="font-weight:normal;color:var(--muted)"></span></summary><div class="list"></div></details>
@@ -255,9 +258,11 @@
   function isOngoing(e) { return daysLeft(parse(e.end)) - daysLeft(parse(e.start)) >= 14; }
 
   function group(events) {
-    var g = { apply: [], thisW: [], ongoing: [], nextW: [], big: [], nation: [], later: [] };
+    var g = { fav: [], apply: [], thisW: [], ongoing: [], nextW: [], big: [], nation: [], later: [] };
+    var favs = loadFavs();
     events.forEach(function (e) {
       if (parse(e.end) < today) return;            // 지난 행사 숨김
+      if (favs.indexOf(e.id) >= 0) g.fav.push(e);  // 찜한 행사는 맨 위에 한 번 더
       if (applyDate(e)) g.apply.push(e);           // 다른 묶음에도 그대로 보임
       if (e.region === "전국") { g.nation.push(e); return; }
       if (overlaps(e, thisStart, thisSun)) { (isOngoing(e) ? g.ongoing : g.thisW).push(e); return; }
@@ -274,6 +279,18 @@
 
   // ---------- 카드 그리기 ----------
   var ICON = { "과학": "🔬", "야외": "🌳", "예술": "🎭", "축제": "🎪" };
+
+  // 찜: 이 브라우저(폰)에만 저장. 저장이 막힌 환경(시크릿 모드 등)에서는 조용히 동작만 안 함
+  var FAV_KEY = "jumal.favs";
+  function loadFavs() { try { return JSON.parse(localStorage.getItem(FAV_KEY) || "[]"); } catch (e) { return []; } }
+  function saveFavs(list) { try { localStorage.setItem(FAV_KEY, JSON.stringify(list)); } catch (e) {} }
+  function isFav(id) { return loadFavs().indexOf(id) >= 0; }
+  window.toggleFav = function (id) {
+    var list = loadFavs(), i = list.indexOf(id);
+    if (i >= 0) list.splice(i, 1); else list.push(id);
+    saveFavs(list);
+    render();
+  };
 
   // 대전(둔산 기준)에서 가는 시간. 도시 이름이 포함되면 적용. 행사에 travel 값이 있으면 그걸 우선 씀
   var TRAVEL = [
@@ -358,6 +375,7 @@
       '<a href="' + mapUrl(e) + '" target="_blank" rel="noopener">길찾기</a>' +
       '<a href="' + calendarUrl(e) + '" target="_blank" rel="noopener">캘린더</a>' +
       '<a href="#" onclick="shareEvent(\'' + esc(e.id) + '\');return false;">공유</a>' +
+      '<a href="#" class="fav' + (isFav(e.id) ? ' on' : '') + '" onclick="toggleFav(\'' + esc(e.id) + '\');return false;">' + (isFav(e.id) ? '♥ 찜됨' : '♡ 찜') + '</a>' +
       '</div>';
     if (e.applyNote) badges += '<span class="badge">' + esc(e.applyNote) + '</span>';
     if (e.verified === false) badges += '<span class="badge unverified">확인 필요</span>';
@@ -390,6 +408,9 @@
   function render() {
     var events = (window.EVENTS || []).filter(passes);
     var g = group(events);
+    var favSec = document.getElementById("sec-fav");
+    favSec.style.display = g.fav.length ? "" : "none";
+    fill("sec-fav", g.fav, "");
     var applySec = document.getElementById("sec-apply");
     applySec.style.display = g.apply.length ? "" : "none";   // 없으면 묶음 자체를 숨김
     fill("sec-apply", g.apply, "");
