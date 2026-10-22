@@ -68,6 +68,7 @@
   .card .date { font-weight: 700; color: var(--accent); white-space: nowrap; font-size: 15px; }
   .card .meta { color: var(--muted); font-size: 14px; margin-top: 4px; }
   .card .meta span + span::before { content: " · "; color: var(--line); }
+  .card .meta .travel { font-weight: 600; color: #1d4ed8; white-space: nowrap; }
   .card .note { font-size: 14px; margin-top: 8px; }
   .card .foot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
   .tag { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: #eee; }
@@ -274,6 +275,21 @@
   // ---------- 카드 그리기 ----------
   var ICON = { "과학": "🔬", "야외": "🌳", "예술": "🎭", "축제": "🎪" };
 
+  // 대전(둔산 기준)에서 가는 시간. 도시 이름이 포함되면 적용. 행사에 travel 값이 있으면 그걸 우선 씀
+  var TRAVEL = [
+    ["대전", "대전 시내"], ["세종", "차 40분"], ["계룡", "차 30분"], ["옥천", "차 40분"],
+    ["청주", "차 1시간"], ["공주", "차 50분"], ["논산", "차 50분"], ["금산", "차 50분"],
+    ["부여", "차 1시간 10분"], ["천안", "차 1시간 10분"], ["김천", "차 1시간 20분"], ["문경", "차 1시간 30분"],
+    ["서울", "KTX 1시간 · 차 2시간"], ["과천", "차 2시간"], ["인천", "차 2시간 30분"], ["부산", "KTX 1시간 30분 · 차 3시간"],
+    ["강원", "차 2시간 30분"], ["광주", "KTX 1시간 · 차 2시간"]
+  ];
+  function travel(e) {
+    if (e.travel) return e.travel;
+    var c = e.city || "";
+    for (var i = 0; i < TRAVEL.length; i++) if (c.indexOf(TRAVEL[i][0]) >= 0) return TRAVEL[i][1];
+    return "";
+  }
+
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   // 오늘부터 며칠 남았는지 (0 = 오늘)
@@ -356,7 +372,8 @@
     return '<article class="card"><div class="row">' + thumb + '<div class="main">' +
       '<div class="top"><h3 class="title"><a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a></h3>' +
       '<div class="date">' + dateLabel(e) + endD + '</div></div>' +
-      '<div class="meta"><span>' + esc(e.time) + '</span><span>' + esc(e.place) + '</span><span>' + esc(e.city) + '</span><span>' + esc(e.ages) + '</span></div>' +
+      '<div class="meta"><span>' + esc(e.time) + '</span><span>' + esc(e.place) + '</span><span>' + esc(e.city) +
+        (travel(e) && travel(e) !== "대전 시내" ? ' <b class="travel">🚗 ' + esc(travel(e)) + '</b>' : '') + '</span><span>' + esc(e.ages) + '</span></div>' +
       (e.note ? '<div class="note">' + esc(e.note) + "</div>" : "") +
       '<div class="foot">' + tags + badges +
       '<span class="src">출처: <a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.source) + "</a></span></div>" +
