@@ -83,6 +83,8 @@
   .card .src a { color: var(--muted); }
 
   details { margin-top: 28px; }
+  #sec-ongoing { margin-top: 14px; }
+  #sec-ongoing summary { font-size: 14px; color: var(--muted); font-weight: 600; }
   summary { cursor: pointer; font-size: 16px; font-weight: 700; }
   .sources { margin-top: 10px; font-size: 14px; }
   .sources h3 { font-size: 14px; color: var(--muted); margin: 14px 0 4px; font-weight: normal; }
@@ -125,7 +127,9 @@
   </div>
 
   <section id="sec-apply"><h2>예약 서두르기 <small>7일 안에 접수 마감·시작</small></h2><div class="list"></div></section>
-  <section id="sec-this"><h2>이번 주말 <small id="range-this"></small></h2><div class="list"></div></section>
+  <section id="sec-this"><h2>이번 주말 <small id="range-this"></small></h2><div class="list"></div>
+    <details id="sec-ongoing"><summary>계속 진행 중인 전시·체험 <span id="count-ongoing" style="font-weight:normal;color:var(--muted)"></span></summary><div class="list"></div></details>
+  </section>
   <section id="sec-next"><h2>다음 주말 <small id="range-next"></small></h2><div class="list"></div></section>
   <section id="sec-big"><h2>미리 체크할 큰 행사 <small>약 6주 안 · 예약 서두를 것</small></h2><div class="list"></div></section>
   <section id="sec-nation"><h2>전국 큰 행사 <small>있을 때만</small></h2><div class="list"></div></section>
@@ -222,13 +226,16 @@
     return cands.length ? cands[0] : null;
   }
 
+  // 2주 넘게 이어지는 전시·체험은 "계속 진행 중"으로 접어 둔다 (이번 주말 묶음이 길어지지 않게)
+  function isOngoing(e) { return daysLeft(parse(e.end)) - daysLeft(parse(e.start)) >= 14; }
+
   function group(events) {
-    var g = { apply: [], thisW: [], nextW: [], big: [], nation: [], later: [] };
+    var g = { apply: [], thisW: [], ongoing: [], nextW: [], big: [], nation: [], later: [] };
     events.forEach(function (e) {
       if (parse(e.end) < today) return;            // 지난 행사 숨김
       if (applyDate(e)) g.apply.push(e);           // 다른 묶음에도 그대로 보임
       if (e.region === "전국") { g.nation.push(e); return; }
-      if (overlaps(e, thisStart, thisSun)) { g.thisW.push(e); return; }
+      if (overlaps(e, thisStart, thisSun)) { (isOngoing(e) ? g.ongoing : g.thisW).push(e); return; }
       if (overlaps(e, nextStart, nextEnd)) { g.nextW.push(e); return; }
       if (e.big && parse(e.start) <= bigEnd) { g.big.push(e); return; }
       g.later.push(e);
@@ -236,6 +243,7 @@
     var byDate = function (a, b) { return parse(a.start) - parse(b.start); };
     Object.keys(g).forEach(function (k) { g[k].sort(byDate); });
     g.apply.sort(function (a, b) { return applyDate(a) - applyDate(b); });
+    g.ongoing.sort(function (a, b) { return parse(a.end) - parse(b.end); });   // 곧 끝나는 것부터
     return g;
   }
 
@@ -334,7 +342,11 @@
     var applySec = document.getElementById("sec-apply");
     applySec.style.display = g.apply.length ? "" : "none";   // 없으면 묶음 자체를 숨김
     fill("sec-apply", g.apply, "");
-    fill("sec-this", g.thisW, "이번 주말엔 조건에 맞는 행사가 없어요.");
+    fill("sec-this", g.thisW, g.ongoing.length ? "이번 주말에만 열리는 행사는 없어요. 아래 '계속 진행 중'을 펼쳐 보세요." : "이번 주말엔 조건에 맞는 행사가 없어요.");
+    var ongoingEl = document.getElementById("sec-ongoing");
+    ongoingEl.style.display = g.ongoing.length ? "" : "none";
+    ongoingEl.querySelector(".list").innerHTML = g.ongoing.map(card).join("");
+    document.getElementById("count-ongoing").textContent = "(" + g.ongoing.length + "건 · 끝나는 날 순)";
     fill("sec-next", g.nextW, "다음 주말 행사가 아직 없어요. 수집을 돌려 보세요.");
     fill("sec-big", g.big, "미리 체크할 큰 행사가 없어요.");
     fill("sec-nation", g.nation, "지금은 전국 큰 행사가 없어요.");
