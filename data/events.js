@@ -12,10 +12,10 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-10-22
+// 마지막 수집: 2026-10-26
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-10-22 07:08";
+window.LAST_UPDATED = "2026-10-26 07:20";
 
 window.EVENTS = [
 
@@ -75,20 +75,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
-    id: "2026-10-daejeon-science-lecture",
-    title: "국립중앙과학관 별의별 과학특강 (10월)",
-    start: "2026-10-24", end: "2026-10-24",
-    time: "시간 미확인",
-    place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "", reservation: true, ages: "전연령",
-    applyNote: "누리집 선착순 예약 + 잔여석 현장접수",
-    tags: ["과학"],
-    indoor: true,
-    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "토요일 대중 과학강연. 누리집 선착순 예약 + 잔여석 현장접수. 강연 주제·시간은 공지 확인.",
-    big: false, verified: true
-  },
-  {
     id: "2026-10-daejeon-maker-play",
     title: "국립중앙과학관 「2026 메이커 PLAY」 + 마리오네트 인형극 〈낭만유랑극단〉",
     start: "2026-10-31", end: "2026-10-31",
@@ -144,59 +130,33 @@ window.EVENTS = [
     big: true, verified: true
   },
 
+  // ───────────── 근교 ─────────────
+
   {
-    id: "2026-10-daejeon-bookfair",
-    title: "2026 대전 북페어 (그림책 만들기·북토크)",
-    start: "2026-10-24", end: "2026-10-25",
+    id: "2026-10-sejong-bohemian-music",
+    title: "2026 세종보헤미안 뮤직페스티벌",
+    start: "2026-10-30", end: "2026-11-01",
     time: "시간 미확인",
-    place: "엑스포기념관", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "입장료 미확인", reservation: false, ages: "전연령",
-    tags: ["과학", "축제"],
-    indoor: true,
-    url: "https://www.wikitree.co.kr/articles/1165916", source: "위키트리 (검색 기사)",
-    note: "AI 그림책 만들기, 책갈피 제작 체험, 궤도·심채경 등 북토크. 엑스포과학공원 일원이라 주차 혼잡 예상.",
-    big: false, verified: false
-  },
-  {
-    id: "2026-10-daejeon-seogu-book-festival",
-    title: "대전 서구 책축제",
-    start: "2026-10-24", end: "2026-10-24",
-    time: "13:00~17:00",
-    place: "대전 서구 (장소 미확인)", city: "대전 서구", region: "대전",
-    cost: "무료", price: "비용 미확인", reservation: false, ages: "전연령",
-    tags: ["축제"],
-    indoor: "both",
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp", source: "문화체육관광부 축제 안내",
-    note: "문체부 축제 목록에 날짜·시간만 있음. 문의 042-288-4872. 북페어와 같은 날.",
+    place: "세종중앙공원 도시축제마당", city: "세종", region: "근교",
+    cost: "유료", price: "미확인", reservation: false, ages: "전연령 추정",
+    tags: ["예술", "축제"],
+    indoor: false,
+    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do", source: "세종시 행사달력",
+    note: "세종시 행사달력에 날짜만 등록. 가족 대상 여부·요금은 미확인.",
     big: false, verified: true
   },
   {
-    id: "2026-10-nonsan-art-festival",
-    title: "제21회 논산예술제",
-    start: "2026-10-24", end: "2026-10-24",
-    time: "10:00~19:30",
-    place: "논산시민공원(시민가족공원)", city: "논산", region: "근교",
-    cost: "무료", price: "비용 미확인", reservation: false, ages: "전연령",
-    tags: ["예술", "축제"],
+    id: "2026-10-nonsan-chrysanthemum-exhibit",
+    title: "논산 시민과 함께하는 국화전시",
+    start: "2026-10-21", end: "2026-11-04",
+    time: "시간 미확인",
+    place: "논산 시민가족공원", city: "논산", region: "근교",
+    cost: "무료", price: "", reservation: false, ages: "전연령",
+    tags: ["야외"],
     indoor: false,
     url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
-    note: "세부 프로그램은 미확인. 대전에서 차로 약 40분.",
+    note: "국화 전시. 대전에서 차로 약 40분. 세부 프로그램 미확인.",
     big: false, verified: true
-  },
-
-  // ───────────── 근교 ─────────────
-  {
-    id: "2026-10-cheongju-media-art",
-    title: "2026 국가유산 미디어아트 청주 '빛으로 여는 청주의 보물'",
-    start: "2026-10-16", end: "2026-10-24",
-    time: "19:00~22:00",
-    place: "청주 용두사지 철당간 일원 (원도심)", city: "청주", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["예술", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=13539", source: "문화체육관광부 행사안내 (국가유산청·청주시)",
-    note: "철당간·망선루 등 4곳 미디어파사드, 3D 사운드 투어, 포토존. 야간 행사. 공식 누리집 cjculturenight.org",
-    big: true, verified: true
   },
   {
     id: "2026-10-sejong-arboretum-night",
@@ -221,7 +181,7 @@ window.EVENTS = [
     tags: ["축제"],
     indoor: true,
     url: "https://sejong.nl.go.kr/brd/NttView.do?bbsSe=BBST002&menuId=O122&upperMenuId=O100&selectedIdx=106644", source: "국립세종도서관",
-    note: "세계기록유산 전시. 의상 체험, 다색 스탬프 엽서, 기록 스티커 지도. 10/26~31 임시휴관이라 10/25 이전 방문.",
+    note: "세계기록유산 전시. 의상 체험, 다색 스탬프 엽서, 기록 스티커 지도. 10/26~31 임시휴관이라 11/1(일)만 관람 가능(운영 여부 확인).",
     big: false, verified: true
   },
   {
@@ -253,41 +213,28 @@ window.EVENTS = [
   {
     id: "2026-10-gongju-museum-terrarium",
     title: "국립공주박물관 '우리 가족 슬기로운 공작생활' (이끼 테라리움 만들기)",
-    start: "2026-10-24", end: "2026-11-28",
+    start: "2026-11-28", end: "2026-11-28",
     time: "14:00~15:30",
     place: "국립공주박물관 세미나실·전시실", city: "공주", region: "근교",
     cost: "무료", price: "", reservation: true, ages: "초등 이상 + 가족",
-    applyStart: "2026-10-19", applyTime: "10:00", deadline: "2026-10-23", applyNote: "10/24 회차: 10/19 10시 선착순 / 11/28 회차: 11/23 10시",
+    applyStart: "2026-11-23", applyTime: "10:00", deadline: "2026-11-27", applyNote: "11/23(월) 10시 누리집 선착순",
     tags: ["과학", "예술"],
     indoor: true,
     url: "https://gongju.museum.go.kr/prog/eduPrgrm/kor/sub03_01/view.do?prgrmNo=1089", source: "국립공주박물관",
-    note: "토요일 회차 10/24, 11/28. 회차 30명, 접수는 전주 월요일 10시 누리집 선착순(10/19, 11/23). 보호자 동반 필수.",
+    note: "11/28(토) 회차(10/24 회차는 종료). 회차 30명, 접수는 전주 월요일 10시 누리집 선착순. 보호자 동반 필수.",
     big: true, verified: true
   },
   {
     id: "2026-10-cheongju-museum-concert",
     title: "국립청주박물관 가을 음악회 '쉼포니'",
-    start: "2026-10-24", end: "2026-10-31",
+    start: "2026-10-31", end: "2026-10-31",
     time: "13:30~14:30 (현장접수 12:00~13:00)",
     place: "국립청주박물관 청명관 대강당", city: "청주", region: "근교",
     cost: "무료", price: "", reservation: false, ages: "전연령",
     tags: ["예술"],
     indoor: true,
     url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12347", source: "국립청주박물관",
-    note: "10/24(토)·10/31(토) 2회. 사전예약 없이 당일 선착순 238석. 특별전·어린이박물관과 같은 날 묶기 좋음.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-sports-festival",
-    title: "2026 세종 스포츠 축제",
-    start: "2026-10-24", end: "2026-10-24",
-    time: "08:00~21:00",
-    place: "세종중앙공원", city: "세종", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do", source: "세종시 행사달력",
-    note: "비용·세부 프로그램은 미확인(행사달력에는 날짜·장소만 있음). 같은 날 밤 국립세종수목원 야간개장과 묶어 갈 수 있음.",
+    note: "10/31(토) 마지막 회(10/24 회차는 종료). 사전예약 없이 당일 선착순 238석. 특별전·어린이박물관과 같은 날 묶기 좋음.",
     big: false, verified: true
   },
   {
@@ -373,19 +320,6 @@ window.EVENTS = [
 
   // ───────────── 전국 (큰 행사만) ─────────────
   {
-    id: "2026-10-seoul-silvergrass-festival",
-    title: "제25회 서울억새축제",
-    start: "2026-10-17", end: "2026-10-23",
-    time: "10:00~21:00",
-    place: "월드컵공원 하늘공원 일대", city: "서울 마포구", region: "전국",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=11817", source: "서울시·문체부 축제정보",
-    note: "억새 라이팅쇼·포토존, 밤 9시까지. 월드컵경기장역에서 도보 40분 또는 맹꽁이 전기차. 주말 혼잡.",
-    big: true, verified: true
-  },
-  {
     id: "2026-10-mungyeong-apple-festival",
     title: "2026 문경사과축제",
     start: "2026-10-17", end: "2026-11-01",
@@ -396,32 +330,6 @@ window.EVENTS = [
     indoor: false,
     url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=11812", source: "문체부 축제정보",
     note: "문경새재 단풍 + 사과농장 체험. 대전에서 차로 약 1시간 30분. 체험 세부는 mgapple.or.kr 확인.",
-    big: true, verified: true
-  },
-  {
-    id: "2026-10-gimcheon-gimbap-festival",
-    title: "김천김밥축제",
-    start: "2026-10-23", end: "2026-10-25",
-    time: "시간 미확인",
-    place: "직지사길 일원", city: "경북 김천", region: "전국",
-    cost: "일부 유료", price: "입장 무료 추정, 김밥 구매 유료", reservation: false, ages: "전연령",
-    tags: ["축제"],
-    indoor: false,
-    url: "https://gimbapcity.kr/main/main.html", source: "잘쓸레터(어피티)",
-    note: "전국 김밥 맛집 모음 축제. 대전에서 차로 약 1시간 20분 또는 KTX 김천(구미)역. 직지사 단풍과 연계.",
-    big: true, verified: false
-  },
-  {
-    id: "2026-10-seoul-starlight-festival",
-    title: "2026 별빛축제 (서울시립과학관×노원천문우주과학관)",
-    start: "2026-10-24", end: "2026-10-25",
-    time: "토 09:30~21:00 / 일 09:30~17:30",
-    place: "서울시립과학관", city: "서울 노원구", region: "전국",
-    cost: "무료", price: "", reservation: true, ages: "전연령",
-    tags: ["과학", "축제"],
-    indoor: "both",
-    url: "https://science.seoul.go.kr/sciEvent/starlight/read?menuId=76&progMstId=2338", source: "펀서울·서울시립과학관",
-    note: "토요일 야간 공개 별관측(우천 취소), 천문강연·과학체험부스. 일부 사전예약. 주차 협소, 하계역 도보 1.2km.",
     big: true, verified: true
   },
   {
@@ -447,8 +355,8 @@ window.EVENTS = [
     tags: ["야외", "예술", "축제"],
     indoor: false,
     url: "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=465", source: "펀서울 (서울시 축제 포털)",
-    note: "단풍 숲속 설치미술·참여형 설치·공연·체험(세부 변동 가능). 바로 옆 국립과천과학관과 같은 날 묶기 좋음.",
-    big: true, verified: true
+    note: "펀서울 목록엔 11/7~8로도 표기돼 날짜 재확인 필요. 단풍 숲속 설치미술·참여형 설치·공연·체험(세부 변동 가능). 바로 옆 국립과천과학관과 같은 날 묶기 좋음.",
+    big: true, verified: false
   },
   {
     id: "2026-11-gstar-busan",
