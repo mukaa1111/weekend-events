@@ -12,10 +12,10 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-10-26
+// 마지막 수집: 2026-10-29
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-10-26 07:20";
+window.LAST_UPDATED = "2026-10-29 07:20";
 
 window.EVENTS = [
 
@@ -223,6 +223,19 @@ window.EVENTS = [
     url: "https://gongju.museum.go.kr/prog/eduPrgrm/kor/sub03_01/view.do?prgrmNo=1089", source: "국립공주박물관",
     note: "11/28(토) 회차(10/24 회차는 종료). 회차 30명, 접수는 전주 월요일 10시 누리집 선착순. 보호자 동반 필수.",
     big: true, verified: true
+  },
+  {
+    id: "2026-11-cheongju-museum-matchgirl",
+    title: "국립청주박물관 어린이 뮤지컬 〈성냥팔이 소녀〉 (문화가 있는 날)",
+    start: "2026-11-28", end: "2026-11-28",
+    time: "14:00 / 15:00",
+    place: "국립청주박물관", city: "청주", region: "근교",
+    cost: "무료", price: "", reservation: false, ages: "어린이 + 가족",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://cheongju.museum.go.kr", source: "국립청주박물관",
+    note: "문화가 있는 날 문화행사(공연 예정). 신청 방법은 누리집 공고에서 재확인 필요. 같은 날 공주박물관 테라리움과 일정 겹침.",
+    big: false, verified: true
   },
   {
     id: "2026-10-cheongju-museum-concert",
