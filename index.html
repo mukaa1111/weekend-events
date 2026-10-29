@@ -443,7 +443,8 @@
       var items = src.filter(function (s) { return s.region === r; });
       if (!items.length) return;
       html += "<h3>" + r + " (" + items.length + ")</h3><ul>" + items.map(function (s) {
-        return '<li class="' + (s.active === false ? "off" : "") + '"><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + "</a>" +
+        var label = s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + "</a>" : esc(s.name) + (s.query ? ' <span style="color:var(--muted);font-size:12px">"' + esc(s.query) + '"</span>' : "");
+        return '<li class="' + (s.active === false ? "off" : "") + '">' + label +
           ' <span style="color:var(--muted);font-size:12px">' + esc(s.type) + (s.active === false ? " · 잠시 끔" : "") + (s.note ? " · " + esc(s.note) : "") + "</span></li>";
       }).join("") + "</ul>";
     });

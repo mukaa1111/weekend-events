@@ -19,6 +19,11 @@ window.SOURCES = [
   { name: "대전광역시 통합도서관", url: "https://www.daejeon.go.kr/lib", region: "대전", type: "도서관", active: false, note: "주소가 404. 올바른 주소 확인 후 다시 켜기" },
   { name: "대전시민천문대", url: "https://star.metro.daejeon.kr", region: "대전", type: "기관", active: true, note: "2026-10-16 접속 실패. 다음 수집 때 재시도" },
   { name: "대전교육과학연구원", url: "https://www.dise.go.kr", region: "대전", type: "기관", active: true, note: "2026-10-16 접속 실패. 다음 수집 때 재시도" },
+  { name: "대전 서구 문화관광 (축제·행사)", url: "https://www.seogu.go.kr/tour/", region: "대전", type: "행사달력", active: true, note: "축제 상세에 기간·장소·주최가 글로 잘 나옴. '지난축제' 표시된 건 제외. 2026-10-29 추가" },
+  { name: "대전 유성구 문화관광 (축제)", url: "https://www.yuseong.go.kr/tour/", region: "대전", type: "행사달력", active: true, note: "축제 소개는 있으나 연도별 날짜는 검색으로 보완. 2026-10-29 추가" },
+  { name: "대덕구·중구·동구 문화관광", url: "", query: "대덕구 축제 ○월 / 대전 중구 축제 ○월 / 대전 동구 축제 ○월", region: "대전", type: "검색", active: true, note: "구청 사이트가 클라우드에서 안 열려(404) 검색으로 대신. 대덕문화관광재단·중구문화원 행사 포함" },
+  { name: "대전 이번 주말 축제·행사 검색", url: "", query: "대전 이번 주말 축제 / 대전 ○월 축제 어린이 가족 / 대전 ○월 어린이 공연 전시", region: "대전", type: "검색", active: true, note: "대전일보·중도일보·충청투데이 기사가 주로 잡힘. 기사만 있으면 verified:false" },
+  { name: "대전문화재단·대전예술의전당·시립연정국악원", url: "", query: "대전문화재단 ○월 행사 / 대전예술의전당 ○월 어린이 공연 / 대전시립연정국악원 ○월 공연", region: "대전", type: "검색", active: true, note: "공식 사이트가 보안오류·접속불가라 검색으로 대신" },
 
   // 근교 (차로 1시간 안쪽)
   { name: "국립세종도서관", url: "https://sejong.nl.go.kr", region: "근교", type: "도서관", active: true },
@@ -33,7 +38,10 @@ window.SOURCES = [
 
   // 보완 (추천 글, 뉴스레터)
   { name: "잘쓸레터(어피티) 지난 호 보관함", url: "https://uppity.co.kr/newsletter/jalsseul-letter/", region: "보완", type: "뉴스레터", active: true, note: "로그인 없이 전문 공개. Gmail 연결 불필요. '즐길거리/일정' 코너 확인" },
-  { name: "문화체육관광부 축제 안내", url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp", region: "보완", type: "행사달력", active: true, note: "대전·근교 축제 날짜 확인용으로 가장 믿을 만함" },
+  { name: "문체부 축제 DB — 대전 필터", url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=06&pOrder=01up&pCurrentPage=1", region: "대전", type: "행사달력", active: true, note: "pSido=06이 대전. 전국 목록 첫 페이지만 보면 대전이 묻혀서 놓침(2026-10 대덕대청호물결축제 누락 원인). 반드시 이 필터 주소로 읽고 2쪽 이상이면 다음 쪽도" },
+  { name: "문체부 축제 DB — 세종 필터", url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=08&pOrder=01up&pCurrentPage=1", region: "근교", type: "행사달력", active: true, note: "pSido=08 세종" },
+  { name: "문체부 축제 DB — 충북 필터", url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=12&pOrder=01up&pCurrentPage=1", region: "근교", type: "행사달력", active: true, note: "pSido=12 충북. 청주·옥천만 고르기" },
+  { name: "문체부 축제 DB — 충남 필터", url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=13&pOrder=01up&pCurrentPage=1", region: "근교", type: "행사달력", active: true, note: "pSido=13 충남. 공주·논산·계룡·금산·부여·천안만 고르기" },
   { name: "네이버 블로그 '대전 아이와 주말' 검색", url: "https://search.naver.com/search.naver?where=blog&query=대전+아이와+주말", region: "보완", type: "블로그", active: true, note: "에이전트 검색으로는 결과가 적음. 뉴스·축제 포털로 보완" },
   { name: "인스타그램 '대전아이와' 해시태그", url: "https://www.instagram.com/explore/tags/대전아이와/", region: "보완", type: "SNS", active: true, note: "로그인 없이는 못 읽음. 직접 보고 알려주는 용도" },
 

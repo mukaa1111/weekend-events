@@ -129,6 +129,19 @@ window.EVENTS = [
     note: "수목원 QR 스탬프 걷기(완주 시 온통대전 1만원), 태양광 체험 6종, OX퀴즈. 사전등록 ~10/31 선착순 1,500명 — 서두를 것.",
     big: true, verified: true
   },
+  {
+    id: "2026-11-daejeon-noodle-festival",
+    title: "누들대전축제 (전국 최대 칼국수·면요리 축제)",
+    start: "2026-11-13", end: "2026-11-15",
+    time: "13일 16:00~21:00 / 14~15일 12:00~21:00",
+    place: "서대전시민광장", city: "대전 중구", region: "대전",
+    cost: "일부 유료", price: "입장 무료, 먹거리존·일부 체험 유료", reservation: false, ages: "전연령",
+    tags: ["축제"],
+    indoor: false,
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=13376", source: "문체부 축제 DB (주최 대전일보사)",
+    note: "글로벌 누들존, 스타셰프 쿠킹쇼, 누들마스터 경연. 공식 noodle-dj.com. 주말 점심시간대 혼잡 예상.",
+    big: true, verified: true
+  },
 
   // ───────────── 근교 ─────────────
 
