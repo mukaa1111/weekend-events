@@ -15,7 +15,7 @@
 // 마지막 수집: 2026-10-29
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-10-29 07:20";
+window.LAST_UPDATED = "2026-10-29 09:31";
 
 window.EVENTS = [
 
@@ -142,8 +142,48 @@ window.EVENTS = [
     note: "글로벌 누들존, 스타셰프 쿠킹쇼, 누들마스터 경연. 공식 noodle-dj.com. 주말 점심시간대 혼잡 예상.",
     big: true, verified: true
   },
+  {
+    id: "2026-11-daejeon-forest-culture-festival",
+    title: "2026 산림문화페스티벌 (전국 산림복지 체험)",
+    start: "2026-11-07", end: "2026-11-08",
+    time: "시간 미확인",
+    place: "유림공원", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "체험 프로그램 무료 (푸드트럭 별도)", reservation: false, ages: "전연령 (가족)",
+    tags: ["야외", "축제"],
+    indoor: false,
+    url: "https://www.fnnews.com/news/202610260933345072", source: "파이낸셜뉴스·한국영농신문 (산림청·한국산림복지진흥원 주최)",
+    note: "전국 산림복지시설 대표 체험 무료. 개막 퍼포먼스·공연, 독서 휴식 공간. 어린이 전용 프로그램·운영시간은 한국산림복지진흥원 누리집에서 재확인 필요.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-11-daejeon-manin-forest-camp",
+    title: "우리 가족이 Green 숲! 힐링 가을 캠프 (만인산자연휴양림)",
+    start: "2026-11-14", end: "2026-11-15",
+    time: "시간 미확인",
+    place: "만인산자연휴양림", city: "대전 동구", region: "대전",
+    cost: "유료", price: "미확인 (기사에 요금 없음)", reservation: true, ages: "초등생 자녀 가족 (대전 거주)",
+    applyStart: "2026-11-03", applyTime: "09:00", deadline: "2026-11-13", applyNote: "대전시 누리집 시정소식 게시판 선착순 (10가족)",
+    tags: ["야외", "과학"],
+    indoor: false,
+    url: "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=917464", source: "충남일보·이코노미퀸 (주최 대전시 공원관리사업소)",
+    note: "10가족 한정 1박 2일. 가족 찻상 만들기 목공체험·숲해설·숲놀이. 대전 거주 가족 대상. 11/3 9시 오픈 직후 마감 가능성 높음.",
+    big: true, verified: false
+  },
 
   // ───────────── 근교 ─────────────
+  {
+    id: "2026-10-buyeo-chrysanthemum-festival",
+    title: "부여국화축제 (궁남지)",
+    start: "2026-10-30", end: "2026-11-08",
+    time: "09:00~21:00",
+    place: "부여 궁남지 일원", city: "부여", region: "근교",
+    cost: "무료", price: "", reservation: false, ages: "전연령",
+    tags: ["야외", "축제"],
+    indoor: false,
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=13555", source: "문체부 축제 DB — 충남 필터",
+    note: "주제 '국화, 가을의 조각들을 맞추다'. 국화와 백제 역사·문화. 대전에서 차로 약 1시간. 문의 041-830-2591",
+    big: false, verified: true
+  },
 
   {
     id: "2026-10-sejong-bohemian-music",
