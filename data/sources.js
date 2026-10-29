@@ -23,6 +23,7 @@ window.SOURCES = [
   { name: "대전 유성구 문화관광 (축제)", url: "https://www.yuseong.go.kr/tour/", region: "대전", type: "행사달력", active: true, note: "축제 소개는 있으나 연도별 날짜는 검색으로 보완. 2026-10-29 추가" },
   { name: "대덕구·중구·동구 문화관광", url: "", query: "대덕구 축제 ○월 / 대전 중구 축제 ○월 / 대전 동구 축제 ○월", region: "대전", type: "검색", active: true, note: "구청 사이트가 클라우드에서 안 열려(404) 검색으로 대신. 대덕문화관광재단·중구문화원 행사 포함" },
   { name: "대전 이번 주말 축제·행사 검색", url: "", query: "대전 이번 주말 축제 / 대전 ○월 축제 어린이 가족 / 대전 ○월 어린이 공연 전시", region: "대전", type: "검색", active: true, note: "대전일보·중도일보·충청투데이 기사가 주로 잡힘. 기사만 있으면 verified:false" },
+  { name: "대전일보 문화면 (행사 기사)", url: "https://www.daejonilbo.com/news/articleList.html?sc_section_code=S1N10", region: "대전", type: "뉴스", active: true, note: "제목·날짜가 읽힘. 가족·아동 행사 기사 자주 실림. 기사만 근거면 verified:false, 행사 날짜가 수집 기간 안인 것만. 2026-10-29 추가" },
   { name: "대전문화재단·대전예술의전당·시립연정국악원", url: "", query: "대전문화재단 ○월 행사 / 대전예술의전당 ○월 어린이 공연 / 대전시립연정국악원 ○월 공연", region: "대전", type: "검색", active: true, note: "공식 사이트가 보안오류·접속불가라 검색으로 대신" },
 
   // 근교 (차로 1시간 안쪽)
