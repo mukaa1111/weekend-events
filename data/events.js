@@ -12,10 +12,10 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-10-29
+// 마지막 수집: 2026-11-02
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-10-29 09:31";
+window.LAST_UPDATED = "2026-11-02 07:10";
 
 window.EVENTS = [
 
@@ -75,19 +75,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
-    id: "2026-10-daejeon-maker-play",
-    title: "국립중앙과학관 「2026 메이커 PLAY」 + 마리오네트 인형극 〈낭만유랑극단〉",
-    start: "2026-10-31", end: "2026-10-31",
-    time: "시간 미확인",
-    place: "국립중앙과학관 꿈이광장·사이언스홀", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["과학", "예술"],
-    indoor: "both",
-    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "메이커 체험부스 45개 + 관람객 투표. 같은 날 사이언스홀 인형극. 공연 예약 여부는 당일 전 공지 확인.",
-    big: true, verified: true
-  },
-  {
     id: "2026-11-daejeon-dma-weekend-class",
     title: "대전시립미술관 주말 교육 (초등 2~3학년 반)",
     start: "2026-11-01", end: "2026-11-15",
@@ -126,7 +113,7 @@ window.EVENTS = [
     tags: ["야외", "과학"],
     indoor: false,
     url: "https://xn--269as6am3d4uc81numd8pq3wftwa42zek7a.com/", source: "행사 공식 누리집",
-    note: "수목원 QR 스탬프 걷기(완주 시 온통대전 1만원), 태양광 체험 6종, OX퀴즈. 사전등록 ~10/31 선착순 1,500명 — 서두를 것.",
+    note: "수목원 QR 스탬프 걷기(완주 시 온통대전 1만원), 태양광 체험 6종, OX퀴즈. 사전등록 ~10/31 선착순 1,500명 — 접수 마감(현장등록 여부는 누리집 확인).",
     big: true, verified: true
   },
   {
@@ -169,6 +156,34 @@ window.EVENTS = [
     note: "10가족 한정 1박 2일. 가족 찻상 만들기 목공체험·숲해설·숲놀이. 대전 거주 가족 대상. 11/3 9시 오픈 직후 마감 가능성 높음.",
     big: true, verified: false
   },
+  {
+    id: "2026-11-daejeon-namu-playground",
+    title: "나무상상놀이터 개인예약 (11~12월 토·일)",
+    start: "2026-11-08", end: "2026-12-20",
+    time: "시간 미확인",
+    place: "나무상상놀이터 (대전 OK예약 시설)", city: "대전", region: "대전",
+    cost: "무료", price: "요금 미표기 (예약 페이지 확인)", reservation: true, ages: "미표기 (어린이 놀이시설)",
+    applyStart: "2026-10-31", deadline: "2026-12-18", applyNote: "OK예약 선착순",
+    tags: ["야외", "과학"],
+    indoor: "both",
+    url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
+    note: "토·일 운영(11/8~12/20), 접수 10/31~12/18 선착순. 운영 시간·장소 상세는 예약 페이지에서 확인 필요.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-hellocarbot-musical",
+    title: "뮤지컬 헬로카봇 〈카봇크루가 되어줘!〉 (대전)",
+    start: "2026-11-28", end: "2026-11-29",
+    time: "토 11:00·14:00·16:30 / 일 11:00·14:00",
+    place: "대전 (공연장 미확인)", city: "대전", region: "대전",
+    cost: "유료", price: "미확인", reservation: true, ages: "가족 (연령 미확인)",
+    applyNote: "예매처(놀티켓) 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://nol.yanolja.com/ticket/products/26013205", source: "예매 사이트(놀티켓) 검색 결과",
+    note: "예매 사이트 정보만 확인. 공연장·가격·관람연령은 예매 페이지에서 재확인 필요.",
+    big: false, verified: false
+  },
 
   // ───────────── 근교 ─────────────
   {
@@ -199,6 +214,32 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
+    id: "2026-11-yesan-brothers-festival",
+    title: "의좋은 형제 축제 (예산 의좋은형제공원)",
+    start: "2026-11-07", end: "2026-11-08",
+    time: "10:00~20:00 (일 10:00~19:00)",
+    place: "예산 의좋은형제공원 일원", city: "예산", region: "근교",
+    cost: "무료", price: "입장 무료", reservation: false, ages: "전연령",
+    tags: ["야외", "축제"],
+    indoor: false,
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=13&pOrder=01up&pCurrentPage=1", source: "문체부 축제 DB — 충남 필터",
+    note: "형제 설화 바탕 가족 체험·전통놀이·동화 스토리텔링 체험·문화공연·장터. 대전에서 차로 약 1시간 10분. 문의 041-331-0619",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-nonsan-book-culture",
+    title: "논산시 도서문화제·평생학습축제",
+    start: "2026-11-07", end: "2026-11-08",
+    time: "도서문화제 10:30~ / 평생학습축제 11/7 13:30 (개막 14:00)",
+    place: "온담(평생학습관)·열린도서관 일원", city: "논산", region: "근교",
+    cost: "무료", price: "프로그램별 상이 (미확인)", reservation: false, ages: "전연령",
+    tags: ["축제"],
+    indoor: "both",
+    url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
+    note: "11/7 김홍신 문학제(김홍신문학관)도 같은 날. 어린이 프로그램 세부는 미확인. 대전에서 차로 약 40분.",
+    big: false, verified: true
+  },
+  {
     id: "2026-10-nonsan-chrysanthemum-exhibit",
     title: "논산 시민과 함께하는 국화전시",
     start: "2026-10-21", end: "2026-11-04",
@@ -209,19 +250,6 @@ window.EVENTS = [
     indoor: false,
     url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
     note: "국화 전시. 대전에서 차로 약 40분. 세부 프로그램 미확인.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-arboretum-night",
-    title: "국립세종수목원 야간개장 '우리 함께夜' + 주말 정원체험",
-    start: "2026-10-16", end: "2026-10-31",
-    time: "금·토 18:00~21:30",
-    place: "국립세종수목원 (사계절전시온실·한국전통정원)", city: "세종", region: "근교",
-    cost: "유료", price: "어른 5,000원 / 어린이 3,000원 (변동 가능)", reservation: false, ages: "전연령",
-    tags: ["야외", "과학"],
-    indoor: "both",
-    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do", source: "세종시 행사달력 / 경북매일 보도",
-    note: "10월 말까지 매주 금·토 야간개장. 토요일 19시 가족형 공연·플리마켓, 한복 무료대여. 온실에서 테라리움·압화 체험(요금 별도).",
     big: false, verified: true
   },
   {
@@ -291,19 +319,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
-    id: "2026-10-cheongju-museum-concert",
-    title: "국립청주박물관 가을 음악회 '쉼포니'",
-    start: "2026-10-31", end: "2026-10-31",
-    time: "13:30~14:30 (현장접수 12:00~13:00)",
-    place: "국립청주박물관 청명관 대강당", city: "청주", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12347", source: "국립청주박물관",
-    note: "10/31(토) 마지막 회(10/24 회차는 종료). 사전예약 없이 당일 선착순 238석. 특별전·어린이박물관과 같은 날 묶기 좋음.",
-    big: false, verified: true
-  },
-  {
     id: "2026-10-sejong-lighton",
     title: "2026 LIGHT ON 세종 (국립세종수목원 빛 행사)",
     start: "2026-10-30", end: "2026-11-01",
@@ -315,19 +330,6 @@ window.EVENTS = [
     url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do?mno=sub04_02&year=2026&month=10&day=1", source: "세종시 행사달력",
     note: "세종시 행사달력에 등록. 프로그램·시간·요금은 수목원 누리집(sjna.or.kr)에서 방문 전 확인.",
     big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-doggy-poo",
-    title: "연극 <강아지똥> (세종문화예술회관)",
-    start: "2026-10-31", end: "2026-10-31",
-    time: "시간 미확인",
-    place: "세종문화예술회관 (조치원)", city: "세종", region: "근교",
-    cost: "유료", price: "미확인", reservation: true, ages: "36개월 이상",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.sjac.or.kr/culture/main/view", source: "세종문화예술회관 (검색 결과)",
-    note: "권정생 그림책 원작, 50분. 10/23~24 같은 곳 매직쇼 <후디니>도 있음. 공식 사이트 접속 오류로 시간·가격 미확인.",
-    big: false, verified: false
   },
   {
     id: "2026-11-cheongju-snowwhite",
@@ -399,30 +401,17 @@ window.EVENTS = [
     big: true, verified: true
   },
   {
-    id: "2026-10-changdeok-inner-palace",
-    title: "창덕궁 내전(희정당·대조전) 특별관람",
-    start: "2026-10-20", end: "2026-10-31",
-    time: "시간 미확인",
-    place: "창덕궁", city: "서울 종로구", region: "전국",
-    cost: "일부 유료", price: "창덕궁 입장료 별도 (만 24세 이하 무료), 특별관람 요금 미확인", reservation: true, ages: "초등",
-    tags: ["축제"],
-    indoor: "both",
-    url: "https://www.segye.com/newsView/20261013518690", source: "잘쓸레터(어피티)",
-    note: "평소 비공개인 내전 내부 관람. 회차·인원 제한으로 사전예약 필요 가능성 높음. 역사 체험 코스.",
-    big: true, verified: false
-  },
-  {
     id: "2026-10-seoul-grandpark-autumn",
     title: "서울대공원 가을축제 '예술로 물드는 피노키오의 숲'",
-    start: "2026-10-31", end: "2026-11-08",
+    start: "2026-11-07", end: "2026-11-08",
     time: "시간 미확인",
     place: "서울대공원 일대", city: "경기 과천", region: "전국",
     cost: "일부 유료", price: "축제 무료 추정, 동물원 입장료 별도", reservation: false, ages: "전연령",
     tags: ["야외", "예술", "축제"],
     indoor: false,
     url: "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=465", source: "펀서울 (서울시 축제 포털)",
-    note: "펀서울 목록엔 11/7~8로도 표기돼 날짜 재확인 필요. 단풍 숲속 설치미술·참여형 설치·공연·체험(세부 변동 가능). 바로 옆 국립과천과학관과 같은 날 묶기 좋음.",
-    big: true, verified: false
+    note: "펀서울 목록에 11/7~8로 표기(날짜 확정). 단풍 숲속 설치미술·참여형 설치·공연·체험(세부 변동 가능). 바로 옆 국립과천과학관과 같은 날 묶기 좋음.",
+    big: true, verified: true
   },
   {
     id: "2026-11-gstar-busan",
