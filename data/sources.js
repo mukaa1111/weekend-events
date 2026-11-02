@@ -12,13 +12,14 @@ window.SOURCES = [
   // 대전
   { name: "국립중앙과학관 행사안내·개인교육", url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", region: "대전", type: "기관", active: true, note: "메인보다 /mps/ 게시판이 잘 읽힘. 예약은 rsvn.science.go.kr" },
   // OK예약서비스 (대전시 통합 예약). 주소 뒤 조건: rsvtUseStatTpcd=002 접수중, 001 접수대기(곧 접수 시작). "총 n건 | 1/2 페이지"면 pageIdx=2도 읽기
+  // 행사 url에는 목록 메뉴 주소 말고 검색 결과 주소를 넣기: expRsvtList.do?menuSeq=8200&searchType=02&keyword=검색어 (예: keyword=지역미술). 상세 페이지는 주소로 못 열림(폼 전송)
   { name: "OK예약 — 체험 (접수중)", url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&rsvtUseStatTpcd=002&pageIdx=1", region: "대전", type: "예약", active: true, note: "우리놀이터·한밭수목원 해설·나무상상놀이터·도서관 견학 등. 목록에 접수기간→applyStart/deadline, 이용기간→start/end, 요일, 무료 여부가 다 나옴. 2쪽이면 pageIdx=2도" },
   { name: "OK예약 — 체험 (접수대기)", url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&rsvtUseStatTpcd=001&pageIdx=1", region: "대전", type: "예약", active: true, note: "곧 접수 시작하는 것. 접수기간 시작일을 applyStart에 넣으면 '예약 서두르기'에 뜸. 2026-11-02 추가" },
   { name: "OK예약 — 교육 (접수중)", url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8102&rsvtUseStatTpcd=002&pageIdx=1", region: "대전", type: "예약", active: true, note: "시립미술관 주말교육 등. 반려동물문화센터 교육은 아이 동반 가능한 것만. 2026-11-02 추가" },
   { name: "OK예약 — 교육 (접수대기)", url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8102&rsvtUseStatTpcd=001&pageIdx=1", region: "대전", type: "예약", active: true, note: "곧 접수 시작하는 교육. 2026-11-02 추가" },
   { name: "OK예약 — 강좌 (접수중)", url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8101&rsvtUseStatTpcd=002&pageIdx=1", region: "대전", type: "예약", active: true, note: "어린이·가족 강좌만 고르기 (성인 강좌가 많음). 2026-11-02 추가" },
   { name: "OK예약 — 공연/전시 (연정국악원·예술의전당·시립예술단)", url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", region: "대전", type: "공연장", active: true, note: "공연일·시간·관람료·관람 등급(초등학생 이상 등)·예매 여부가 글로 나옴. 등급이 '초등학생 이상'이거나 가족 공연인 것만. 2026-11-02 추가" },
-  { name: "대전시립미술관", url: "https://www.daejeon.go.kr/dma", region: "대전", type: "기관", active: true },
+  { name: "대전시립미술관 — 교육·행사 > 어린이·가족", url: "https://www.daejeon.go.kr/dma/DmaEduList.do?category=2&menuSeq=6089", region: "대전", type: "기관", active: true, note: "메인(/dma)에는 교육 프로그램이 안 보임. 이 목록에 기간·수강료·장소와 'OK예약 > 체험에서 ○○ 검색' 안내가 글로 나옴. 2026-11-02 주소 교체" },
   { name: "이응노미술관", url: "https://www.leeungnomuseum.or.kr", region: "대전", type: "기관", active: true, note: "행사 상세가 이미지라 본문 읽기 어려움" },
   { name: "대전시립박물관", url: "https://www.daejeon.go.kr/his", region: "대전", type: "기관", active: true },
   { name: "대전관광공사 (대전 문화관광)", url: "https://www.daejeontour.co.kr", region: "대전", type: "행사달력", active: true, note: "daejeon.go.kr/tou는 404. 이 주소는 보안 오류로 가끔 안 열림 → 문체부 축제 DB·뉴스로 대체" },

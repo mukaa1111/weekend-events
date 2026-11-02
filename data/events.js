@@ -63,7 +63,7 @@ window.EVENTS = [
   },
   {
     id: "2026-11-daejeon-dma-weekend-class",
-    title: "대전시립미술관 주말 교육 (초등 2~3학년 반)",
+    title: "대전시립미술관 지역미술조명사업 연계 주말 교육 (초등 2~3학년 반)",
     start: "2026-11-01", end: "2026-11-15",
     time: "시간 미확인",
     place: "대전시립미술관", city: "대전 서구", region: "대전",
@@ -71,8 +71,8 @@ window.EVENTS = [
     applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 선착순",
     tags: ["예술"],
     indoor: true,
-    url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스 / 대전시립미술관",
-    note: "2학년 맞춤 반! 토·일 운영. 접수 10/6~11/13 선착순(OK예약). 연계 전시 《선과 색, 지역의 기억》 10/21 개막. 문의 042-270-7332",
+    url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=지역미술&pageIdx=1", source: "대전광역시 OK예약서비스 / 대전시립미술관",
+    note: "2학년 맞춤 반! 토·일 운영, 회차 시간은 OK예약 상세에서 확인. 미술관 홈 첫 화면에는 안 보이고 교육·행사 > 어린이·가족 메뉴에 있음. 예약은 OK예약 > 체험에서 '지역미술' 검색 (링크가 바로 그 화면). 접수 10/6~11/13 선착순. 4~6학년 반은 1개 반 이미 마감. 문의 042-270-7332",
     big: true, verified: true
   },
   {
