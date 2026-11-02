@@ -15,7 +15,7 @@
 // 마지막 수집: 2026-11-02
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-02 07:10";
+window.LAST_UPDATED = "2026-11-02 10:59";
 
 window.EVENTS = [
 
@@ -168,6 +168,20 @@ window.EVENTS = [
     indoor: "both",
     url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
     note: "토·일 운영(11/8~12/20), 접수 10/31~12/18 선착순. 운영 시간·장소 상세는 예약 페이지에서 확인 필요.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-yeonjeong-pungryu",
+    title: "대전시립연정국악단 풍류마당 〈협주곡의 밤〉",
+    start: "2026-11-06", end: "2026-11-06",
+    time: "19:30",
+    place: "연정국악원", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 5천원", reservation: true, ages: "초등학생 이상",
+    applyNote: "OK예약 공연 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "금요일 저녁 국악 협주곡 공연. 관람 등급 초등학생 이상. 예매 가능.",
     big: false, verified: true
   },
   {
