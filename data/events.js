@@ -15,24 +15,11 @@
 // 마지막 수집: 2026-11-02
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-02 10:59";
+window.LAST_UPDATED = "2026-11-02 11:20";
 
 window.EVENTS = [
 
   // ───────────── 대전 ─────────────
-  {
-    id: "2026-10-daejeon-yuseong-chrysanthemum",
-    title: "제17회 유성국화축제",
-    start: "2026-10-17", end: "2026-11-01",
-    time: "10:00~22:00",
-    place: "유림공원 일원", city: "대전 유성구", region: "대전",
-    cost: "일부 유료", price: "입장 무료, 일부 체험부스 유료", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=12919", source: "문화체육관광부 축제정보 (주최 유성구청)",
-    note: "국화조형물·분재, 원예·목공 체험, 로봇 캐리커처, 저녁 점등·버스킹. 주말 혼잡, 저녁 산책 코스로도 좋음. 문의 042-611-2678",
-    big: true, verified: true
-  },
   {
     id: "2026-10-daejeon-museum-folk-play",
     title: "대전시립박물관 우리놀이터 전통놀이 체험",
@@ -162,7 +149,7 @@ window.EVENTS = [
     start: "2026-11-08", end: "2026-12-20",
     time: "시간 미확인",
     place: "나무상상놀이터 (대전 OK예약 시설)", city: "대전", region: "대전",
-    cost: "무료", price: "요금 미표기 (예약 페이지 확인)", reservation: true, ages: "미표기 (어린이 놀이시설)",
+    cost: "유료", price: "현장결제 (요금은 예약 페이지 확인)", reservation: true, ages: "미표기 (어린이 놀이시설)",
     applyStart: "2026-10-31", deadline: "2026-12-18", applyNote: "OK예약 선착순",
     tags: ["야외", "과학"],
     indoor: "both",
@@ -199,6 +186,49 @@ window.EVENTS = [
     big: false, verified: false
   },
 
+  {
+    id: "2026-11-daejeon-119-experience",
+    title: "대전119시민체험센터 11월 체험 (평일·토요일)",
+    start: "2026-11-03", end: "2026-11-30",
+    time: "시간 미확인 (예약 페이지 회차 확인)",
+    place: "대전119시민체험센터", city: "대전", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "전연령 (어린이 체험 가능)",
+    applyStart: "2026-08-31", deadline: "2026-11-30", applyNote: "OK예약 선착순 (12월분은 접수 중, 10/1~12/31)",
+    tags: ["과학", "야외"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
+    note: "화~토 운영(일·월 휴무). 화재·지진 등 안전체험. 회차·정원은 예약 페이지에서 확인.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-wood-culture-kids",
+    title: "대전목재문화체험장 아동반 (10~12월 목공 체험)",
+    start: "2026-11-03", end: "2026-12-25",
+    time: "시간 미확인",
+    place: "대전목재문화체험장", city: "대전", region: "대전",
+    cost: "유료", price: "현장결제 (요금 예약 페이지 확인)", reservation: true, ages: "아동 (연령 미확인)",
+    applyStart: "2026-09-01", deadline: "2026-12-25", applyNote: "OK예약",
+    tags: ["과학", "예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
+    note: "화~일 운영. 아동반·초급반 목공 만들기. 회차별 일정·연령은 예약 페이지에서 재확인 필요.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-science-citizen-explore",
+    title: "국립중앙과학관 11월 시민자연과학 탐사 프로그램",
+    start: "2026-11-14", end: "2026-11-14",
+    time: "14:00",
+    place: "국립중앙과학관", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "미확인", reservation: true, ages: "미확인 (공고 확인)",
+    applyNote: "국립중앙과학관 누리집 공고 확인",
+    tags: ["과학", "야외"],
+    indoor: "both",
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
+    note: "행사안내 목록에서 날짜만 확인. 대상 연령·신청 방법·무료 여부는 공고에서 재확인 필요. 같은 달 21일(토) 별의별 과학특강은 고등학생 이상 위주라 제외.",
+    big: false, verified: false
+  },
+
   // ───────────── 근교 ─────────────
   {
     id: "2026-10-buyeo-chrysanthemum-festival",
@@ -214,19 +244,6 @@ window.EVENTS = [
     big: false, verified: true
   },
 
-  {
-    id: "2026-10-sejong-bohemian-music",
-    title: "2026 세종보헤미안 뮤직페스티벌",
-    start: "2026-10-30", end: "2026-11-01",
-    time: "시간 미확인",
-    place: "세종중앙공원 도시축제마당", city: "세종", region: "근교",
-    cost: "유료", price: "미확인", reservation: false, ages: "전연령 추정",
-    tags: ["예술", "축제"],
-    indoor: false,
-    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do", source: "세종시 행사달력",
-    note: "세종시 행사달력에 날짜만 등록. 가족 대상 여부·요금은 미확인.",
-    big: false, verified: true
-  },
   {
     id: "2026-11-yesan-brothers-festival",
     title: "의좋은 형제 축제 (예산 의좋은형제공원)",
@@ -264,19 +281,6 @@ window.EVENTS = [
     indoor: false,
     url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
     note: "국화 전시. 대전에서 차로 약 40분. 세부 프로그램 미확인.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-donghak-exhibit",
-    title: "국립세종도서관 동학농민혁명기록물 순회전 + '1894 기억저장소' 체험",
-    start: "2026-10-16", end: "2026-11-01",
-    time: "도서관 개관시간",
-    place: "국립세종도서관 1층 전시실", city: "세종", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["축제"],
-    indoor: true,
-    url: "https://sejong.nl.go.kr/brd/NttView.do?bbsSe=BBST002&menuId=O122&upperMenuId=O100&selectedIdx=106644", source: "국립세종도서관",
-    note: "세계기록유산 전시. 의상 체험, 다색 스탬프 엽서, 기록 스티커 지도. 10/26~31 임시휴관이라 11/1(일)만 관람 가능(운영 여부 확인).",
     big: false, verified: true
   },
   {
@@ -330,19 +334,6 @@ window.EVENTS = [
     indoor: true,
     url: "https://cheongju.museum.go.kr", source: "국립청주박물관",
     note: "문화가 있는 날 문화행사(공연 예정). 신청 방법은 누리집 공고에서 재확인 필요. 같은 날 공주박물관 테라리움과 일정 겹침.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-sejong-lighton",
-    title: "2026 LIGHT ON 세종 (국립세종수목원 빛 행사)",
-    start: "2026-10-30", end: "2026-11-01",
-    time: "시간 미확인",
-    place: "국립세종수목원", city: "세종", region: "근교",
-    cost: "유료", price: "수목원 입장료 (상세 미확인)", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.sejong.go.kr/prog/scheduleDetail/SCN_1/monthList.do?mno=sub04_02&year=2026&month=10&day=1", source: "세종시 행사달력",
-    note: "세종시 행사달력에 등록. 프로그램·시간·요금은 수목원 누리집(sjna.or.kr)에서 방문 전 확인.",
     big: false, verified: true
   },
   {
@@ -401,19 +392,6 @@ window.EVENTS = [
   },
 
   // ───────────── 전국 (큰 행사만) ─────────────
-  {
-    id: "2026-10-mungyeong-apple-festival",
-    title: "2026 문경사과축제",
-    start: "2026-10-17", end: "2026-11-01",
-    time: "09:00~18:00",
-    place: "문경새재도립공원 일원", city: "경북 문경", region: "전국",
-    cost: "일부 유료", price: "입장 무료, 사과따기 체험 유료", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=11812", source: "문체부 축제정보",
-    note: "문경새재 단풍 + 사과농장 체험. 대전에서 차로 약 1시간 30분. 체험 세부는 mgapple.or.kr 확인.",
-    big: true, verified: true
-  },
   {
     id: "2026-10-seoul-grandpark-autumn",
     title: "서울대공원 가을축제 '예술로 물드는 피노키오의 숲'",
