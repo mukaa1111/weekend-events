@@ -12,10 +12,10 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-11-02
+// 마지막 수집: 2026-11-05
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-02 11:20";
+window.LAST_UPDATED = "2026-11-05 07:30";
 
 window.EVENTS = [
 
@@ -229,6 +229,49 @@ window.EVENTS = [
     big: false, verified: false
   },
 
+  {
+    id: "2026-11-daejeon-science-magic-concert",
+    title: "국립중앙과학관 ORIGINAL 과학마술콘서트 시즌2",
+    start: "2026-11-14", end: "2026-11-15",
+    time: "시간 미확인 (사이언스홀)",
+    place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "미확인 (공고 확인)", reservation: true, ages: "미확인 (가족 대상 공연)",
+    applyNote: "국립중앙과학관 누리집 공고 확인",
+    tags: ["과학", "예술"],
+    indoor: true,
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
+    note: "행사안내 목록에서 날짜·장소만 확인. 시간·무료 여부·예약 방법은 공고 재확인 필요. 같은 날(11/14) 시민자연과학 탐사도 있음.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-11-daejeon-hanbat-lib-saturday",
+    title: "한밭도서관 11월 토요문화광장 〈심청이 온다〉 전통 가면극",
+    start: "2026-11-21", end: "2026-11-21",
+    time: "15:00~15:50",
+    place: "한밭도서관 창작방", city: "대전 서구", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "미확인 (가족 공연)",
+    applyStart: "2026-11-03", deadline: "2026-11-19", applyNote: "OK예약 강좌 선착순 (정원 100명, 11/5 현재 96명 접수)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8101&rsvtUseStatTpcd=002&pageIdx=1", source: "대전광역시 OK예약서비스(강좌)",
+    note: "거의 마감 임박(잔여 4명). 50분 공연. 대상 연령은 목록에 없음.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-toyo-gugak",
+    title: "대전시립연정국악단 상설공연 〈토요국악〉",
+    start: "2026-11-14", end: "2026-11-14",
+    time: "14:00",
+    place: "연정국악원", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 2천원", reservation: true, ages: "초등학생 이상",
+    applyNote: "OK예약 공연 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "토요일 오후 국악 공연. 관람 등급 초등학생 이상. 예매 가능.",
+    big: false, verified: true
+  },
+
   // ───────────── 근교 ─────────────
   {
     id: "2026-10-buyeo-chrysanthemum-festival",
@@ -268,19 +311,6 @@ window.EVENTS = [
     indoor: "both",
     url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
     note: "11/7 김홍신 문학제(김홍신문학관)도 같은 날. 어린이 프로그램 세부는 미확인. 대전에서 차로 약 40분.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-10-nonsan-chrysanthemum-exhibit",
-    title: "논산 시민과 함께하는 국화전시",
-    start: "2026-10-21", end: "2026-11-04",
-    time: "시간 미확인",
-    place: "논산 시민가족공원", city: "논산", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["야외"],
-    indoor: false,
-    url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
-    note: "국화 전시. 대전에서 차로 약 40분. 세부 프로그램 미확인.",
     big: false, verified: true
   },
   {
