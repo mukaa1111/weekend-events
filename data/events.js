@@ -12,10 +12,10 @@
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
 //
-// 마지막 수집: 2026-11-05
+// 마지막 수집: 2026-11-09
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-05 07:30";
+window.LAST_UPDATED = "2026-11-09 07:30";
 
 window.EVENTS = [
 
@@ -117,19 +117,6 @@ window.EVENTS = [
     big: true, verified: true
   },
   {
-    id: "2026-11-daejeon-forest-culture-festival",
-    title: "2026 산림문화페스티벌 (전국 산림복지 체험)",
-    start: "2026-11-07", end: "2026-11-08",
-    time: "시간 미확인",
-    place: "유림공원", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "체험 프로그램 무료 (푸드트럭 별도)", reservation: false, ages: "전연령 (가족)",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.fnnews.com/news/202610260933345072", source: "파이낸셜뉴스·한국영농신문 (산림청·한국산림복지진흥원 주최)",
-    note: "전국 산림복지시설 대표 체험 무료. 개막 퍼포먼스·공연, 독서 휴식 공간. 어린이 전용 프로그램·운영시간은 한국산림복지진흥원 누리집에서 재확인 필요.",
-    big: false, verified: false
-  },
-  {
     id: "2026-11-daejeon-manin-forest-camp",
     title: "우리 가족이 Green 숲! 힐링 가을 캠프 (만인산자연휴양림)",
     start: "2026-11-14", end: "2026-11-15",
@@ -155,20 +142,6 @@ window.EVENTS = [
     indoor: "both",
     url: "https://www.daejeon.go.kr/okr2019/OkrExpList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
     note: "토·일 운영(11/8~12/20), 접수 10/31~12/18 선착순. 운영 시간·장소 상세는 예약 페이지에서 확인 필요.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-11-daejeon-yeonjeong-pungryu",
-    title: "대전시립연정국악단 풍류마당 〈협주곡의 밤〉",
-    start: "2026-11-06", end: "2026-11-06",
-    time: "19:30",
-    place: "연정국악원", city: "대전 서구", region: "대전",
-    cost: "유료", price: "전석 5천원", reservation: true, ages: "초등학생 이상",
-    applyNote: "OK예약 공연 예매",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
-    note: "금요일 저녁 국악 협주곡 공연. 관람 등급 초등학생 이상. 예매 가능.",
     big: false, verified: true
   },
   {
@@ -254,7 +227,7 @@ window.EVENTS = [
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8101&rsvtUseStatTpcd=002&pageIdx=1", source: "대전광역시 OK예약서비스(강좌)",
-    note: "거의 마감 임박(잔여 4명). 50분 공연. 대상 연령은 목록에 없음.",
+    note: "거의 마감 임박(11/9 현재 잔여 2명 안팎). 50분 공연. 대상 연령은 목록에 없음.",
     big: false, verified: true
   },
   {
@@ -272,73 +245,48 @@ window.EVENTS = [
     big: false, verified: true
   },
 
-  // ───────────── 근교 ─────────────
   {
-    id: "2026-10-buyeo-chrysanthemum-festival",
-    title: "부여국화축제 (궁남지)",
-    start: "2026-10-30", end: "2026-11-08",
-    time: "09:00~21:00",
-    place: "부여 궁남지 일원", city: "부여", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalView.jsp?pSeq=13555", source: "문체부 축제 DB — 충남 필터",
-    note: "주제 '국화, 가을의 조각들을 맞추다'. 국화와 백제 역사·문화. 대전에서 차로 약 1시간. 문의 041-830-2591",
-    big: false, verified: true
-  },
-
-  {
-    id: "2026-11-yesan-brothers-festival",
-    title: "의좋은 형제 축제 (예산 의좋은형제공원)",
-    start: "2026-11-07", end: "2026-11-08",
-    time: "10:00~20:00 (일 10:00~19:00)",
-    place: "예산 의좋은형제공원 일원", city: "예산", region: "근교",
-    cost: "무료", price: "입장 무료", reservation: false, ages: "전연령",
-    tags: ["야외", "축제"],
-    indoor: false,
-    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=13&pOrder=01up&pCurrentPage=1", source: "문체부 축제 DB — 충남 필터",
-    note: "형제 설화 바탕 가족 체험·전통놀이·동화 스토리텔링 체험·문화공연·장터. 대전에서 차로 약 1시간 10분. 문의 041-331-0619",
+    id: "2026-11-daejeon-insect-model",
+    title: "대전곤충생태관 곤충모형 만들기 체험",
+    start: "2026-11-10", end: "2026-12-11",
+    time: "화~금 (회차 시간은 OK예약 확인)",
+    place: "대전곤충생태관", city: "대전", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "미확인 (어린이 체험)",
+    deadline: "2026-12-10", applyNote: "OK예약 선착순 (접수중)",
+    tags: ["과학"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=곤충", source: "대전광역시 OK예약서비스(체험)",
+    note: "화~금 운영(주말 아님). 이용기간 9/18~12/11. 대상 연령은 목록에 없음.",
     big: false, verified: true
   },
   {
-    id: "2026-11-nonsan-book-culture",
-    title: "논산시 도서문화제·평생학습축제",
-    start: "2026-11-07", end: "2026-11-08",
-    time: "도서문화제 10:30~ / 평생학습축제 11/7 13:30 (개막 14:00)",
-    place: "온담(평생학습관)·열린도서관 일원", city: "논산", region: "근교",
-    cost: "무료", price: "프로그램별 상이 (미확인)", reservation: false, ages: "전연령",
-    tags: ["축제"],
-    indoor: "both",
-    url: "https://www.nonsan.go.kr", source: "논산시청 누리집",
-    note: "11/7 김홍신 문학제(김홍신문학관)도 같은 날. 어린이 프로그램 세부는 미확인. 대전에서 차로 약 40분.",
-    big: false, verified: true
+    id: "2026-11-daejeon-science-animal-magic",
+    title: "국립중앙과학관 리얼 애니멀매직쇼 & 바다야 날라 특별한 만남 (대한민국 월드리그 조류)",
+    start: "2026-11-28", end: "2026-11-28",
+    time: "시간 미확인",
+    place: "국립중앙과학관", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "미확인 (과학관 공지 확인)", reservation: false, ages: "미확인",
+    tags: ["과학"],
+    indoor: true,
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
+    note: "행사 목록에서 날짜(11/28 토)만 확인. 시간·비용·예약 여부는 공지 확인 필요.",
+    big: false, verified: false
   },
   {
-    id: "2026-10-sejong-hangeul-namjune",
-    title: "2026 한글문화특별기획전 <세종과 남준> (세종대왕 × 백남준)",
-    start: "2026-10-16", end: "2026-11-08",
-    time: "10:00~18:00",
-    place: "세종중앙공원 비엔날레 전시관", city: "세종", region: "근교",
-    cost: "무료", price: "", reservation: false, ages: "전연령",
+    id: "2026-12-daejeon-nutcracker",
+    title: "유니버설발레단 발레 〈호두까기인형〉 (대전예술의전당)",
+    start: "2026-12-11", end: "2026-12-12",
+    time: "시간 미확인",
+    place: "대전예술의전당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "미확인", reservation: true, ages: "미확인 (가족 공연)",
     tags: ["예술"],
     indoor: true,
-    url: "https://www.sjcf.or.kr/hangeul/www/prfr/list.do?key=2504150023", source: "세종시문화관광재단 한글문화도시",
-    note: "도슨트 해설 화~일 14시·16시. 주말 체험 '나도 한글장난감아티스트'(장난감 분해·조립)는 온라인 사전신청. 문의 044-850-8952",
-    big: false, verified: true
+    url: "https://v.daum.net/v/20260115164438376", source: "대전예술의전당 2026 시즌 기사 (1월)",
+    note: "시즌 라인업 기사 기준. 예매처·가격은 대전예술의전당 공지 확인 필요.",
+    big: false, verified: false
   },
-  {
-    id: "2026-10-cheongju-museum-metal-exhibit",
-    title: "국립청주박물관 특별전 '빛·울림·힘 - 금속, 감각을 깨우다' + 어린이박물관",
-    start: "2026-10-16", end: "2026-11-08",
-    time: "09:00~18:00 (월요일 휴관)",
-    place: "국립청주박물관 청명관 / 어린이박물관", city: "청주", region: "근교",
-    cost: "무료", price: "", reservation: true, ages: "전연령",
-    tags: ["예술", "축제"],
-    indoor: true,
-    url: "https://cheongju.museum.go.kr/www/speclExbiView.do?key=48&exbiNo=158", source: "국립청주박물관",
-    note: "특별전은 11/8까지. 어린이박물관은 온라인 회차 예약(kguide.kr/cjnm001) 권장. 미르숲·금관실은 12/27까지 휴실.",
-    big: false, verified: true
-  },
+  // ───────────── 근교 ─────────────
+
   {
     id: "2026-10-gongju-museum-terrarium",
     title: "국립공주박물관 '우리 가족 슬기로운 공작생활' (이끼 테라리움 만들기)",
@@ -364,19 +312,6 @@ window.EVENTS = [
     indoor: true,
     url: "https://cheongju.museum.go.kr", source: "국립청주박물관",
     note: "문화가 있는 날 문화행사(공연 예정). 신청 방법은 누리집 공고에서 재확인 필요. 같은 날 공주박물관 테라리움과 일정 겹침.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-11-cheongju-snowwhite",
-    title: "가족 뮤지컬 <백설공주> (청주아트홀)",
-    start: "2026-11-07", end: "2026-11-08",
-    time: "11:00, 14:00, 16:00",
-    place: "청주아트홀", city: "청주", region: "근교",
-    cost: "유료", price: "미확인", reservation: true, ages: "전연령 (가족)",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
-    note: "토·일 각 3회. 11/7(토) 17:00 소공연장 '색소폰 앙상블 가족음악회'도 있음. 가격·예매처 미표기.",
     big: false, verified: true
   },
   {
@@ -421,20 +356,20 @@ window.EVENTS = [
     big: false, verified: true
   },
 
-  // ───────────── 전국 (큰 행사만) ─────────────
   {
-    id: "2026-10-seoul-grandpark-autumn",
-    title: "서울대공원 가을축제 '예술로 물드는 피노키오의 숲'",
-    start: "2026-11-07", end: "2026-11-08",
-    time: "시간 미확인",
-    place: "서울대공원 일대", city: "경기 과천", region: "전국",
-    cost: "일부 유료", price: "축제 무료 추정, 동물원 입장료 별도", reservation: false, ages: "전연령",
-    tags: ["야외", "예술", "축제"],
-    indoor: false,
-    url: "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=465", source: "펀서울 (서울시 축제 포털)",
-    note: "펀서울 목록에 11/7~8로 표기(날짜 확정). 단풍 숲속 설치미술·참여형 설치·공연·체험(세부 변동 가능). 바로 옆 국립과천과학관과 같은 날 묶기 좋음.",
-    big: true, verified: true
+    id: "2026-12-cheongju-frozen",
+    title: "가족 뮤지컬 <겨울왕국> (청주아트홀)",
+    start: "2026-12-20", end: "2026-12-20",
+    time: "11:00, 14:00, 16:00, 18:00",
+    place: "청주아트홀", city: "청주", region: "근교",
+    cost: "유료", price: "미확인", reservation: true, ages: "전연령 (가족)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
+    note: "12/18(금) 10:20 <크리스마스캐롤-스쿠루지>(대공연장)도 있음. 가격·예매처 미표기.",
+    big: false, verified: true
   },
+  // ───────────── 전국 (큰 행사만) ─────────────
   {
     id: "2026-11-gstar-busan",
     title: "지스타 2026 (G-STAR, 국제게임전시회)",
