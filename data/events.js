@@ -310,7 +310,7 @@ window.EVENTS = [
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=594", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
-    note: "회신으로 요청한 행사. 옛이야기를 몸으로 표현하는 체험형 연극. 11시·14시 두 회차 모두 현재 인원마감. 초2가 대상 상한이라 마지막 기회일 수 있음.",
+    note: "회신으로 요청한 행사(링크와 포스터 사진 모두 받음). 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험형 연극. 11시·14시 두 회차 모두 현재 인원마감. 초2가 대상 상한이라 마지막 기회일 수 있음.",
     big: false, verified: true
   },
   // ───────────── 근교 ─────────────
@@ -425,19 +425,5 @@ window.EVENTS = [
     url: "https://www.yugacrew.com/crewletter/coex-baby-fair-2026", source: "육아 블로그(유가크루) / 주최 세계전람",
     note: "로봇코딩·AI·쿠킹·공예 체험 부스. 사전등록은 educare.co.kr. 주 대상이 유아~예비초등이라 2학년에겐 다소 어릴 수 있음.",
     big: true, verified: false
-  },
-  {
-    id: "2026-12-daejeon-djac-bangwija-play",
-    title: "대전예술의전당 어린이 체험 표현놀이극 〈방귀쟁이 며느리〉",
-    start: "2026-12-05", end: "2026-12-05",
-    time: "11:00 / 14:00 (택 1)",
-    place: "대전예술의전당 앙상블홀 리허설룸", city: "대전 서구", region: "대전",
-    cost: "유료", price: "1만원", reservation: true, ages: "6세~초등 2학년 (2018~2021년생), 부모 참관 가능",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/djac/ac/cultureList.do?gubun=ing&culGubun=01&menuSeq=6980", source: "직접 요청(텔레그램 사진)",
-    note: "회신으로 요청한 행사. 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험. 포스터 기준 정보라 공식 페이지에서 날짜·접수 일정 확인 필요 (문의 042-270-8152).",
-    applyNote: "대전예술의전당 아카데미 홈페이지 신청 (접수 시작일 미확인)",
-    big: false, verified: false
   }
 ];
