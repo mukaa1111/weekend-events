@@ -43,6 +43,10 @@
 3. 수집 기록(8절)에 한 줄을 추가한다. 변경이 0건이어도 적는다 (자동 수집이 돌았다는 증거)
 4. 결과 요약을 알려준다: 새로 추가 n건 / 갱신 n건 / 출처별 ○△× 표 / 확인 필요 n건
 5. "확인 필요"(verified: false) 중 가까운 주말 것은 공식 페이지를 한 번 더 찾아본다
+6. **검사**: 아래 명령이 `ok`를 출력해야 한다 (id 중복, 날짜 형식, indoor·region·cost·tags 값 확인). 실패하면 고친 뒤 다시 돌린다.
+   ```
+   node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(e.applyTime&&!/^\d{2}:\d{2}$/.test(e.applyTime))throw new Error('bad applyTime '+e.id);if(!(e.indoor===true||e.indoor===false||e.indoor==='both'))throw new Error('bad indoor '+e.id);if(e.image&&!/^https:\/\//.test(e.image))throw new Error('bad image '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"
+   ```
 
 ## 6. 특별 요청
 - "○○ 지역 큰 어린이 행사 찾아줘" → 그 지역을 검색하고 `region: "전국"`, `big: true`로 추가
