@@ -21,16 +21,22 @@
 - **환경 변수**(클라우드 환경 설정에 직접 입력): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` → 설정법은 `docs/TELEGRAM.md`
 - **현재 루틴 주소**: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh (팀 계정)
 
+## 두 번째 루틴: 저녁 회신 반영 (2026-11-09 추가)
+- **이름**: 주말 뭐하지? 회신 반영 (매일 21:00) · **시간**: 매일 21:00 (한국) = cron `0 12 * * *` · **모델**: claude-sonnet-5-5 · 도구·저장소·환경 변수는 아침 루틴과 같음
+- **하는 일**: 수집은 안 하고, 봇에게 보낸 내 답장(행사명, "○○ 빼줘" 등)만 읽어 행사 목록에 반영하고 "💬 회신 반영" 확인 메시지를 보낸다. 아침 루틴도 0번 단계에서 같은 처리를 하므로 하루 두 번 반영된다. 텔레그램이 안 받아 간 메시지를 24시간만 보관해서 매일 돌아야 한다.
+- **지시문**: `docs/routine-prompt-evening.txt` (그대로 복사). 규칙 본문은 `docs/COLLECT.md` 7절.
+- **현재 루틴 주소**: (만든 뒤 적음)
+
 ## 새 계정에서 다시 만들 때 순서
 1. 새 계정으로 https://claude.ai/code 로그인 → 아래쪽 "저장소"에서 GitHub 연결
 2. https://github.com/apps/claude/installations/select_target 에서 mukaa1111 선택 → weekend-events 저장소 허용 → Install
 3. claude.ai/code 환경(Default) 설정에서 환경 변수 2개(`docs/TELEGRAM.md` 4번)를 넣고, 네트워크 접근을 "전체" 또는 아래 도메인 허용으로 바꾸기
    (science.go.kr, daejeon.go.kr, sejong.go.kr, sjcf.or.kr, cheongju.museum.go.kr, gongju.museum.go.kr, nonsan.go.kr, uppity.co.kr, mcst.go.kr, festival.seoul.go.kr, museum.go.kr, sciencecenter.go.kr, leeungnomuseum.or.kr, cheongju.go.kr, sjac.or.kr)
-4. Claude Code에게 "docs/ROUTINE.md대로 루틴 만들어줘"라고 말하기 (아래 지시문을 그대로 씀)
+4. Claude Code에게 "docs/ROUTINE.md대로 루틴 만들어줘"라고 말하기 — **루틴 2개**: 아침 수집(아래 지시문)과 저녁 회신 반영(`docs/routine-prompt-evening.txt`)
 5. 만든 뒤 한 번 "지금 실행"해서 GitHub에 새 커밋이 올라오는지 확인
 
 ## 팀 계정이 끝날 때 정리 (연결 끊기)
-1. https://claude.ai/code/routines 에서 이 루틴 삭제 (삭제는 직접 해야 함)
+1. https://claude.ai/code/routines 에서 루틴 2개(아침 수집·저녁 회신 반영) 삭제 (삭제는 직접 해야 함)
 2. claude.ai 설정 → 커넥터에서 GitHub 연결 해제
 3. https://github.com/settings/installations 에서 "Claude" 앱 중 팀 계정으로 설치된 것 제거
 4. 개인 계정에서 위 "새 계정에서 다시 만들 때 순서"대로 다시 연결
@@ -45,6 +51,7 @@
 | 2026-10-19 (첫 자동 실행) | 월요일 07:00 자동 실행 성공. 추가 1·갱신 1·삭제 5, 텔레그램 도착 |
 | 2026-10-19 (지시문 변경) | 접수 시작·마감일을 `applyStart`/`deadline`으로 적고, 알림에 '예약 서두르기(7일 안)' 묶음 추가 |
 | 2026-11-02 (지시문 변경) | OK예약서비스 메뉴 확장: 체험·교육·강좌(접수중/접수대기), 공연/전시 목록. 접수기간을 applyStart/deadline로 옮기는 규칙 |
+| 2026-11-09 (지시문 변경) | 텔레그램 회신 처리: 아침 루틴에 0번 단계(답장 읽기) 추가, 저녁 21:00 회신 반영 루틴 신설 |
 | 2026-10-29 (지시문 변경) | 대덕대청호물결축제 누락 원인 수정: 문체부 DB 지역 필터 주소, 검색형 출처(`type: "검색"`), 대전 균형 규칙, 요약에 지역별 건수 |
 
 ## 루틴이 안 되는 요금제라면 (대안)
@@ -62,6 +69,7 @@
 3. `data/events.js` — 현재 행사 목록과 데이터 형식. 이 형식을 정확히 유지한다 (`window.EVENTS = [ ... ];` 로 시작하는 자바스크립트 파일, 필드: id, title, start, end, time, place, city, region, cost, price, reservation, ages, tags, url, source, note, big, verified. indoor(실내 true / 야외 false / 둘 다 "both") 필수. 선택 필드: image(공식 포스터 이미지 주소), applyStart(접수 시작일), applyTime(접수 시작 시각 "HH:MM"), deadline(접수 마감일), applyNote(접수 방법 한 줄)).
 
 ## 할 일
+0. **텔레그램 회신 먼저**: `python3 scripts/read_replies.py`를 실행한다. 새 답장이 있으면(`replies: n건`, n>0) `data/inbox/` 날짜 파일의 "처리 전" 줄을 `docs/COLLECT.md` 7절 규칙대로 처리한다(행사 추가·삭제·정정·메모, 처리한 줄은 "처리됨"으로 옮김). 스크립트가 오류를 내면 요약에 적고 수집은 계속한다. 처리 결과는 9번 알림 메시지의 "추가 n · 갱신 n · 삭제 n" 줄 바로 아래에 "💬 회신 반영: ✅ 행사명 추가 / ❌ ○○ 못 찾음" 한 줄로 넣는다 (답장이 없었으면 이 줄은 생략).
 1. `TZ=Asia/Seoul date +%Y-%m-%d`로 오늘 날짜(한국 시간)를 확인한다. 수집 기간은 오늘부터 약 6주 뒤까지.
 2. `data/sources.js`의 활성 출처를 **빠짐없이 모두** 돈다. **출처마다 WebFetch를 최소 한 번은 시도한다.** `type: "검색"` 출처는 주소가 없고 `query`에 검색어가 있다: "/"로 나뉜 검색어를 각각 WebSearch로 실행하고 "○월"은 이번 달과 다음 달로 바꿔 두 번 검색한다 (대전 구청·문화재단 사이트가 클라우드에서 안 열려 검색으로 대신하는 것). 문체부 축제 DB는 sources.js의 **지역 필터 주소**(대전 pSido=06, 세종 08, 충북 12, 충남 13)로 읽고, "총 n건 [1/m 쪽]"에서 m이 2 이상이면 pCurrentPage를 올려 끝까지 읽는다. 전국 목록만 보면 대전 행사가 묻힌다. **OK예약서비스**(대전시 통합 예약) 목록은 sources.js에 "접수중"(rsvtUseStatTpcd=002)·"접수대기"(001) 조건이 붙은 주소로 들어 있다. 목록 한 줄에 접수기간·이용기간·요일·요금·상태가 있으니 접수기간 시작→applyStart, 접수기간 끝→deadline, 이용기간→start/end로 그대로 옮기고, "총 n건 | 1/2 페이지"면 pageIdx=2도 읽는다. 공연/전시 목록은 관람 등급이 초등학생 이상이거나 가족 공연인 것만 넣는다. 같은 날 이미 수집했더라도, '바뀐 게 없을 것 같아도' 생략하지 않는다. 한 출처가 안 열려도 멈추지 말고 다음 출처로 넘어간다. 순서: 공식 사이트(교육·행사·공지 페이지) WebFetch → 안 열리면 WebSearch로 '기관명 + 이번달/다음달 + 어린이 행사' 검색해서 검색 결과·뉴스 기사에서 날짜를 읽는다. 잘쓸레터(어피티)는 보관함 https://uppity.co.kr/newsletter/jalsseul-letter/ 에서 최신 호 1~2개를 읽고 '즐길거리/일정' 코너의 행사를 뽑는다. 보완 검색도 3~5개 한다 (예: '대전 아이와 주말 ○월 행사', '대전 어린이 체험 ○월 ○일', '세종 청주 공주 ○월 축제 가족', '국립중앙과학관 ○월 주말 프로그램').
 3. 찾은 행사를 `data/events.js`에 반영한다:

@@ -26,6 +26,7 @@
 - 예약 확인·끄기·지금 실행: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh
 - 수집 규칙을 바꾸고 싶으면 `docs/COLLECT.md`를 고치면 돼요 (에이전트가 매번 이 문서를 읽어요).
 - 수집이 끝나면 텔레그램으로 "이번 주말 추천 3곳 + 예약 서두르기" 요약이 와요 (설정: `docs/TELEGRAM.md`).
+- **텔레그램 답장으로 행사 요청**: 알림에 행사명을 답장하면 밤 9시(또는 월·목 아침)에 찾아서 추가해요. "○○ 빼줘"도 돼요. 자세한 건 `docs/TELEGRAM.md`.
 
 ## 자주 쓰는 말 (Claude에게)
 - "이번 주 행사 수집해줘" → `data/events.js` 갱신 (2단계부터)
