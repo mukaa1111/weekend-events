@@ -7,7 +7,7 @@
 ## 할 일
 1. `TZ=Asia/Seoul date +"%Y-%m-%d %H:%M"`로 한국 시간을 확인한다.
 2. `python3 scripts/read_replies.py`를 실행한다. 출력이 `replies: 0건`이면 `data/inbox/`에 "처리 전"이 남아 있는 파일이 있는지도 확인한다. 둘 다 없으면 아무것도 바꾸지 말고 "회신 없음"이라고 요약하고 끝낸다. 스크립트가 오류를 내면(토큰 없음, 409 Conflict 등) 오류 내용을 요약에 적고 끝낸다.
-3. "처리 전" 줄을 하나씩 COLLECT.md 7절 규칙대로 처리한다: 행사명이면 공식 페이지를 찾아 `data/events.js`에 추가(또는 보강), "빼줘"면 삭제, 정정이면 고치기, 그 밖의 말은 `docs/NOTES.md`에 메모. 처리한 줄은 "## 처리됨" 아래로 옮기고 결과 표시를 붙인다.
+3. "처리 전" 줄을 하나씩 COLLECT.md 7절 규칙대로 처리한다: 행사명이면 공식 페이지를 찾아 `data/events.js`에 추가(또는 보강), `[사진 data/inbox/photos/…]`로 시작하면 **Read 도구로 그 사진 파일을 열어** 포스터의 행사명·날짜·장소를 읽은 뒤 같은 방법으로 추가, "빼줘"면 삭제, 정정이면 고치기, 그 밖의 말은 `docs/NOTES.md`에 메모. 사진 파일(data/inbox/photos/)은 커밋하지 않는다(.gitignore). 처리한 줄은 "## 처리됨" 아래로 옮기고 결과 표시를 붙인다.
 4. events.js를 바꿨으면 파일 맨 위 `window.LAST_UPDATED` 값을 지금 시각으로 바꾸고, COLLECT.md 5절의 `node -e …` 검사가 `ok`를 출력하는지 확인한다. 실패하면 고친 뒤 다시 검사한다.
 5. 바뀐 파일(events.js, inbox, telegram_offset.json, NOTES.md)을 커밋하고 `main`에 바로 푸시한다 (PR 만들지 않는다). 커밋 메시지 예: `회신 반영 2026-11-09: 추가 1건, 삭제 0건`.
 6. 처리한 줄이 1개 이상이면 `bash scripts/telegram.sh "<메시지>"`로 COLLECT.md 7절의 "💬 회신 반영" 형식 메시지를 한 번 보낸다. 글자만(마크다운 기호 없이). 토큰·chat id 값은 절대 출력하거나 파일에 쓰지 않는다.

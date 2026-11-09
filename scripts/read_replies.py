@@ -6,7 +6,9 @@
     없으면 프로젝트 폴더의 .env 파일에서 읽는다 (.env는 git에 올리지 않는다).
   - 마지막으로 읽은 위치는 data/telegram_offset.json 에 기억한다 (저장소에 올라가므로 PC와 클라우드가 같이 쓴다).
   - 내 chat id 가 아닌 곳에서 온 메시지는 기록하지 않고 건너뛴다.
-  - 글자 메시지만 다룬다 (사진·파일은 "[사진]"처럼 표시만).
+  - 사진(포스터)을 보내면 가장 큰 크기로 data/inbox/photos/ 에 내려받고 줄에 "[사진 data/inbox/photos/파일명]"으로 적는다.
+    루틴이 Read 도구로 그 사진을 열어 행사명·날짜를 읽는다. 사진 파일은 git에 올리지 않는다(.gitignore).
+    이미지 파일(document, image/*)도 같게 다룬다. 음성·영상·스티커는 종류만 표시한다.
   - --dry-run 이면 파일에 쓰지 않고 offset 도 올리지 않는다 (같은 메시지를 다음에 또 받는다).
   - 텔레그램은 봇이 안 받아 간 메시지를 24시간만 보관한다. 하루 한 번은 돌려야 안 잃는다.
   - 처리 규칙은 docs/COLLECT.md 7절.
@@ -26,6 +28,7 @@ from datetime import datetime, timedelta, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OFFSET_PATH = os.path.join(ROOT, "data", "telegram_offset.json")
 INBOX_DIR = os.path.join(ROOT, "data", "inbox")
+PHOTO_DIR = os.path.join(INBOX_DIR, "photos")
 KST = timezone(timedelta(hours=9))
 
 
@@ -78,12 +81,46 @@ def save_offset(n):
         f.write(json.dumps({"offset": n, "saved": datetime.now(KST).strftime("%Y-%m-%d %H:%M")}, ensure_ascii=False) + "\n")
 
 
-def describe(msg):
-    """메시지 하나를 한 줄 글자로. 글자가 아니면 종류만 표시."""
+def pick_photo(msg):
+    """메시지에서 내려받을 이미지의 file_id와 확장자. 없으면 (None, None)."""
+    if msg.get("photo"):
+        best = max(msg["photo"], key=lambda p: int(p.get("file_size") or 0) or int(p.get("width") or 0))
+        return best["file_id"], ".jpg"
+    doc = msg.get("document")
+    if doc and str(doc.get("mime_type", "")).startswith("image/"):
+        ext = os.path.splitext(doc.get("file_name") or "")[1].lower() or "." + doc["mime_type"].split("/")[1]
+        return doc["file_id"], ext
+    return None, None
+
+
+def download_photo(token, file_id, dest):
+    """getFile → 파일 내려받기. 실패하면 None."""
+    try:
+        info = api(token, "getFile", file_id=file_id)
+        url = "https://api.telegram.org/file/bot%s/%s" % (token, info["file_path"])
+        os.makedirs(PHOTO_DIR, exist_ok=True)
+        with urllib.request.urlopen(url, timeout=60) as r, open(dest, "wb") as f:
+            f.write(r.read())
+        return dest
+    except Exception:
+        return None
+
+
+def describe(msg, token=None, update_id=None, ts=None, dry=False):
+    """메시지 하나를 한 줄 글자로. 사진은 내려받아 경로를 적고, 그 밖의 첨부는 종류만 표시."""
     text = msg.get("text") or msg.get("caption") or ""
-    kinds = [k for k in ("photo", "document", "voice", "audio", "video", "sticker") if k in msg]
-    if kinds:
-        text = ("[%s] " % {"photo": "사진", "document": "파일", "voice": "음성", "audio": "오디오", "video": "영상", "sticker": "스티커"}[kinds[0]]) + text
+    file_id, ext = pick_photo(msg)
+    if file_id:
+        if dry or not token:
+            text = "[사진] " + text
+        else:
+            name = "%s_u%s%s" % (ts.strftime("%Y-%m-%d"), update_id, ext)
+            saved = download_photo(token, file_id, os.path.join(PHOTO_DIR, name))
+            text = ("[사진 data/inbox/photos/%s] " % name if saved else "[사진 내려받기 실패] ") + text
+    else:
+        kinds = [k for k in ("document", "voice", "audio", "video", "sticker") if k in msg]
+        if kinds:
+            text = ("[%s] " % {"document": "파일", "voice": "음성", "audio": "오디오", "video": "영상", "sticker": "스티커"}[kinds[0]]) + text
     return text.replace("\r", " ").replace("\n", " ⏎ ").strip()
 
 
@@ -116,10 +153,10 @@ def main():
         if str(m.get("chat", {}).get("id")) != chat:
             skipped += 1
             continue
-        text = describe(m)
+        ts = datetime.fromtimestamp(int(m.get("date", 0)), KST)
+        text = describe(m, token=token, update_id=u["update_id"], ts=ts, dry=dry)
         if not text or text.startswith("/"):          # /start 같은 명령은 기록하지 않음
             continue
-        ts = datetime.fromtimestamp(int(m.get("date", 0)), KST)
         day = ts.strftime("%Y-%m-%d")
         per_day.setdefault(day, []).append("- %s · %s   <!-- u%s -->" % (ts.strftime("%H:%M"), text, u["update_id"]))
         got.append((day, text))
