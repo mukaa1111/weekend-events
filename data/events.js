@@ -15,7 +15,7 @@
 // 마지막 수집: 2026-11-09
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-09 07:30";
+window.LAST_UPDATED = "2026-11-09 10:50";
 
 window.EVENTS = [
 
@@ -284,6 +284,34 @@ window.EVENTS = [
     url: "https://v.daum.net/v/20260115164438376", source: "대전예술의전당 2026 시즌 기사 (1월)",
     note: "시즌 라인업 기사 기준. 예매처·가격은 대전예술의전당 공지 확인 필요.",
     big: false, verified: false
+  },
+  {
+    id: "2026-11-daejeon-djac-forest-workshop",
+    title: "대전예술의전당 어린이 체험 워크숍 〈한여름밤의 신비한 숲속 모험〉",
+    start: "2026-11-21", end: "2026-11-21",
+    time: "10:00 / 14:00 (각 약 120분)",
+    place: "대전예술의전당 무용연습실", city: "대전 서구", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "초등 2~6학년",
+    applyStart: "2026-11-05", deadline: "2026-11-19", applyTime: "10:00", applyNote: "대전예술의전당 홈페이지 수강신청 (선착순 15명, 문의 042-270-8152)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=596", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
+    note: "회신으로 요청한 행사. 셰익스피어 희곡을 오르프 악기·즉흥 장면으로 표현하는 음악·연극 워크숍. 10시·14시 두 회차 모두 현재 인원마감(취소 자리 확인 필요).",
+    big: false, verified: true
+  },
+  {
+    id: "2026-12-daejeon-djac-fartlady-play",
+    title: "대전예술의전당 참여형 연극 〈방귀쟁이 며느리〉",
+    start: "2026-12-05", end: "2026-12-05",
+    time: "11:00 / 14:00 (약 60분)",
+    place: "대전예술의전당 앙상블홀 리허설룸", city: "대전 서구", region: "대전",
+    cost: "유료", price: "1만원", reservation: true, ages: "6세~초등 2학년 (부모 참관 가능)",
+    applyStart: "2026-11-02", deadline: "2026-12-01", applyTime: "09:00", applyNote: "대전예술의전당 홈페이지 수강신청 (문의 042-270-8152)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=594", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
+    note: "회신으로 요청한 행사. 옛이야기를 몸으로 표현하는 체험형 연극. 11시·14시 두 회차 모두 현재 인원마감. 초2가 대상 상한이라 마지막 기회일 수 있음.",
+    big: false, verified: true
   },
   // ───────────── 근교 ─────────────
 
