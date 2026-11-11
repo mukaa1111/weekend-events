@@ -16,10 +16,10 @@
 //            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
 // closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
-// 마지막 수집: 2026-11-09
+// 마지막 수집: 2026-11-11
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-11 13:30";
+window.LAST_UPDATED = "2026-11-11 12:30";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -28,9 +28,9 @@ window.LAST_UPDATED = "2026-11-11 13:30";
 window.PICKS = {
   weekend: "2026-11-14",
   items: [
-    { id: "2026-11-daejeon-noodle-festival", why: "이번 주말에만 열리는 축제. 예약 없이 바로 가면 돼요" },
     { id: "2026-11-daejeon-dma-weekend-class", why: "2학년 맞춤 무료 미술 수업, 이번이 마지막 주말 (접수 11/13까지)" },
-    { id: "2026-10-daejeon-museum-folk-play", why: "11/14(토)가 휴관 전 마지막 날. 토요일은 예약 없이 현장접수" }
+    { id: "2026-10-daejeon-museum-folk-play", why: "11/14(토)가 마지막 날. 토요일은 예약 없이 현장접수" },
+    { id: "2026-11-daejeon-toyo-gugak", why: "초등학생 이상 국악 공연, 2천원. 비 와도 실내라 안심" }
   ]
 };
 
@@ -104,7 +104,7 @@ window.EVENTS = [
     indoor: true,
     url: "https://science.go.kr/mps/0/bbs/163/moveBbsNttList.do", source: "국립중앙과학관 개인교육",
     note: "매주 토요일 4회 과정. 접수 10/14~11/6. 통합예약(rsvn.science.go.kr)에서 아이 이름으로 가입 후 결제까지 해야 완료.",
-    closedNote: "11월 과정 접수 11/6 종료",
+    closed: true, closedNote: "11월 과정 접수 11/6 종료",
     big: true, verified: true
   },
   {
@@ -211,13 +211,13 @@ window.EVENTS = [
     title: "국립중앙과학관 11월 시민자연과학 탐사 프로그램",
     start: "2026-11-14", end: "2026-11-14",
     time: "14:00",
-    place: "국립중앙과학관", city: "대전 유성구", region: "대전",
+    place: "국립중앙과학관 창의나래관 2층 나래홀", city: "대전 유성구", region: "대전",
     cost: "무료", price: "미확인", reservation: true, ages: "미확인 (공고 확인)",
     applyNote: "국립중앙과학관 누리집 공고 확인",
-    tags: ["과학", "야외"],
-    indoor: "both",
+    tags: ["과학"],
+    indoor: true,
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "행사안내 목록에서 날짜만 확인. 대상 연령·신청 방법·무료 여부는 공고에서 재확인 필요. 같은 달 21일(토) 별의별 과학특강은 고등학생 이상 위주라 제외.",
+    note: "강연형(나래홀). 대상 연령·신청 방법·무료 여부는 공고에서 재확인 필요. 21일 별의별 과학특강은 고등학생 이상 위주라 제외.",
     big: false, verified: false
   },
 
@@ -283,12 +283,12 @@ window.EVENTS = [
     title: "국립중앙과학관 리얼 애니멀매직쇼 & 바다야 날라 특별한 만남 (대한민국 월드리그 조류)",
     start: "2026-11-28", end: "2026-11-28",
     time: "시간 미확인",
-    place: "국립중앙과학관", city: "대전 유성구", region: "대전",
+    place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
     cost: "무료", price: "미확인 (과학관 공지 확인)", reservation: false, ages: "미확인",
     tags: ["과학"],
     indoor: true,
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "행사 목록에서 날짜(11/28 토)만 확인. 시간·비용·예약 여부는 공지 확인 필요.",
+    note: "사이언스홀 강연(11/28 토). 시간·비용·예약 여부는 공지 확인 필요.",
     big: false, verified: false
   },
   {
@@ -333,6 +333,48 @@ window.EVENTS = [
     note: "회신으로 요청한 행사. 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험형 연극. 초2가 대상 상한이라 마지막 기회일 수 있음.",
     closed: true, closedNote: "두 회차 모두 인원 마감 (11/9 확인)",
     big: false, verified: true
+  },
+  {
+    id: "2026-12-daejeon-museum-folk-play",
+    title: "대전시립박물관 우리놀이터 12월 예약 (전통놀이 체험)",
+    start: "2026-12-01", end: "2026-12-31",
+    time: "화~토 (회차는 OK예약 확인)",
+    place: "대전시립박물관 우리놀이터", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "전연령",
+    deadline: "2026-12-30", applyNote: "OK예약 체험 선착순 (접수중)",
+    tags: ["축제"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=우리놀이터", source: "대전광역시 OK예약서비스(체험)",
+    note: "겨울방학 전에 미리 예약. 월요일 휴관. 11월분(~11/30)은 별도 항목.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-swan-nutcracker-festa",
+    title: "춤추는 발레 FESTA 〈백조의호수〉&〈호두까기인형〉 (대전예술의전당)",
+    start: "2026-11-29", end: "2026-11-29",
+    time: "15:00 (120분, 인터미션 15분)",
+    place: "대전예술의전당 아트홀", city: "대전 서구", region: "대전",
+    cost: "유료", price: "R 10만 / S 8만 / A 6만원", reservation: true, ages: "5세 이상",
+    applyNote: "놀티켓 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://nol.yanolja.com/ticket/products/26008679", source: "예매 사이트(놀티켓)",
+    note: "발레 입문용 하이라이트 공연. 예매 사이트 기준이라 공연장 공지 재확인 필요.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-12-daejeon-secret-juju",
+    title: "쇼뮤지컬 〈시크릿쥬쥬 : 별의보석〉 (대전)",
+    start: "2026-12-25", end: "2026-12-25",
+    time: "11:00 / 14:00 / 16:30 (70분)",
+    place: "평송청소년문화센터 대극장", city: "대전 서구", region: "대전",
+    cost: "유료", price: "R 6.6만 / S 4.4만원", reservation: true, ages: "24개월 이상",
+    applyNote: "놀티켓 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://nol.yanolja.com/ticket/products/26013206", source: "예매 사이트(놀티켓)",
+    note: "크리스마스 당일 공연. 대상이 어린 편이라 초2에겐 다소 유아적일 수 있음.",
+    big: false, verified: false
   },
   // ───────────── 근교 ─────────────
 
@@ -381,7 +423,7 @@ window.EVENTS = [
     id: "2026-11-cheongju-kids-opera-festa",
     title: "알리오페라단 키즈 오페라 페스타",
     start: "2026-11-27", end: "2026-11-28",
-    time: "시간 미확인",
+    time: "11/27 19:30 / 11/28 11:00·17:00·19:30",
     place: "청주예술의전당 대공연장", city: "청주", region: "근교",
     cost: "유료", price: "요금 미확인 (예매안내 참고)", reservation: true, ages: "어린이 가족",
     applyNote: "청주예술의전당 예매안내 참고",
@@ -416,6 +458,32 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
     note: "12/18(금) 10:20 <크리스마스캐롤-스쿠루지>(대공연장)도 있음. 가격·예매처 미표기.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-sejong-mind-walk",
+    title: "2026 국민건강 리부트 마음건강 걷기대회 (세종)",
+    start: "2026-11-14", end: "2026-11-14",
+    time: "시간 미확인",
+    place: "세종중앙공원 도시축제마당", city: "세종", region: "근교",
+    cost: "무료", price: "", reservation: false, ages: "전연령",
+    tags: ["야외"],
+    indoor: false,
+    url: "https://xn--ok0b236bp0a.com/place/29435", source: "공연·행사 정보 사이트(검색)",
+    note: "시민 참여형 걷기 행사. 비 오면 불편. 신청 방법·시간은 공식 공지 확인 필요.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-11-cheonan-maple-forest",
+    title: "단풍나무숲길 힐링축제 (천안 독립기념관)",
+    start: "2026-10-16", end: "2026-11-15",
+    time: "금·토·일 18:00~21:00",
+    place: "독립기념관 단풍나무숲길", city: "천안", region: "근교",
+    cost: "일부 유료", price: "미확인", reservation: false, ages: "전연령",
+    tags: ["야외", "축제"],
+    indoor: false,
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=13&pOrder=01up&pCurrentPage=1", source: "문체부 축제 DB (충남 필터)",
+    note: "약 3.2km 야간 단풍길과 조명·미디어파사드. 11/15까지라 이번 주말이 마지막. 차 1시간 안팎.",
     big: false, verified: true
   },
   // ───────────── 전국 (큰 행사만) ─────────────
