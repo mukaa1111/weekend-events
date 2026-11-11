@@ -25,6 +25,7 @@
 - 매주 **월요일·목요일 아침 7시**에 클라우드에서 자동으로 행사를 모아 GitHub에 올려요. 폰 주소에 바로 반영돼요.
 - 예약 확인·끄기·지금 실행: https://claude.ai/code/routines/trig_01KxcHeuUARbcQ3ZKNuaYTAh
 - 저녁 9시 회신 반영 루틴: https://claude.ai/code/routines/trig_01ULJVVdobwpSBcHaJkGsaVW
+- 아침 7시 30분 접수 알림 루틴: https://claude.ai/code/routines/trig_01XLDB8AGeHdKLXhKpuSvXeT
 - 수집 규칙을 바꾸고 싶으면 `docs/COLLECT.md`를 고치면 돼요 (에이전트가 매번 이 문서를 읽어요).
 - 수집이 끝나면 텔레그램으로 "이번 주말 추천 3곳 + 예약 서두르기" 요약이 와요 (설정: `docs/TELEGRAM.md`).
 - **매일 아침 7시 30분**에는 그날 접수가 시작·마감되는 행사가 있을 때만 "⏰ 오늘 접수 알림"이 와요.
