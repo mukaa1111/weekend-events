@@ -133,6 +133,12 @@
     text-align: center; line-height: 22px; font-size: 13px;
   }
   #sec-closed .card { opacity: 0.72; }
+  .badge.visited { color: #1d4ed8; border-color: #bfdbfe; background: #eff6ff; font-weight: 700; }
+  .vrow { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .vrow .vd { flex: 0 0 auto; color: var(--muted); font-size: 13px; min-width: 62px; }
+  .vrow .vt { min-width: 0; }
+  .vrow .vt b { display: block; }
+  .vrow .vt span { display: block; font-size: 13px; color: var(--muted); }
   /* 예약 서두르기: 카드 대신 한 줄. 누르면 아래 그 행사 카드로 이동 */
   .apply-row {
     display: flex; gap: 10px; align-items: center; background: var(--card); border: 1px solid #fdba74;
@@ -223,6 +229,12 @@
     <div class="list"></div>
   </details>
 
+  <details id="sec-visited">
+    <summary>다녀온 곳 <span id="count-visited" style="font-weight:normal;color:var(--muted)"></span></summary>
+    <div class="visited" id="visited"></div>
+    <p class="howto">텔레그램 알림에 "갔어 누들축제 재밌었어"처럼 답장하면 밤 9시에 여기에 쌓여요. 좋았던 종류는 다음 추천에 더 반영돼요.</p>
+  </details>
+
   <details>
     <summary>지금 보는 출처 <span id="count-sources" style="font-weight:normal;color:var(--muted)"></span></summary>
     <div class="sources" id="sources"></div>
@@ -237,6 +249,7 @@
 
 <script src="data/events.js"></script>
 <script src="data/sources.js"></script>
+<script src="data/visited.js"></script>
 <script>
 (function () {
   // ---------- 날짜 도우미 ----------
@@ -324,6 +337,10 @@
   // 2주 넘게 이어지는 전시·체험은 "계속 진행 중"으로 접어 둔다 (이번 주말 묶음이 길어지지 않게)
   function isOngoing(e) { return daysLeft(parse(e.end)) - daysLeft(parse(e.start)) >= 14; }
 
+  // 다녀온 곳 (data/visited.js). 다녀온 행사는 추천에서 빼고 카드에 "다녀옴" 표시
+  var VISITED = window.VISITED || [];
+  function wasVisited(e) { return VISITED.some(function (v) { return v.eventId && v.eventId === e.id; }); }
+
   // 지금 신청할 수 없는 행사인가. closed 값이 있으면 그대로, 없으면 "예약 필요 + 마감일 지남"이면 마감으로 본다
   function isClosed(e) {
     if (e.closed === true) return true;
@@ -352,7 +369,7 @@
   }
   function pickList(events) {
     var cands = events.filter(function (e) {
-      return parse(e.end) >= today && !isClosed(e) && e.region !== "전국" && overlaps(e, wkFrom, thisSun);
+      return parse(e.end) >= today && !isClosed(e) && !wasVisited(e) && e.region !== "전국" && overlaps(e, wkFrom, thisSun);
     });
     var out = [], used = {};
     var P = window.PICKS;
@@ -503,6 +520,7 @@
     else if (e.indoor === "both") badges += '<span class="tag venue">실내+야외</span>';
     else if (e.indoor === false) badges += '<span class="tag venue outdoor">야외</span>';
     if (e.verified === false) badges += '<span class="badge unverified">확인 필요</span>';
+    if (wasVisited(e)) badges += '<span class="badge visited">✔ 다녀옴</span>';
 
     var tv = travel(e);
     var meta = [];
@@ -631,6 +649,21 @@
     document.getElementById("count-later").textContent = g.later.length ? "(" + g.later.length + "건)" : "";
   }
 
+  // ---------- 다녀온 곳 ----------
+  function renderVisited() {
+    var list = VISITED.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });   // 최근 것부터
+    var ym = today.getFullYear() + "-" + pad2(today.getMonth() + 1);
+    var thisMonth = list.filter(function (v) { return (v.date || "").slice(0, 7) === ym; }).length;
+    document.getElementById("count-visited").textContent = list.length ? "(이번 달 " + thisMonth + "곳 · 전체 " + list.length + "곳)" : "(아직 없음)";
+    document.getElementById("visited").innerHTML = list.map(function (v) {
+      var d = parse(v.date);
+      var mark = v.liked === true ? "👍 " : (v.liked === false ? "👎 " : "");
+      return '<div class="vrow"><span class="vd">' + fmt(d) + '(' + dayName(d) + ')</span><span class="vt"><b>' + esc(v.title) + '</b>' +
+        ((v.place || v.comment) ? '<span>' + [v.place ? esc(v.place) : "", v.comment ? mark + esc(v.comment) : mark].filter(Boolean).join(" · ") + '</span>' : (mark ? '<span>' + mark + '</span>' : '')) +
+        '</span></div>';
+    }).join("");
+  }
+
   // ---------- 출처 목록 ----------
   function renderSources() {
     var src = window.SOURCES || [];
@@ -651,6 +684,7 @@
   }
 
   render();
+  renderVisited();
   renderSources();
 })();
 </script>
