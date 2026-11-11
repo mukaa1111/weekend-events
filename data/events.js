@@ -11,11 +11,28 @@
 // image    : 공식 포스터 이미지 주소 (https://…, 있을 때만). 카드 왼쪽 섬네일로 보이고, 안 열리면 분야 아이콘이 대신 보입니다
 // applyStart / deadline : 접수 시작일 / 접수 마감일 ("연-월-일", 있을 때만). applyTime : 접수 시작 시각 ("10:00"). applyNote : 접수 방법 한 줄
 //   → 7일 안에 마감·시작하는 것은 화면 맨 위 "예약 서두르기"와 텔레그램 알림에 나옵니다
+// closed   : (선택) true 이면 "지금은 신청할 수 없음"(인원 마감·매진·접수 종료). 화면에서 맨 아래 "접수가 끝난 행사"로 접히고 추천에서 빠집니다.
+//            적지 않으면 화면이 알아서 판단합니다: 예약이 필요한데 deadline이 지났으면 마감으로 봅니다.
+//            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
+// closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
 // 마지막 수집: 2026-11-09
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-09 10:51";
+window.LAST_UPDATED = "2026-11-11 13:30";
+
+// 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
+//   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
+//   items   : 최대 3개. id는 아래 행사의 id, why는 "왜 이걸 추천하는지" 한 줄 (40자 안쪽)
+//   마감됐거나 끝난 행사가 들어 있으면 화면이 빼고, 빈 자리는 자동으로 채웁니다 (무료·예약 불필요·이번 주말만 하는 것 우선).
+window.PICKS = {
+  weekend: "2026-11-14",
+  items: [
+    { id: "2026-11-daejeon-noodle-festival", why: "이번 주말에만 열리는 축제. 예약 없이 바로 가면 돼요" },
+    { id: "2026-11-daejeon-dma-weekend-class", why: "2학년 맞춤 무료 미술 수업, 이번이 마지막 주말 (접수 11/13까지)" },
+    { id: "2026-10-daejeon-museum-folk-play", why: "11/14(토)가 휴관 전 마지막 날. 토요일은 예약 없이 현장접수" }
+  ]
+};
 
 window.EVENTS = [
 
@@ -72,7 +89,7 @@ window.EVENTS = [
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=지역미술&pageIdx=1", source: "대전광역시 OK예약서비스 / 대전시립미술관",
-    note: "2학년 맞춤 반! 토·일 운영, 회차 시간은 OK예약 상세에서 확인. 미술관 홈 첫 화면에는 안 보이고 교육·행사 > 어린이·가족 메뉴에 있음. 예약은 OK예약 > 체험에서 '지역미술' 검색 (링크가 바로 그 화면). 접수 10/6~11/13 선착순. 4~6학년 반은 1개 반 이미 마감. 문의 042-270-7332",
+    note: "2학년 맞춤 반! 토·일 운영, 회차 시간은 OK예약 상세에서 확인. 11/11 현재 접수중. 미술관 홈 첫 화면에는 안 보이고 교육·행사 > 어린이·가족 메뉴에 있음. 예약은 OK예약 > 체험에서 '지역미술' 검색 (링크가 바로 그 화면). 접수 10/6~11/13 선착순. 4~6학년 반은 1개 반 이미 마감. 문의 042-270-7332",
     big: true, verified: true
   },
   {
@@ -87,6 +104,7 @@ window.EVENTS = [
     indoor: true,
     url: "https://science.go.kr/mps/0/bbs/163/moveBbsNttList.do", source: "국립중앙과학관 개인교육",
     note: "매주 토요일 4회 과정. 접수 10/14~11/6. 통합예약(rsvn.science.go.kr)에서 아이 이름으로 가입 후 결제까지 해야 완료.",
+    closedNote: "11월 과정 접수 11/6 종료",
     big: true, verified: true
   },
   {
@@ -101,6 +119,7 @@ window.EVENTS = [
     indoor: false,
     url: "https://xn--269as6am3d4uc81numd8pq3wftwa42zek7a.com/", source: "행사 공식 누리집",
     note: "수목원 QR 스탬프 걷기(완주 시 온통대전 1만원), 태양광 체험 6종, OX퀴즈. 사전등록 ~10/31 선착순 1,500명 — 접수 마감(현장등록 여부는 누리집 확인).",
+    closedNote: "사전등록 10/31 종료 (현장등록 여부는 누리집 확인)",
     big: true, verified: true
   },
   {
@@ -297,6 +316,7 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=596", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
     note: "회신으로 요청한 행사. 셰익스피어 희곡을 오르프 악기·즉흥 장면으로 표현하는 음악·연극 워크숍. 10시·14시 두 회차 모두 현재 인원마감(취소 자리 확인 필요).",
+    closed: true, closedNote: "두 회차 모두 인원 마감 (11/9 확인)",
     big: false, verified: true
   },
   {
@@ -311,6 +331,7 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=594", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
     note: "회신으로 요청한 행사(링크와 포스터 사진 모두 받음). 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험형 연극. 11시·14시 두 회차 모두 현재 인원마감. 초2가 대상 상한이라 마지막 기회일 수 있음.",
+    closed: true, closedNote: "두 회차 모두 인원 마감 (11/9 확인)",
     big: false, verified: true
   },
   // ───────────── 근교 ─────────────

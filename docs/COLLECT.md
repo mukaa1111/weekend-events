@@ -27,6 +27,7 @@
 - `tags`: 과학(과학·만들기·코딩) / 야외(운동·야외·자연) / 예술(예술·공연·전시) / 축제(축제·역사·도서관). 1~2개
 - `indoor`: **필수.** 실내면 `true`, 야외면 `false`, 둘 다면 `"both"`. 기준은 "비가 와도 갈 수 있나". 화면의 "비 와도 OK" 필터와 비 예보 때 추천에 쓴다
 - `applyStart` / `deadline`: 접수 시작일 / 마감일을 **반드시 날짜("연-월-일")로** 적는다. 메모에만 적으면 알림이 못 챙긴다. 선착순이면 `deadline`은 행사 전날. 시작 시각이 있으면 `applyTime`에 "10:00"처럼 적는다 (인기 프로그램은 오픈 직후 마감). `applyNote`: 접수 방법 한 줄 (예: "OK예약 선착순")
+- `closed` / `closedNote`: **지금 신청할 수 없는 행사**(인원 마감, 매진, 접수 종료)인데 행사 날짜는 아직 남았으면 지우지 말고 `closed: true`와 `closedNote`(사유 한 줄, 예: "두 회차 모두 인원 마감 (11/9 확인)")를 적는다. 화면이 맨 아래 "접수가 끝난 행사"로 접어 보여주고 추천에서 뺀다. 목록·상세 페이지에 "인원마감", "접수종료", "매진", "대기자접수"가 보이면 여기에 해당한다. 예약이 필요한데 `deadline`이 지난 행사는 화면이 알아서 마감으로 보므로 `closed`를 안 적어도 된다. 반대로 `deadline`은 지났지만 현장 접수가 되면 `closed: false`라고 적는다. 이미 `closed: true`인 행사는 수집 때마다 다시 확인해서 자리가 났으면 `closed`·`closedNote`를 지운다. "마감 가능성 높음"처럼 추측이면 적지 않는다 (확인된 것만)
 - `image`: 공식 페이지의 포스터·대표 이미지 **주소만** (https://). 기사·블로그 이미지는 안 쓴다. 파일을 내려받아 저장소에 넣지 않는다. 없으면 비움
 - `url`: 그 주소를 열었을 때 **행사가 바로 보이는 화면**이어야 한다 (상세 페이지, 또는 검색어·필터가 붙은 목록). 기관 메인이나 빈 메뉴 주소는 안 된다 — 2026-11-02 시립미술관 주말 교육이 OK예약 일반 메뉴 링크라 "들어가 보니 아무것도 없다"는 일이 있었다. OK예약은 `expRsvtList.do?menuSeq=8200&searchType=02&keyword=검색어` 꼴로 넣는다(상세 페이지는 주소로 못 연다). 넣기 전에 그 주소를 한 번 열어 행사 이름이 보이는지 확인한다
 - `note`: 부모가 알아야 할 것 한 줄 (주차, 같은 날 묶어 갈 곳, 소요 시간)
@@ -43,9 +44,15 @@
 3. 수집 기록(8절)에 한 줄을 추가한다. 변경이 0건이어도 적는다 (자동 수집이 돌았다는 증거)
 4. 결과 요약을 알려준다: 새로 추가 n건 / 갱신 n건 / 출처별 ○△× 표 / 확인 필요 n건
 5. "확인 필요"(verified: false) 중 가까운 주말 것은 공식 페이지를 한 번 더 찾아본다
-6. **검사**: 아래 명령이 `ok`를 출력해야 한다 (id 중복, 날짜 형식, indoor·region·cost·tags 값 확인). 실패하면 고친 뒤 다시 돌린다.
+6. **추천 3곳(`window.PICKS`)**: `data/events.js` 위쪽의 `window.PICKS`를 다음 토·일 기준으로 다시 적는다. 화면 맨 위 "이번 주말 추천 3곳"에 그대로 나오고, 텔레그램 추천 3곳도 **같은 것**을 쓴다.
+   - `weekend`: 다음 토요일 날짜("연-월-일"). `items`: 최대 3개, 각 `{ id, why }`. `why`는 왜 추천하는지 한 줄(40자 안쪽, 예: "이번 주말에만 열리는 축제. 예약 없이 가면 돼요").
+   - 고르는 기준: 그 토·일에 실제로 갈 수 있는 것만 (`closed` 아님, 접수 마감 안 지남). 우선순위는 초2 남아 2명에게 맞는 체험 > 이번 주말에만 하는 것 > 예약 없이 가능 또는 아직 접수중 > 무료 > 대전. `verified: false`는 되도록 피한다. 3개가 서로 비슷한 종류면 하나는 다른 분야로 바꾼다.
+   - 주말에 비·눈 예보면 `indoor`가 true 또는 "both"인 것만 고른다.
+   - 예약이 필요한 추천은 고르기 전에 접수 페이지를 한 번 열어 지금도 접수중인지 확인한다.
+   - 갈 만한 게 3개가 안 되면 있는 만큼만 적는다 (빈 자리는 화면이 자동으로 채운다).
+7. **검사**: 아래 명령이 `ok`를 출력해야 한다 (id 중복, 날짜 형식, indoor·region·cost·tags 값, 추천 3곳 id, closed 값 확인). 실패하면 고친 뒤 다시 돌린다.
    ```
-   node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(e.applyTime&&!/^\d{2}:\d{2}$/.test(e.applyTime))throw new Error('bad applyTime '+e.id);if(!(e.indoor===true||e.indoor===false||e.indoor==='both'))throw new Error('bad indoor '+e.id);if(e.image&&!/^https:\/\//.test(e.image))throw new Error('bad image '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"
+   node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(e.applyTime&&!/^\d{2}:\d{2}$/.test(e.applyTime))throw new Error('bad applyTime '+e.id);if(!(e.indoor===true||e.indoor===false||e.indoor==='both'))throw new Error('bad indoor '+e.id);if(e.image&&!/^https:\/\//.test(e.image))throw new Error('bad image '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});const P=w.PICKS;if(P){if(!D.test(P.weekend))throw new Error('bad PICKS.weekend');if(!Array.isArray(P.items)||P.items.length>3)throw new Error('bad PICKS.items');P.items.forEach(i=>{if(!ids.has(i.id))throw new Error('bad pick id '+i.id)})}E.forEach(e=>{if('closed' in e&&typeof e.closed!=='boolean')throw new Error('bad closed '+e.id)});console.log('ok',E.length)"
    ```
 
 ## 6. 특별 요청

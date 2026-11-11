@@ -51,6 +51,7 @@
 | 2026-10-19 (첫 자동 실행) | 월요일 07:00 자동 실행 성공. 추가 1·갱신 1·삭제 5, 텔레그램 도착 |
 | 2026-10-19 (지시문 변경) | 접수 시작·마감일을 `applyStart`/`deadline`으로 적고, 알림에 '예약 서두르기(7일 안)' 묶음 추가 |
 | 2026-11-02 (지시문 변경) | OK예약서비스 메뉴 확장: 체험·교육·강좌(접수중/접수대기), 공연/전시 목록. 접수기간을 applyStart/deadline로 옮기는 규칙 |
+| 2026-11-11 (지시문 변경) | 추천 3곳(`window.PICKS`)을 수집 때마다 다시 고르고 텔레그램 추천과 같게 함. 마감 행사는 `closed: true`로 표시. 검사 명령은 COLLECT.md 5절 한 곳으로 모음 |
 | 2026-11-09 (루틴 추가) | 텔레그램 회신 처리: 저녁 21:00 회신 반영 루틴 신설 (아침 수집 지시문은 그대로) |
 | 2026-10-29 (지시문 변경) | 대덕대청호물결축제 누락 원인 수정: 문체부 DB 지역 필터 주소, 검색형 출처(`type: "검색"`), 대전 균형 규칙, 요약에 지역별 건수 |
 
@@ -74,7 +75,7 @@
 3. 찾은 행사를 `data/events.js`에 반영한다:
    - 이미 있는 행사(id 같거나 날짜·장소가 같은 것)는 새로 만들지 말고 시간·가격·예약·접수 정보만 보강한다.
    - 새 행사는 COLLECT.md 3절 형식대로 추가한다. `verified`는 공식 페이지에서 날짜를 직접 읽었을 때만 true.
-   - **접수(예약) 정보는 반드시 날짜로 적는다.** 접수 시작일이 보이면 `applyStart`, 시작 시각(예: 10시 오픈)이 보이면 `applyTime`에 "HH:MM", 마감일이 보이면 `deadline`에 "연-월-일"로 적고, 방법은 `applyNote`에 한 줄(예: "OK예약 선착순", "누리집 교육행사 탭"). 선착순이라 마감일이 없으면 `deadline`은 행사 전날로 적는다. 접수가 이미 마감됐지만 행사는 남았으면 그대로 두고 `note`에 "접수 마감"이라고 적는다. 메모(`note`)에만 적고 `deadline`을 비워 두면 안 된다.
+   - **접수(예약) 정보는 반드시 날짜로 적는다.** 접수 시작일이 보이면 `applyStart`, 시작 시각(예: 10시 오픈)이 보이면 `applyTime`에 "HH:MM", 마감일이 보이면 `deadline`에 "연-월-일"로 적고, 방법은 `applyNote`에 한 줄(예: "OK예약 선착순", "누리집 교육행사 탭"). 선착순이라 마감일이 없으면 `deadline`은 행사 전날로 적는다. 접수가 끝났거나 인원 마감·매진이라 지금 신청할 수 없는데 행사 날짜는 남았으면 지우지 말고 `closed: true`와 `closedNote`(사유 한 줄, 예: "인원 마감 (11/12 확인)")를 적는다 (COLLECT.md 3절). 화면이 "접수가 끝난 행사"로 접어 보여준다. 이미 `closed: true`인 행사는 다시 확인해서 자리가 났으면 `closed`를 지운다. 메모(`note`)에만 적고 `deadline`을 비워 두면 안 된다.
    - **`indoor`를 반드시 적는다.** 비가 와도 진행되는 실내 행사는 true, 공원·거리 같은 야외는 false, 실내 공간이 일부 있으면 "both". 공연장·박물관·과학관·도서관·전시관은 true, 축제·수목원·공원은 false 또는 "both".
    - **포스터**: 공식 페이지에 행사 포스터나 대표 이미지가 있으면 그 이미지의 절대 주소(https://로 시작)를 `image`에 적는다. 기사·블로그 이미지는 쓰지 않는다. 없으면 비워 둔다. 이미지를 내려받아 저장소에 넣지 않는다 (주소만).
    - `end`가 어제 이전인 지난 행사는 삭제한다.
@@ -83,12 +84,13 @@
    - 파일 맨 위 주석의 '마지막 수집:' 날짜를 오늘로 바꾸고, 바로 아래 `window.LAST_UPDATED = "YYYY-MM-DD HH:MM";` 값을 오늘 날짜·현재 시각(한국 시간, `TZ=Asia/Seoul date +"%Y-%m-%d %H:%M"`)으로 바꾼다. 화면 맨 위 "마지막 수집" 표시에 쓰인다.
 4. `data/sources.js`는 출처가 안 열리거나 주소가 바뀐 경우에만 `note`를 갱신한다. 출처를 멋대로 지우지 않는다.
    - **대전 균형 규칙**: 반영이 끝났을 때 `region: "대전"` 행사 수가 `"근교"`보다 적으면 대전의 `type: "검색"` 출처를 한 번 더 돌린다. 그래도 적으면 요약에 "대전 행사 부족"이라고 적는다. 이 서비스의 중심은 대전이다.
-5. 검사: `node -e "const vm=require('vm'),fs=require('fs');const w={};vm.createContext(w);vm.runInContext(fs.readFileSync('data/events.js','utf8').replace(/window\./g,'this.'),w);const E=w.EVENTS;const ids=new Set();const D=/^\d{4}-\d{2}-\d{2}$/;E.forEach(e=>{if(ids.has(e.id))throw new Error('dup id '+e.id);ids.add(e.id);if(!D.test(e.start)||!D.test(e.end)||e.start>e.end)throw new Error('bad date '+e.id);['applyStart','deadline'].forEach(k=>{if(e[k]&&!D.test(e[k]))throw new Error('bad '+k+' '+e.id)});if(e.applyTime&&!/^\d{2}:\d{2}$/.test(e.applyTime))throw new Error('bad applyTime '+e.id);if(!(e.indoor===true||e.indoor===false||e.indoor==='both'))throw new Error('bad indoor '+e.id);if(e.image&&!/^https:\/\//.test(e.image))throw new Error('bad image '+e.id);if(!['대전','근교','전국'].includes(e.region))throw new Error('bad region '+e.id);if(!['무료','유료','일부 유료'].includes(e.cost))throw new Error('bad cost '+e.id);if(!e.tags.every(t=>['과학','야외','예술','축제'].includes(t)))throw new Error('bad tag '+e.id);});console.log('ok',E.length)"` 가 `ok`를 출력해야 한다. 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
+   - **추천 3곳(`window.PICKS`)**: 커밋하기 전에 8번의 주말 날씨를 먼저 확인하고, `docs/COLLECT.md` 5절 6번 기준대로 다음 토·일에 갈 만한 행사 3개를 골라 `data/events.js` 위쪽 `window.PICKS`의 `weekend`(다음 토요일 날짜)와 `items`(`{ id, why }` 최대 3개)를 다시 적는다. `closed`이거나 접수가 끝난 행사는 고르지 않는다. 화면 맨 위 "이번 주말 추천 3곳"과 9번 텔레그램 추천이 이 3개를 그대로 쓴다.
+5. 검사: `docs/COLLECT.md` 5절 7번에 있는 `node -e "…"` 명령을 그대로 실행한다. `ok 숫자`를 출력해야 한다 (id 중복, 날짜 형식, indoor·region·cost·tags, 추천 3곳 id, closed 값 확인). 실패하면 고친 뒤 다시 검사한다. node가 없으면 파일을 눈으로 꼼꼼히 검토한다.
 6. `docs/COLLECT.md` 맨 아래 '수집 기록' 표에 한 줄 추가한다 (**변경이 0건이어도 반드시 추가**): | 날짜 | 추가 n건 | 갱신 n건 | 못 연 출처 | 메모 |
 7. 변경된 파일을 커밋하고 `main` 브랜치에 바로 푸시한다 (PR 만들지 않는다). **수집 기록 한 줄만 바뀌었어도 반드시 커밋·푸시한다.** 이 커밋이 자동 수집이 살아 있다는 증거다. 커밋 메시지 예: `행사 수집 2026-10-20: 추가 7건, 갱신 3건, 삭제 5건`. 푸시가 끝나면 GitHub Pages가 자동으로 새 목록을 보여준다.
 8. **주말 날씨**: WebSearch로 '대전 이번 주말 날씨' 또는 '대전 M월 D일 날씨 예보'를 검색해 다음 토·일의 날씨(맑음/흐림/비/눈)와 최고기온을 확인한다. 확인되면 메시지 둘째 줄에 "🌤 주말 날씨: 토 맑음 21° / 일 흐림 18°"처럼 적고, 비·눈 예보면 "☔ 비 예보"라고 적은 뒤 추천 3개를 `indoor`가 true 또는 "both"인 행사에서만 고른다 (부족하면 있는 만큼만 적고 "야외 행사는 비 예보라 뺐음"이라고 덧붙인다). 확인 못 하면 "주말 날씨: 확인 못 함"이라고 적는다.
 9. **텔레그램 알림**: 푸시가 끝나면 `bash scripts/telegram.sh "<메시지>"` 를 한 번 실행한다. 메시지는 글자만(마크다운 기호 없이), 아래 형식으로 만든다.
-   - '이번 주말'은 오늘 기준 다음 토·일. 추천은 `data/events.js`에서 그 주말에 열리는 행사 중 초등 2학년에게 잘 맞는 것 3개(무료·체험 우선). 예약이 필요한 행사는 "예약 필요(마감 M/D)" 또는 "예약 필요(선착순)"처럼 접수 상태를 꼭 적고, 접수가 이미 끝난 행사는 추천하지 않는다.
+   - '이번 주말'은 오늘 기준 다음 토·일. 추천은 `window.PICKS`에 적은 3개를 그대로 쓴다 (행사명 뒤에 `why` 한 줄을 붙여도 좋다). 예약이 필요한 행사는 "예약 필요(마감 M/D)" 또는 "예약 필요(선착순)"처럼 접수 상태를 꼭 적고, 접수가 이미 끝난 행사는 추천하지 않는다.
    - '예약 서두르기'는 `deadline` 또는 `applyStart`가 오늘부터 7일 안인 행사(최대 3개, 날짜 빠른 순). 없으면 "예약 서두르기: 없음" 한 줄.
 ```
 📅 주말 뭐하지? M/D(요일) 수집 결과

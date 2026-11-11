@@ -92,7 +92,19 @@
   .badge.resv { color: #b45309; border-color: #fde68a; background: #fffbeb; }
   .badge.unverified { color: #b91c1c; border-color: #fecaca; background: #fef2f2; }
   .badge.deadline { color: #9a3412; border-color: #fdba74; background: #fff7ed; font-weight: 700; }
-  .badge.closed { color: var(--muted); text-decoration: line-through; }
+  .badge.closed { color: #57534e; background: #f5f5f4; border-color: #d6d3d1; font-weight: 700; }
+  .badge.open { color: #15803d; border-color: #bbf7d0; background: #f0fdf4; font-weight: 700; }
+  #sec-picks h2 { font-size: 20px; }
+  #sec-picks .card { border: 2px solid var(--accent); }
+  .pick-why {
+    display: flex; gap: 8px; align-items: flex-start; font-size: 14px; font-weight: 700; color: #9a3412;
+    background: var(--accent-soft); border-radius: 10px; padding: 8px 10px; margin-bottom: 12px;
+  }
+  .pick-why .num {
+    flex: 0 0 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff;
+    text-align: center; line-height: 22px; font-size: 13px;
+  }
+  #sec-closed .card { opacity: 0.72; }
   #sec-apply .card { border-color: #fdba74; }
   .card .src { margin-left: auto; font-size: 12px; color: var(--muted); }
   .dday { display: inline-block; margin-left: 6px; font-size: 12px; padding: 2px 7px; border-radius: 6px; background: #fff7ed; color: #9a3412; font-weight: 700; vertical-align: middle; }
@@ -154,14 +166,20 @@
     <button class="chip region-chip" data-region="전국">전국</button>
   </div>
 
+  <section id="sec-picks"><h2>이번 주말 추천 3곳 <small id="range-picks"></small></h2><div class="list"></div></section>
   <section id="sec-fav"><h2>♥ 찜한 행사 <small>이 폰에만 저장돼요</small></h2><div class="list"></div></section>
   <section id="sec-apply"><h2>예약 서두르기 <small>7일 안에 접수 마감·시작</small></h2><div class="list"></div></section>
-  <section id="sec-this"><h2>이번 주말 <small id="range-this"></small></h2><div class="list"></div>
+  <section id="sec-this"><h2>이번 주 · 주말 <small id="range-this"></small></h2><div class="list"></div>
     <details id="sec-ongoing"><summary>계속 진행 중인 전시·체험 <span id="count-ongoing" style="font-weight:normal;color:var(--muted)"></span></summary><div class="list"></div></details>
   </section>
   <section id="sec-next"><h2>다음 주말 <small id="range-next"></small></h2><div class="list"></div></section>
   <section id="sec-big"><h2>미리 체크할 큰 행사 <small>약 6주 안 · 예약 서두를 것</small></h2><div class="list"></div></section>
   <section id="sec-nation"><h2>전국 큰 행사 <small>있을 때만</small></h2><div class="list"></div></section>
+
+  <details id="sec-closed">
+    <summary>접수가 끝난 행사 <span id="count-closed" style="font-weight:normal;color:var(--muted)"></span></summary>
+    <div class="list"></div>
+  </details>
 
   <details id="sec-later">
     <summary>그 이후 행사 <span id="count-later" style="font-weight:normal;color:var(--muted)"></span></summary>
@@ -199,6 +217,8 @@
   var nextEnd = addDays(thisSun, 7);
   var bigEnd = addDays(today, 42);       // 미리 체크: 약 6주
   var applyEnd = addDays(today, 7);      // 예약 서두르기: 7일 안
+  var wkSat = addDays(thisSun, -1);      // 추천 3곳: 이번 토·일 (오늘이 일요일이면 오늘만)
+  var wkFrom = wkSat < today ? today : wkSat;
 
   var lastUpd = "";
   if (window.LAST_UPDATED) {                       // "2026-10-22 07:08" → "10/22(목) 07:08 수집"
@@ -209,6 +229,8 @@
   document.getElementById("today").textContent =
     "오늘 " + fmt(today) + "(" + dayName(today) + ") · 대전 + 차로 1시간 안쪽 · 초등 2학년 기준" + lastUpd;
   document.getElementById("range-this").textContent = fmt(thisStart) + " ~ " + fmt(thisSun);
+  document.getElementById("range-picks").textContent =
+    (wkFrom < thisSun ? fmt(wkFrom) + "(토) ~ " : "") + fmt(thisSun) + "(일)";
   document.getElementById("range-next").textContent = fmt(nextStart) + " ~ " + fmt(nextEnd);
 
   // ---------- 필터 상태 ----------
@@ -265,12 +287,60 @@
   // 2주 넘게 이어지는 전시·체험은 "계속 진행 중"으로 접어 둔다 (이번 주말 묶음이 길어지지 않게)
   function isOngoing(e) { return daysLeft(parse(e.end)) - daysLeft(parse(e.start)) >= 14; }
 
-  function group(events) {
-    var g = { fav: [], apply: [], thisW: [], ongoing: [], nextW: [], big: [], nation: [], later: [] };
+  // 지금 신청할 수 없는 행사인가. closed 값이 있으면 그대로, 없으면 "예약 필요 + 마감일 지남"이면 마감으로 본다
+  function isClosed(e) {
+    if (e.closed === true) return true;
+    if (e.closed === false) return false;
+    return !!(e.reservation && e.deadline && parse(e.deadline) < today);
+  }
+
+  // 추천 3곳: 수집 에이전트가 고른 것(window.PICKS)을 먼저 쓰고, 마감·종료로 빠진 자리는 점수로 채운다
+  function pickScore(e) {
+    var s = 0;
+    if (!isOngoing(e)) s += 3;                       // 이번 주말에만 하는 것
+    if (e.cost === "무료") s += 2;
+    if (!e.reservation) s += 2;                      // 예약 없이 갈 수 있음
+    if (e.verified !== false) s += 2;
+    if (e.region === "대전") s += 1;
+    if (/초등|전연령|가족|어린이/.test(e.ages || "")) s += 1;
+    if (/미확인/.test(e.time || "")) s -= 1;
+    return s;
+  }
+  function autoWhy(e) {
+    var w = [];
+    if (!isOngoing(e)) w.push("이번 주말에만 열려요");
+    if (e.cost === "무료") w.push("무료");
+    if (!e.reservation) w.push("예약 없이 가면 돼요");
+    return w.length ? w.join(" · ") : "이번 주말에 갈 수 있어요";
+  }
+  function pickList(events) {
+    var cands = events.filter(function (e) {
+      return parse(e.end) >= today && !isClosed(e) && e.region !== "전국" && overlaps(e, wkFrom, thisSun);
+    });
+    var out = [], used = {};
+    var P = window.PICKS;
+    if (P && P.items && P.weekend && parse(P.weekend).getTime() === wkSat.getTime()) {
+      P.items.forEach(function (it) {
+        var e = cands.filter(function (x) { return x.id === it.id; })[0];
+        if (e && !used[e.id] && out.length < 3) { used[e.id] = 1; out.push({ e: e, why: it.why || autoWhy(e) }); }
+      });
+    }
+    var rest = cands.filter(function (e) { return !used[e.id]; })
+      .map(function (e) { return { e: e, s: pickScore(e) }; })
+      .sort(function (a, b) { return b.s - a.s || parse(a.e.start) - parse(b.e.start); });
+    for (var i = 0; i < rest.length && out.length < 3; i++) out.push({ e: rest[i].e, why: autoWhy(rest[i].e) });
+    return out;
+  }
+
+  function group(events, pickIds) {
+    var g = { fav: [], apply: [], thisW: [], ongoing: [], nextW: [], big: [], nation: [], closed: [], later: [] };
     var favs = loadFavs();
+    pickIds = pickIds || [];
     events.forEach(function (e) {
       if (parse(e.end) < today) return;            // 지난 행사 숨김
       if (favs.indexOf(e.id) >= 0) g.fav.push(e);  // 찜한 행사는 맨 위에 한 번 더
+      if (isClosed(e)) { g.closed.push(e); return; }   // 접수가 끝난 행사는 맨 아래 접힌 묶음으로
+      if (pickIds.indexOf(e.id) >= 0) return;      // 추천 3곳에 올라간 행사는 아래 묶음에서 뺀다 (두 번 안 보이게)
       if (applyDate(e)) g.apply.push(e);           // 다른 묶음에도 그대로 보임
       if (e.region === "전국") { g.nation.push(e); return; }
       if (overlaps(e, thisStart, thisSun)) { (isOngoing(e) ? g.ongoing : g.thisW).push(e); return; }
@@ -364,19 +434,26 @@
     return a + " ~ " + fmt(t) + "(" + dayName(t) + ")";
   }
 
-  function card(e) {
+  function card(e, opt) {
+    opt = (opt && typeof opt === "object") ? opt : {};   // list.map(card)로 불릴 때 두 번째 값(순번)은 무시
     var badges = "";
     if (e.cost === "무료") badges += '<span class="badge free">무료</span>';
     else badges += '<span class="badge">' + esc(e.cost) + (e.price ? " · " + esc(e.price) : "") + "</span>";
-    if (e.reservation) badges += '<span class="badge resv">예약 필요</span>';
-    if (e.applyStart && parse(e.applyStart) >= today) {
-      var ap = parse(e.applyStart);   // 시작일이 아직 안 지났으면 항상 표시 (오픈 직후 매진 대비)
-      badges += '<span class="badge deadline">접수 시작 ' + fmt(ap) + '(' + dayName(ap) + ')' + (e.applyTime ? ' ' + esc(e.applyTime) : '') + '</span>' + dday(ap, "접수 시작");
-    }
-    if (e.deadline) {
-      var dl = parse(e.deadline);
-      if (dl < today) badges += '<span class="badge closed">접수 마감됨 ' + fmt(dl) + '</span>';
-      else badges += '<span class="badge deadline">접수 마감 ' + fmt(dl) + '(' + dayName(dl) + ')</span>' + dday(dl, "접수 마감");
+    if (isClosed(e)) {
+      // 지금은 신청할 수 없는 행사: 접수 날짜 배지 대신 "마감" 하나만
+      var why = e.closedNote || (e.deadline ? "접수 " + fmt(parse(e.deadline)) + " 종료" : "");
+      badges += '<span class="badge closed">마감' + (why ? " · " + esc(why) : "") + '</span>';
+    } else {
+      if (e.reservation) badges += '<span class="badge resv">예약 필요</span>';
+      else badges += '<span class="badge open">예약 없이 OK</span>';
+      if (e.applyStart && parse(e.applyStart) >= today) {
+        var ap = parse(e.applyStart);   // 시작일이 아직 안 지났으면 항상 표시 (오픈 직후 매진 대비)
+        badges += '<span class="badge deadline">접수 시작 ' + fmt(ap) + '(' + dayName(ap) + ')' + (e.applyTime ? ' ' + esc(e.applyTime) : '') + '</span>' + dday(ap, "접수 시작");
+      }
+      if (e.deadline && parse(e.deadline) >= today) {
+        var dl = parse(e.deadline);
+        badges += '<span class="badge deadline">접수 마감 ' + fmt(dl) + '(' + dayName(dl) + ')</span>' + dday(dl, "접수 마감");
+      }
     }
     var endD = dday(parse(e.end), "종료");   // 행사 자체가 7일 안에 끝나면 날짜 옆에 표시
     var actions = '<div class="actions">' +
@@ -395,7 +472,8 @@
     var first = (e.tags && e.tags[0]) || "축제";
     var thumb = '<div class="thumb ' + esc(first) + '"><span class="icon">' + (ICON[first] || "📌") + '</span>' +
       (e.image ? '<img src="' + esc(e.image) + '" alt="" loading="lazy" onerror="this.remove()">' : "") + '</div>';
-    return '<article class="card"><div class="row">' + thumb + '<div class="main">' +
+    var pickHead = opt.why ? '<div class="pick-why"><span class="num">' + (opt.num || "") + '</span><span>' + esc(opt.why) + '</span></div>' : "";
+    return '<article class="card">' + pickHead + '<div class="row">' + thumb + '<div class="main">' +
       '<div class="top"><h3 class="title"><a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.title) + '</a></h3>' +
       '<div class="date">' + dateLabel(e) + endD + '</div></div>' +
       '<div class="meta"><span>' + esc(e.time) + '</span><span>' + esc(e.place) + '</span><span>' + esc(e.city) +
@@ -415,14 +493,19 @@
 
   function render() {
     var events = (window.EVENTS || []).filter(passes);
-    var g = group(events);
+    var picks = pickList(events);
+    var g = group(events, picks.map(function (p) { return p.e.id; }));
+    var pickSec = document.getElementById("sec-picks");
+    pickSec.style.display = picks.length ? "" : "none";
+    pickSec.querySelector(".list").innerHTML = picks.map(function (p, i) { return card(p.e, { why: p.why, num: i + 1 }); }).join("");
     var favSec = document.getElementById("sec-fav");
     favSec.style.display = g.fav.length ? "" : "none";
     fill("sec-fav", g.fav, "");
     var applySec = document.getElementById("sec-apply");
     applySec.style.display = g.apply.length ? "" : "none";   // 없으면 묶음 자체를 숨김
     fill("sec-apply", g.apply, "");
-    fill("sec-this", g.thisW, g.ongoing.length ? "이번 주말에만 열리는 행사는 없어요. 아래 '계속 진행 중'을 펼쳐 보세요." : "이번 주말엔 조건에 맞는 행사가 없어요.");
+    fill("sec-this", g.thisW, picks.length ? "추천 3곳 말고 이번 주에만 열리는 행사는 더 없어요." + (g.ongoing.length ? " 아래 '계속 진행 중'도 펼쳐 보세요." : "")
+      : (g.ongoing.length ? "이번 주말에만 열리는 행사는 없어요. 아래 '계속 진행 중'을 펼쳐 보세요." : "이번 주말엔 조건에 맞는 행사가 없어요."));
     var ongoingEl = document.getElementById("sec-ongoing");
     ongoingEl.style.display = g.ongoing.length ? "" : "none";
     ongoingEl.querySelector(".list").innerHTML = g.ongoing.map(card).join("");
@@ -430,6 +513,10 @@
     fill("sec-next", g.nextW, "다음 주말 행사가 아직 없어요. 수집을 돌려 보세요.");
     fill("sec-big", g.big, "미리 체크할 큰 행사가 없어요.");
     fill("sec-nation", g.nation, "지금은 전국 큰 행사가 없어요.");
+    var closedEl = document.getElementById("sec-closed");
+    closedEl.style.display = g.closed.length ? "" : "none";
+    closedEl.querySelector(".list").innerHTML = g.closed.map(card).join("");
+    document.getElementById("count-closed").textContent = "(" + g.closed.length + "건 · 취소 자리가 날 수 있어요)";
     fill("sec-later", g.later, "그 이후 행사가 없어요.");
     document.getElementById("count-later").textContent = g.later.length ? "(" + g.later.length + "건)" : "";
   }
