@@ -48,7 +48,7 @@ window.EVENTS = [
     tags: ["축제"],
     indoor: true,
     url: "https://www.daejeon.go.kr/his/board/musBoardDataView.do?bbsCode=hisnews&menuSeq=677&boardDataSeq=12351", source: "대전시립박물관 공지 / OK예약서비스",
-    note: "평일은 OK예약 사전예약(11월분 10/13~11/30 접수 중), 토요일은 현장접수만. 일·월 휴무. 11/16~30 시설보수 휴관.",
+    note: "2학년 맞춤 반. 토·일 운영, 회차 시간은 예약 화면에서 확인. 4~6학년 반은 한 반이 이미 마감. 문의 042-270-7332",
     big: false, verified: true
   },
   {
@@ -85,7 +85,7 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "대전시립미술관", city: "대전 서구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "초등 2~3학년",
-    applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 선착순",
+    applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 > 체험에서 '지역미술' 검색 (선착순, 11/11 접수중 확인)",
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=지역미술&pageIdx=1", source: "대전광역시 OK예약서비스 / 대전시립미술관",
@@ -330,7 +330,7 @@ window.EVENTS = [
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=594", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
-    note: "회신으로 요청한 행사(링크와 포스터 사진 모두 받음). 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험형 연극. 11시·14시 두 회차 모두 현재 인원마감. 초2가 대상 상한이라 마지막 기회일 수 있음.",
+    note: "회신으로 요청한 행사. 옛이야기를 듣고 몸으로 표현하며 인형을 만드는 체험형 연극. 초2가 대상 상한이라 마지막 기회일 수 있음.",
     closed: true, closedNote: "두 회차 모두 인원 마감 (11/9 확인)",
     big: false, verified: true
   },
