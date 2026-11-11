@@ -16,10 +16,10 @@
 //            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
 // closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
-// 마지막 수집: 2026-11-11
+// 마지막 수집: 2026-11-12
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-11 12:30";
+window.LAST_UPDATED = "2026-11-12 07:30";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -85,11 +85,11 @@ window.EVENTS = [
     time: "시간 미확인",
     place: "대전시립미술관", city: "대전 서구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "초등 2~3학년",
-    applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 > 체험에서 '지역미술' 검색 (선착순, 11/11 접수중 확인)",
+    applyStart: "2026-10-06", deadline: "2026-11-13", applyNote: "OK예약 > 체험에서 '지역미술' 검색 (선착순, 11/12 접수중 확인)",
     tags: ["예술"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=지역미술&pageIdx=1", source: "대전광역시 OK예약서비스 / 대전시립미술관",
-    note: "2학년 맞춤 반! 토·일 운영, 회차 시간은 OK예약 상세에서 확인. 11/11 현재 접수중. 미술관 홈 첫 화면에는 안 보이고 교육·행사 > 어린이·가족 메뉴에 있음. 예약은 OK예약 > 체험에서 '지역미술' 검색 (링크가 바로 그 화면). 접수 10/6~11/13 선착순. 4~6학년 반은 1개 반 이미 마감. 문의 042-270-7332",
+    note: "2학년 맞춤 반! 토·일 운영, 회차 시간은 OK예약 상세에서 확인. 11/12 현재 접수중. 미술관 홈 첫 화면에는 안 보이고 교육·행사 > 어린이·가족 메뉴에 있음. 예약은 OK예약 > 체험에서 '지역미술' 검색 (링크가 바로 그 화면). 접수 10/6~11/13 선착순. 4~6학년 반은 1개 반 이미 마감. 문의 042-270-7332",
     big: true, verified: true
   },
   {
@@ -363,6 +363,20 @@ window.EVENTS = [
     big: false, verified: false
   },
   {
+    id: "2026-11-daejeon-mushroom-opera",
+    title: "조선판 코믹 오페라 〈버섯전〉 (연정국악원 큰마당)",
+    start: "2026-11-19", end: "2026-11-20",
+    time: "19:30 (약 60분, 인터미션 없음)",
+    place: "연정국악원 큰마당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 3만원", reservation: true, ages: "초등학생 이상",
+    applyNote: "OK예약 공연 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "평일 저녁 공연. 관람 등급 초등학생 이상, 60분이라 초2도 부담 적음.",
+    big: false, verified: true
+  },
+  {
     id: "2026-12-daejeon-secret-juju",
     title: "쇼뮤지컬 〈시크릿쥬쥬 : 별의보석〉 (대전)",
     start: "2026-12-25", end: "2026-12-25",
@@ -458,6 +472,20 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
     note: "12/18(금) 10:20 <크리스마스캐롤-스쿠루지>(대공연장)도 있음. 가격·예매처 미표기.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-12-cheongju-santa-rudolph",
+    title: "어린이 뮤지컬 〈산타와 루돌프〉 (청주아트홀)",
+    start: "2026-12-25", end: "2026-12-26",
+    time: "12/25 11:00·14:00·16:00 / 12/26 11:00·14:00",
+    place: "청주아트홀", city: "청주", region: "근교",
+    cost: "유료", price: "미확인", reservation: true, ages: "어린이 가족",
+    applyNote: "청주예술의전당 예매안내 참고",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
+    note: "크리스마스 연휴 공연. 가격·예매처는 예매안내에서 확인.",
     big: false, verified: true
   },
   {
