@@ -19,7 +19,7 @@
 // 마지막 수집: 2026-11-12
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-12 07:30";
+window.LAST_UPDATED = "2026-11-12 11:46";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -341,7 +341,7 @@ window.EVENTS = [
     time: "화~토 (회차는 OK예약 확인)",
     place: "대전시립박물관 우리놀이터", city: "대전 유성구", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령",
-    deadline: "2026-12-30", applyNote: "OK예약 체험 선착순 (접수중)",
+    applyStart: "2026-11-10", deadline: "2026-12-30", applyNote: "OK예약 체험 선착순 (접수중)",
     tags: ["축제"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200&searchType=02&keyword=우리놀이터", source: "대전광역시 OK예약서비스(체험)",
