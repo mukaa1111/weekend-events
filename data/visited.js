@@ -9,4 +9,5 @@
 // comment : 한 줄 감상 (답장에 적은 말 그대로)
 // eventId : data/events.js 의 행사 id (목록에 있던 행사면)
 window.VISITED = [
+  { date: "2026-11-14", title: "우리 가족이 Green 숲! 힐링 가을 캠프 (만인산자연휴양림)", place: "만인산자연휴양림", tags: ["야외", "과학"], liked: null, comment: "", eventId: "2026-11-daejeon-manin-forest-camp" },
 ];
