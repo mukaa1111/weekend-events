@@ -16,10 +16,10 @@
 //            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
 // closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
-// 마지막 수집: 2026-11-16
+// 마지막 수집: 2026-11-19
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-16 07:30";
+window.LAST_UPDATED = "2026-11-19 07:13";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -29,8 +29,8 @@ window.PICKS = {
   weekend: "2026-11-21",
   items: [
     { id: "2026-10-daejeon-museum-folk-play", why: "무료 전통놀이 체험, 토요일도 운영. 11월분 접수중" },
-    { id: "2026-11-cheongju-museum-tree-class", why: "초등 1~6학년 가족 박물관 교육, 접수 11/18까지" },
-    { id: "2026-10-daejeon-hanbat-arboretum-tour", why: "무료 토요 수목원 해설, 접수 11/26까지 선착순" }
+    { id: "2026-10-daejeon-hanbat-arboretum-tour", why: "무료 토요 수목원 해설, 접수 11/26까지 선착순" },
+    { id: "2026-11-daejeon-sinmyeong-pungmuak", why: "일요일 저녁 국악 타악 공연, 전 연령 1만원부터" }
   ]
 };
 
@@ -190,7 +190,7 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
     note: "사이언스홀 강연(11/28 토). 시간·비용·예약 여부는 공지 확인 필요.",
-    big: false, verified: false
+    big: false, verified: true
   },
   {
     id: "2026-12-daejeon-nutcracker",
@@ -291,6 +291,47 @@ window.EVENTS = [
     note: "크리스마스 당일 공연. 대상이 어린 편이라 초2에겐 다소 유아적일 수 있음.",
     big: false, verified: false
   },
+  {
+    id: "2026-11-daejeon-sinmyeong-pungmuak",
+    title: "2026 신명풍무악 정기공연 (연정국악원 큰마당)",
+    start: "2026-11-22", end: "2026-11-22",
+    time: "19:00",
+    place: "연정국악원 큰마당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "S석 2만원 / A석 1만원", reservation: true, ages: "전 연령 (미취학 아동은 보호자 동반)",
+    applyNote: "OK예약 공연 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "국악 타악·풍물 공연. 일요일 저녁이라 다음 날 등교 시간만 고려.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-science-starlecture",
+    title: "국립중앙과학관 별의별 과학특강 11월 (사이언스홀)",
+    start: "2026-11-21", end: "2026-11-21",
+    time: "시간 미확인",
+    place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "미확인 (과학관 공지 확인)", reservation: false, ages: "미확인",
+    tags: ["과학"],
+    indoor: true,
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
+    note: "매월 셋째 토요일 특강. 주제·대상·신청 방법은 공지 확인 필요(초2에겐 어려울 수 있음).",
+    big: false, verified: false
+  },
+  {
+    id: "2026-12-daejeon-science-tech-expedition",
+    title: "국립중앙과학관 2026 첨단기술 원정대 겨울 (드론·로봇 시연·체험)",
+    start: "2026-12-06", end: "2026-12-06",
+    time: "시간 미확인",
+    place: "국립중앙과학관 미래기술관", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "주차료 별도", reservation: true, ages: "초등학생",
+    applyStart: "2026-11-23", applyTime: "10:00", deadline: "2026-11-30", applyNote: "과학관 누리집 선착순 (회차당 100명 이내)",
+    tags: ["과학"],
+    indoor: true,
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내 / 육아 블로그(유가크루)",
+    note: "드론 조종·로봇 축구 체험. 12/6(일)이 개인 일반 모집일. 보호자는 대기석.",
+    big: true, verified: false
+  },
   // ───────────── 근교 ─────────────
 
   {
@@ -332,6 +373,7 @@ window.EVENTS = [
     indoor: "both",
     url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12333", source: "국립청주박물관",
     note: "어린이 15명 정원. 접수 11/9(월)~11/18(수) 누리집 교육행사 탭. 문의 043-229-6407",
+    closed: true, closedNote: "접수 11/18 마감 (11/19 확인)",
     big: true, verified: true
   },
   {
