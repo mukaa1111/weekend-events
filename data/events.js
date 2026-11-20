@@ -19,7 +19,7 @@
 // 마지막 수집: 2026-11-19
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-19 07:13";
+window.LAST_UPDATED = "2026-11-20 21:10";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -459,5 +459,33 @@ window.EVENTS = [
     url: "https://www.yugacrew.com/crewletter/coex-baby-fair-2026", source: "육아 블로그(유가크루) / 주최 세계전람",
     note: "로봇코딩·AI·쿠킹·공예 체험 부스. 사전등록은 educare.co.kr. 주 대상이 유아~예비초등이라 2학년에겐 다소 어릴 수 있음.",
     big: true, verified: false
+  },
+  {
+    id: "2026-12-daejeon-edu-cooking-class",
+    title: "대전학생교육문화원 겨울 특강 크리스마스 쿠킹 클래스",
+    start: "2026-12-05", end: "2026-12-12",
+    time: "12/5·12/12(토) 14:00~15:30 (2회)",
+    place: "대전학생교육문화원", city: "대전 동구", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "7세~초2 (12명)",
+    applyStart: "2026-11-23", applyTime: "10:00", deadline: "2026-11-30", applyNote: "문화원 누리집 > 프로그램 > 강좌·행사, 전자 추첨 (확정 12/2)",
+    tags: ["과학"],
+    indoor: true,
+    url: "https://dsecc.djsch.kr/djsecc/lm/appl/lectList.do?mi=1115", source: "직접 요청(텔레그램 사진) / 대전학생교육문화원",
+    note: "회신으로 요청한 행사. 크리스마스 쿠키·컵케이크 만들기. 문의 042-229-1443",
+    big: true, verified: true
+  },
+  {
+    id: "2026-12-daejeon-edu-winter-garden",
+    title: "대전학생교육문화원 겨울 특강 겨울 자연을 담은 원예교실",
+    start: "2026-12-07", end: "2026-12-14",
+    time: "12/7·12/14(월) 15:30~17:00 (2회)",
+    place: "대전학생교육문화원", city: "대전 동구", region: "대전",
+    cost: "무료", price: "", reservation: true, ages: "초1~초4 (12명)",
+    applyStart: "2026-11-23", applyTime: "10:00", deadline: "2026-11-30", applyNote: "문화원 누리집 > 프로그램 > 강좌·행사, 전자 추첨 (확정 12/2)",
+    tags: ["과학", "야외"],
+    indoor: true,
+    url: "https://dsecc.djsch.kr/djsecc/lm/appl/lectList.do?mi=1115", source: "직접 요청(텔레그램 사진) / 대전학생교육문화원",
+    note: "회신으로 요청한 행사. 겨울 식물 탐색 후 크리스마스 리스 만들기. 평일 방과후 시간",
+    big: true, verified: true
   }
 ];
