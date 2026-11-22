@@ -16,21 +16,21 @@
 //            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
 // closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
-// 마지막 수집: 2026-11-19
+// 마지막 수집: 2026-11-23
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-20 21:10";
+window.LAST_UPDATED = "2026-11-23 07:30";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
 //   items   : 최대 3개. id는 아래 행사의 id, why는 "왜 이걸 추천하는지" 한 줄 (40자 안쪽)
 //   마감됐거나 끝난 행사가 들어 있으면 화면이 빼고, 빈 자리는 자동으로 채웁니다 (무료·예약 불필요·이번 주말만 하는 것 우선).
 window.PICKS = {
-  weekend: "2026-11-21",
+  weekend: "2026-11-28",
   items: [
-    { id: "2026-10-daejeon-museum-folk-play", why: "무료 전통놀이 체험, 토요일도 운영. 11월분 접수중" },
-    { id: "2026-10-daejeon-hanbat-arboretum-tour", why: "무료 토요 수목원 해설, 접수 11/26까지 선착순" },
-    { id: "2026-11-daejeon-sinmyeong-pungmuak", why: "일요일 저녁 국악 타악 공연, 전 연령 1만원부터" }
+    { id: "2026-11-daejeon-science-animal-magic", why: "무료 동물 매직쇼, 실내. 예약 없이 가면 돼요" },
+    { id: "2026-10-daejeon-museum-folk-play", why: "무료 전통놀이 체험, 토요일 운영. 11/30까지 접수" },
+    { id: "2026-11-daejeon-toyo-gukak-1128", why: "2천원 국악 공연, 초등학생 이상 관람" }
   ]
 };
 
@@ -129,7 +129,7 @@ window.EVENTS = [
     time: "시간 미확인 (예약 페이지 회차 확인)",
     place: "대전119시민체험센터", city: "대전", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령 (어린이 체험 가능)",
-    applyStart: "2026-08-31", deadline: "2026-12-31", applyNote: "OK예약 선착순 (12월분 접수중, 11/16 확인)",
+    applyStart: "2026-08-31", deadline: "2026-12-31", applyNote: "OK예약 선착순 (12월분 접수중, 11/23 확인)",
     tags: ["과학", "야외"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
@@ -148,21 +148,6 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
     note: "화~일 운영. 아동반·초급반 목공 만들기. 회차별 일정·연령은 예약 페이지에서 재확인 필요.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-11-daejeon-hanbat-lib-saturday",
-    title: "한밭도서관 11월 토요문화광장 〈심청이 온다〉 전통 가면극",
-    start: "2026-11-21", end: "2026-11-21",
-    time: "15:00~15:50",
-    place: "한밭도서관 창작방", city: "대전 서구", region: "대전",
-    cost: "무료", price: "", reservation: true, ages: "미확인 (가족 공연)",
-    applyStart: "2026-11-03", deadline: "2026-11-19", applyNote: "OK예약 강좌 선착순 (정원 100명, 11/5 현재 96명 접수)",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/okr2019/eduRsvtList.do?menuSeq=8101&rsvtUseStatTpcd=002&pageIdx=1", source: "대전광역시 OK예약서비스(강좌)",
-    note: "50분 공연. 대상 연령은 목록에 없음.",
-    closed: true, closedNote: "OK예약 강좌 접수중 목록에서 빠짐 (11/16 확인, 11/9엔 잔여 2명)",
     big: false, verified: true
   },
   {
@@ -204,21 +189,6 @@ window.EVENTS = [
     url: "https://v.daum.net/v/20260115164438376", source: "대전예술의전당 2026 시즌 기사 (1월)",
     note: "시즌 라인업 기사 기준. 예매처·가격은 대전예술의전당 공지 확인 필요.",
     big: false, verified: false
-  },
-  {
-    id: "2026-11-daejeon-djac-forest-workshop",
-    title: "대전예술의전당 어린이 체험 워크숍 〈한여름밤의 신비한 숲속 모험〉",
-    start: "2026-11-21", end: "2026-11-21",
-    time: "10:00 / 14:00 (각 약 120분)",
-    place: "대전예술의전당 무용연습실", city: "대전 서구", region: "대전",
-    cost: "무료", price: "", reservation: true, ages: "초등 2~6학년",
-    applyStart: "2026-11-05", deadline: "2026-11-19", applyTime: "10:00", applyNote: "대전예술의전당 홈페이지 수강신청 (선착순 15명, 문의 042-270-8152)",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/djac/ac/cultureView.do?mngNo=596", source: "직접 요청(텔레그램) / 대전예술의전당 교육프로그램",
-    note: "회신으로 요청한 행사. 셰익스피어 희곡을 오르프 악기·즉흥 장면으로 표현하는 음악·연극 워크숍. 10시·14시 두 회차 모두 현재 인원마감(취소 자리 확인 필요).",
-    closed: true, closedNote: "두 회차 모두 인원 마감 (11/9 확인)",
-    big: false, verified: true
   },
   {
     id: "2026-12-daejeon-djac-fartlady-play",
@@ -264,20 +234,6 @@ window.EVENTS = [
     big: false, verified: false
   },
   {
-    id: "2026-11-daejeon-mushroom-opera",
-    title: "조선판 코믹 오페라 〈버섯전〉 (연정국악원 큰마당)",
-    start: "2026-11-19", end: "2026-11-20",
-    time: "19:30 (약 60분, 인터미션 없음)",
-    place: "연정국악원 큰마당", city: "대전 서구", region: "대전",
-    cost: "유료", price: "전석 3만원", reservation: true, ages: "초등학생 이상",
-    applyNote: "OK예약 공연 예매",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
-    note: "평일 저녁 공연. 관람 등급 초등학생 이상, 60분이라 초2도 부담 적음.",
-    big: false, verified: true
-  },
-  {
     id: "2026-12-daejeon-secret-juju",
     title: "쇼뮤지컬 〈시크릿쥬쥬 : 별의보석〉 (대전)",
     start: "2026-12-25", end: "2026-12-25",
@@ -289,33 +245,6 @@ window.EVENTS = [
     indoor: true,
     url: "https://nol.yanolja.com/ticket/products/26013206", source: "예매 사이트(놀티켓)",
     note: "크리스마스 당일 공연. 대상이 어린 편이라 초2에겐 다소 유아적일 수 있음.",
-    big: false, verified: false
-  },
-  {
-    id: "2026-11-daejeon-sinmyeong-pungmuak",
-    title: "2026 신명풍무악 정기공연 (연정국악원 큰마당)",
-    start: "2026-11-22", end: "2026-11-22",
-    time: "19:00",
-    place: "연정국악원 큰마당", city: "대전 서구", region: "대전",
-    cost: "유료", price: "S석 2만원 / A석 1만원", reservation: true, ages: "전 연령 (미취학 아동은 보호자 동반)",
-    applyNote: "OK예약 공연 예매",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
-    note: "국악 타악·풍물 공연. 일요일 저녁이라 다음 날 등교 시간만 고려.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-11-daejeon-science-starlecture",
-    title: "국립중앙과학관 별의별 과학특강 11월 (사이언스홀)",
-    start: "2026-11-21", end: "2026-11-21",
-    time: "시간 미확인",
-    place: "국립중앙과학관 사이언스홀", city: "대전 유성구", region: "대전",
-    cost: "무료", price: "미확인 (과학관 공지 확인)", reservation: false, ages: "미확인",
-    tags: ["과학"],
-    indoor: true,
-    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
-    note: "매월 셋째 토요일 특강. 주제·대상·신청 방법은 공지 확인 필요(초2에겐 어려울 수 있음).",
     big: false, verified: false
   },
   {
@@ -331,6 +260,61 @@ window.EVENTS = [
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내 / 육아 블로그(유가크루)",
     note: "드론 조종·로봇 축구 체험. 12/6(일)이 개인 일반 모집일. 보호자는 대기석.",
     big: true, verified: false
+  },
+  {
+    id: "2026-11-daejeon-toyo-gukak-1128",
+    title: "시립연정국악단 상설공연 토요국악 (11/28)",
+    start: "2026-11-28", end: "2026-11-28",
+    time: "14:00",
+    place: "연정국악원 작은마당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 2천원", reservation: true, ages: "초등학생 이상",
+    applyNote: "OK예약 공연 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "2천원으로 보는 국악 상설공연. 관람 등급 초등학생 이상이라 초2 가능.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-dong-nara-music-play",
+    title: "창작가족음악극 〈똥나라시리즈2 똥싸배기왕의 탄생〉 (연정국악원)",
+    start: "2026-11-29", end: "2026-11-29",
+    time: "17:00",
+    place: "연정국악원 큰마당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 3만원", reservation: true, ages: "36개월 이상 (미취학은 보호자 동반)",
+    applyNote: "OK예약 공연 예매 (11/23 예매 가능 확인)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "국악으로 만든 가족 음악극. 일요일 17시 공연이라 저녁 전에 끝남.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-12-daejeon-gukak-prescription",
+    title: "〈Inside music of the mind : 감정으로 만나는 국악처방전〉 (연정국악원)",
+    start: "2026-12-05", end: "2026-12-05",
+    time: "15:00",
+    place: "연정국악원 작은마당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 1만원", reservation: true, ages: "만 5세 이상",
+    applyNote: "OK예약 공연 예매 (11/23 예매 가능 확인)",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.daejeon.go.kr/okr2019/pblcFcltList.do?menuSeq=8900", source: "대전광역시 OK예약서비스(공연/전시)",
+    note: "감정을 주제로 한 국악 공연. 5세 이상이라 초2 가능, 내용은 다소 차분함.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-11-daejeon-science-artience-camp",
+    title: "국립중앙과학관 2026 아티언스 캠프 〈예술과 과학 사이: 다원대화〉",
+    start: "2026-11-17", end: "2026-11-28",
+    time: "시간 미확인",
+    place: "국립중앙과학관 미래기술관 3층", city: "대전 유성구", region: "대전",
+    cost: "무료", price: "미확인 (과학관 공지 확인)", reservation: false, ages: "미확인",
+    tags: ["과학", "예술"],
+    indoor: true,
+    url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
+    note: "예술과 과학 융합 행사(~11/28). 애니멀매직쇼 날 함께 볼 만함. 대상·내용은 공지 확인 필요.",
+    big: false, verified: false
   },
   // ───────────── 근교 ─────────────
 
@@ -362,21 +346,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   {
-    id: "2026-11-cheongju-museum-tree-class",
-    title: "국립청주박물관 어린이가족 교육 '박물관과 나무 이야기' 2차",
-    start: "2026-11-21", end: "2026-11-21",
-    time: "10:00~11:30",
-    place: "국립청주박물관 상설전시실·야외정원", city: "청주", region: "근교",
-    cost: "무료", price: "", reservation: true, ages: "초등 1~6학년 + 가족",
-    applyStart: "2026-11-09", deadline: "2026-11-18", applyNote: "누리집 교육행사 탭 사전예약",
-    tags: ["야외", "과학"],
-    indoor: "both",
-    url: "https://cheongju.museum.go.kr/www/selectBbsNttView.do?key=482&bbsNo=1&nttNo=12333", source: "국립청주박물관",
-    note: "어린이 15명 정원. 접수 11/9(월)~11/18(수) 누리집 교육행사 탭. 문의 043-229-6407",
-    closed: true, closedNote: "접수 11/18 마감 (11/19 확인)",
-    big: true, verified: true
-  },
-  {
     id: "2026-11-cheongju-kids-opera-festa",
     title: "알리오페라단 키즈 오페라 페스타",
     start: "2026-11-27", end: "2026-11-28",
@@ -388,19 +357,6 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
     note: "11/27(금)~28(토). 예매는 청주예술의전당 예매안내 페이지에서 확인.",
-    big: false, verified: true
-  },
-  {
-    id: "2026-11-cheongju-junglebook",
-    title: "가족 뮤지컬 <정글북> (청주예술의전당 대공연장)",
-    start: "2026-11-21", end: "2026-11-22",
-    time: "11/21 14:00, 16:00 / 11/22 11:00, 14:00",
-    place: "청주예술의전당 대공연장", city: "청주", region: "근교",
-    cost: "유료", price: "미확인", reservation: true, ages: "전연령 (가족)",
-    tags: ["예술"],
-    indoor: true,
-    url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
-    note: "11/27~28 같은 곳 '키즈 오페라 페스타'도 예정. 가격·예매처 미표기.",
     big: false, verified: true
   },
 
@@ -432,34 +388,6 @@ window.EVENTS = [
     big: false, verified: true
   },
   // ───────────── 전국 (큰 행사만) ─────────────
-  {
-    id: "2026-11-gstar-busan",
-    title: "지스타 2026 (G-STAR, 국제게임전시회)",
-    start: "2026-11-19", end: "2026-11-22",
-    time: "11:00~17:30 (입장 마감 17:00)",
-    place: "벡스코 제1·2전시장", city: "부산 해운대구", region: "전국",
-    cost: "유료", price: "일반 18,000원 / 청소년(2008년 이후 출생) 8,000원", reservation: true, ages: "전연령 (초등 고학년 이상 추천)",
-    applyStart: "2026-09-29", applyNote: "100% 사전예매 (현장판매 없음)",
-    tags: ["과학", "축제"],
-    indoor: true,
-    url: "https://www.gstar.or.kr/part/gstar_btc_info.do", source: "지스타 공식 홈페이지",
-    note: "100% 사전예매(현장판매 없음), 9/29부터 판매 중. 8~9세는 청소년권. 체험 대기줄 길 수 있어 초2에겐 다소 힘들 수 있음.",
-    big: true, verified: true
-  },
-  {
-    id: "2026-11-seoul-kids-fair",
-    title: "제58회 서울국제유아교육전&키즈페어(유교전)",
-    start: "2026-11-19", end: "2026-11-22",
-    time: "10:00~18:00 (입장 마감 17:30)",
-    place: "코엑스 Hall A", city: "서울 강남구", region: "전국",
-    cost: "일부 유료", price: "사전등록 시 무료, 현장 10,000원 (57회 기준)", reservation: true, ages: "유아~초등 저학년",
-    applyNote: "사전등록 시 무료 (educare.co.kr)",
-    tags: ["과학", "예술", "축제"],
-    indoor: true,
-    url: "https://www.yugacrew.com/crewletter/coex-baby-fair-2026", source: "육아 블로그(유가크루) / 주최 세계전람",
-    note: "로봇코딩·AI·쿠킹·공예 체험 부스. 사전등록은 educare.co.kr. 주 대상이 유아~예비초등이라 2학년에겐 다소 어릴 수 있음.",
-    big: true, verified: false
-  },
   {
     id: "2026-12-daejeon-edu-cooking-class",
     title: "대전학생교육문화원 겨울 특강 크리스마스 쿠킹 클래스",
