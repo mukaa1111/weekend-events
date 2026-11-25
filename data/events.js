@@ -16,10 +16,10 @@
 //            deadline이 지났어도 현장 접수가 되면 closed: false 라고 적습니다.
 // closedNote : (선택) 마감 사유 한 줄. 예) "두 회차 모두 인원 마감 (11/9 확인)"
 //
-// 마지막 수집: 2026-11-23
+// 마지막 수집: 2026-11-26
 
 // 화면 맨 위 "마지막 수집" 표시에 쓰는 값. 수집할 때마다 날짜·시각(한국 시간)을 갱신합니다.
-window.LAST_UPDATED = "2026-11-23 07:30";
+window.LAST_UPDATED = "2026-11-26 07:30";
 
 // 화면 맨 위 "이번 주말 추천 3곳". 수집할 때마다 다음 토·일 기준으로 다시 고릅니다 (텔레그램 추천 3곳과 같은 것).
 //   weekend : 그 주말의 토요일 날짜. 이 날짜가 이번 주 토요일과 다르면 화면이 무시하고 자동으로 고릅니다.
@@ -129,7 +129,7 @@ window.EVENTS = [
     time: "시간 미확인 (예약 페이지 회차 확인)",
     place: "대전119시민체험센터", city: "대전", region: "대전",
     cost: "무료", price: "", reservation: true, ages: "전연령 (어린이 체험 가능)",
-    applyStart: "2026-08-31", deadline: "2026-12-31", applyNote: "OK예약 선착순 (12월분 접수중, 11/23 확인)",
+    applyStart: "2026-10-01", deadline: "2026-12-31", applyNote: "OK예약 선착순 (12월분 접수중, 11/26 확인)",
     tags: ["과학", "야외"],
     indoor: true,
     url: "https://www.daejeon.go.kr/okr2019/expRsvtList.do?menuSeq=8200", source: "대전광역시 OK예약서비스",
@@ -258,8 +258,8 @@ window.EVENTS = [
     tags: ["과학"],
     indoor: true,
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내 / 육아 블로그(유가크루)",
-    note: "드론 조종·로봇 축구 체험. 12/6(일)이 개인 일반 모집일. 보호자는 대기석.",
-    big: true, verified: false
+    note: "드론 조종·로봇 축구 체험. 12/6(일)이 개인 일반 모집일(하루 3회). 보호자는 대기석.",
+    big: true, verified: true
   },
   {
     id: "2026-11-daejeon-toyo-gukak-1128",
@@ -314,6 +314,48 @@ window.EVENTS = [
     indoor: true,
     url: "https://www.science.go.kr/mps/1070/bbs/431/moveBbsNttList.do", source: "국립중앙과학관 행사안내",
     note: "예술과 과학 융합 행사(~11/28). 애니멀매직쇼 날 함께 볼 만함. 대상·내용은 공지 확인 필요.",
+    big: false, verified: true
+  },
+  {
+    id: "2026-12-daejeon-papa-grade1-musical",
+    title: "뮤지컬 〈아빠와 난 초등 1학년〉 (대전서구문화원)",
+    start: "2026-12-04", end: "2026-12-05",
+    time: "12/4(금) 19:30 / 12/5(토) 11:00·14:00·16:30",
+    place: "대전서구문화원", city: "대전 서구", region: "대전",
+    cost: "유료", price: "전석 4만원", reservation: true, ages: "만 3세 이상",
+    applyNote: "예매처에서 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.yugacrew.com/crewletter/daejeon-kids-performances-december-2026", source: "육아 블로그(유가크루) 12월 대전 어린이 공연 정리",
+    note: "부자(父子) 이야기 가족 뮤지컬. 공연예술통합전산망 기준이라 예매 페이지 재확인 필요.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-12-daejeon-egg-doctor-amazon",
+    title: "뮤지컬 〈에그박사와 아마존 대탐험〉 (한밭대학교 아트홀)",
+    start: "2026-12-19", end: "2026-12-20",
+    time: "11:00 / 14:00 / 16:30",
+    place: "한밭대학교 아트홀", city: "대전 유성구", region: "대전",
+    cost: "유료", price: "R석 49,900원", reservation: true, ages: "전체 관람가",
+    applyNote: "예매처에서 예매",
+    tags: ["예술", "과학"],
+    indoor: true,
+    url: "https://www.yugacrew.com/crewletter/daejeon-kids-performances-december-2026", source: "육아 블로그(유가크루) 12월 대전 어린이 공연 정리",
+    note: "과학 탐험 소재 어린이 뮤지컬. 예매처·회차는 재확인 필요.",
+    big: false, verified: false
+  },
+  {
+    id: "2026-12-daejeon-youth-choir-christmas",
+    title: "대전시립청소년합창단 정기연주회 〈우리들의 크리스마스 파티〉",
+    start: "2026-12-19", end: "2026-12-19",
+    time: "17:00",
+    place: "대전예술의전당", city: "대전 서구", region: "대전",
+    cost: "유료", price: "R 1만 / S 7천 / A 5천원", reservation: true, ages: "만 7세 이상",
+    applyNote: "예매처에서 예매",
+    tags: ["예술"],
+    indoor: true,
+    url: "https://www.yugacrew.com/crewletter/daejeon-kids-performances-december-2026", source: "육아 블로그(유가크루) 12월 대전 어린이 공연 정리",
+    note: "저렴한 크리스마스 합창 공연, 7세 이상 관람. 공식 공지 재확인 필요.",
     big: false, verified: false
   },
   // ───────────── 근교 ─────────────
@@ -386,6 +428,19 @@ window.EVENTS = [
     url: "https://www.cheongju.go.kr/ac/selectTnAhPblprfrListU3.do?key=16202", source: "청주예술의전당 연간공연정보",
     note: "크리스마스 연휴 공연. 가격·예매처는 예매안내에서 확인.",
     big: false, verified: true
+  },
+  {
+    id: "2026-12-nonsan-gotgam-festival",
+    title: "논산양촌곶감축제",
+    start: "2026-12-11", end: "2026-12-13",
+    time: "매일 10:00~18:00",
+    place: "논산 양촌면 양촌리 체육공원 일원", city: "논산", region: "근교",
+    cost: "무료", price: "체험·먹거리는 현장 확인", reservation: false, ages: "전연령",
+    tags: ["축제", "야외"],
+    indoor: false,
+    url: "https://www.mcst.go.kr/site/s_culture/festival/festivalList.jsp?pSido=13&pOrder=01up&pCurrentPage=1", source: "문체부 축제 DB (충남 필터)",
+    note: "곶감 시식·체험 지역 축제. 야외라 방한 필요. 일정은 지자체 사정으로 바뀔 수 있음.",
+    big: true, verified: true
   },
   // ───────────── 전국 (큰 행사만) ─────────────
   {
